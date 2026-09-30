@@ -1,6 +1,7 @@
 """Fine-tune google/flan-t5-small on direct -> indirect speech pairs (Konjunktiv-T5)."""
 
 import json
+import os
 import time
 from pathlib import Path
 
@@ -15,7 +16,10 @@ from transformers import (
     TrainerCallback,
 )
 
-BASE_MODEL = "google/flan-t5-small"
+# flan-t5-base (248M) instead of -small (77M): the download budget allows ~1 GB, and the small model's
+# remaining errors (invented participles, rare verbs) are capacity errors that more data did not remove.
+# Override with KONJUNKTIV_BASE_MODEL=google/flan-t5-small for a faster run.
+BASE_MODEL = os.environ.get("KONJUNKTIV_BASE_MODEL", "google/flan-t5-base")
 OUTPUT_DIR = Path("out/konjunktiv-t5")
 README_PATH = Path("out/README.md")
 TRAIN_PATH = Path("data/train.jsonl")

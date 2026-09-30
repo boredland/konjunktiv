@@ -10,6 +10,7 @@ from pathlib import Path
 from sentencepiece import sentencepiece_model_pb2 as sp_pb2
 from transformers import AutoTokenizer, T5Tokenizer, T5TokenizerFast
 
+# flan-t5-small/-base/-large ship byte-identical spiece.model files, so this tokenizer fits any of them.
 BASE_MODEL = "google/flan-t5-small"
 OUT = Path("out/tokenizer")
 # "▁"-prefixed variants keep a capitalised word one token longer at most ("▁Ö" + "sterreich")

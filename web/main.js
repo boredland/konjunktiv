@@ -1,7 +1,7 @@
 // Runtime is served from this origin (copied in by scripts/build_site.mjs), so no third-party CDN is
 // contacted and the page keeps working offline once the browser has cached it.
 import { pipeline, env, ModelRegistry } from './vendor/transformers.min.js';
-import { splitSentences } from './sentences.js';
+import { splitParagraphs, splitSentences } from './sentences.js';
 
 const TASK = 'text2text-generation';
 const MODEL = 'model';
@@ -135,25 +135,30 @@ async function convert() {
   setBusy(runButton, true, 'Wird umgewandelt …');
   indirect.value = '';
   fitToContent(indirect);
-  const sentences = splitSentences(text);
-  runProgress.max = sentences.length;
+  const paragraphs = splitParagraphs(text).map((p) => ({ ...p, sentences: splitSentences(p.text), out: [] }));
+  const total = paragraphs.reduce((n, p) => n + p.sentences.length, 0);
+  // Rebuilds the output with the input's own line breaks, so paragraphs and lists stay intact.
+  const render = () => paragraphs.map((p) => p.out.join(' ') + (p.out.length ? p.sep : '')).join('').trimEnd();
+  runProgress.max = total;
   runProgress.value = 0;
-  runProgress.hidden = sentences.length < 2;
+  runProgress.hidden = total < 2;
   try {
-    const converted = [];
-    for (const [i, sentence] of sentences.entries()) {
-      setStatus(runStatus, `Wandle um: Satz ${i + 1} von ${sentences.length} …`);
-      // WASM inference blocks the main thread; without a painted frame first, the spinner, progress
-      // bar and status never appear because the browser only repaints after the whole run.
-      await nextPaint();
-      const [{ generated_text }] = await pipe(`sprecher: ${speaker} | ${sentence}`, {
-        max_new_tokens: 64,
-        do_sample: false,
-      });
-      converted.push(generated_text);
-      indirect.value = converted.join(' ');
-      fitToContent(indirect);
-      runProgress.value = i + 1;
+    let done = 0;
+    for (const paragraph of paragraphs) {
+      for (const sentence of paragraph.sentences) {
+        setStatus(runStatus, `Wandle um: Satz ${done + 1} von ${total} …`);
+        // WASM inference blocks the main thread; without a painted frame first, the spinner, progress
+        // bar and status never appear because the browser only repaints after the whole run.
+        await nextPaint();
+        const [{ generated_text }] = await pipe(`sprecher: ${speaker} | ${sentence}`, {
+          max_new_tokens: 64,
+          do_sample: false,
+        });
+        paragraph.out.push(generated_text);
+        indirect.value = render();
+        fitToContent(indirect);
+        runProgress.value = ++done;
+      }
     }
     setStatus(runStatus, 'Fertig.', 'ok');
   } catch (error) {

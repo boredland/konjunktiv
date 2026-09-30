@@ -27,3 +27,22 @@ export function splitSentences(text) {
   if (rest) sentences.push(rest);
   return sentences.filter(Boolean);
 }
+
+// Line breaks carry the text's structure (paragraphs, lists), so they are kept verbatim: returns
+// [{ text, sep }] where `sep` is the exact whitespace that followed the block in the input.
+export function splitParagraphs(input) {
+  const parts = input.split(/(\s*\n\s*)/);
+  const blocks = [];
+  for (let i = 0; i < parts.length; i += 2) {
+    const text = parts[i].trim();
+    const sep = parts[i + 1] ?? '';
+    if (text) {
+      blocks.push({ text, sep: sep.replace(/[^\n]/g, '') });
+    } else if (blocks.length && sep) {
+      // blank line between blocks: add its newlines to the previous separator
+      blocks[blocks.length - 1].sep += sep.replace(/[^\n]/g, '');
+    }
+  }
+  if (blocks.length) blocks[blocks.length - 1].sep = '';
+  return blocks;
+}

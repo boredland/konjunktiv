@@ -47,9 +47,10 @@ RULES = """Regeln (Verhaltensspezifikation):
 5. `ich bin … geboren` → `er sei … geboren worden` (Vorgangspassiv Perfekt, Konjunktiv I). Andere `sein`-Perfekt-Verben (`gestorben, gegangen, aufgewachsen`) bekommen nur `sei` und kein `worden`.
 6. Teilen sich koordinierte Teilsätze (`… und …`) ein finites Verb, wird das Konjunktiv-Hilfsverb in jedem Teilsatz wiederholt (`Er sei 18 Jahre alt und sei in Nürnberg geboren worden.`).
 7. Nur den wiedergegebenen Satz ausgeben: kein `dass`, kein Redeverb (kein „Er sagte, …“), keine Anführungszeichen. Das Subjektpronomen steht am Anfang mit Großbuchstaben, der Satz endet mit `.`.
-8. Sonst nichts ändern: gleiche Inhaltswörter, gleiche Wortstellung, abgesehen von dem, was 1–7 und 9–10 verlangen.
+8. Sonst nichts ändern: gleiche Inhaltswörter, gleiche Wortstellung, abgesehen von dem, was 1–7 und 9–11 verlangen.
 9. Auch in Nebensätzen (dass-, weil-, wenn-, als-, sobald-Sätze, Relativsätze, indirekte Fragen) werden ALLE finiten Verben der wiedergegebenen Rede nach Regel 2–4 umgesetzt, egal welches Subjekt sie haben (`dass er kommt` → `dass er komme`, `was er denkt` → `was er denke`, `die sich dort befinden` → `die sich dort befänden`, `als ich ankam` → `als er angekommen sei`). Kein Indikativ bleibt stehen.
-10. `uns`/`mir` als Dativobjekt, das sich NICHT auf das Subjekt bezieht, wird `ihnen`/`ihm|ihr`, niemals `sich` (`Uns fehlte die Zeit` → `Ihnen habe die Zeit gefehlt`, `Ich hole uns etwas` → `Er hole ihnen etwas`, `Mir geht es gut` → `Ihm gehe es gut`). Partizipien trennbarer Verben immer zusammen und mit -ge- in der Mitte (`kaufte ein` → `eingekauft`, `schaute an` → `angeschaut`)."""
+10. `uns`/`mir` als Dativobjekt oder Dativsubjekt, das sich NICHT auf das Subjekt bezieht, wird `ihnen`/`ihm|ihr`, niemals `sich` (`Uns fehlte die Zeit` → `Ihnen habe die Zeit gefehlt`, `Ich hole uns etwas` → `Er hole ihnen etwas`, `Mir geht es gut` → `Ihm gehe es gut`, `Uns war kalt` → `Ihnen sei kalt gewesen`). Auch als Dativ am Satzanfang. Ein Akkusativobjekt im erweiterten Infinitiv wird `ihn|sie` (`sie baten, mich zu besuchen` → `sie baten, ihn zu besuchen`). Partizipien trennbarer Verben immer zusammen und mit -ge- in der Mitte (`kaufte ein` → `eingekauft`, `schaute an` → `angeschaut`, `lud ein` → `eingeladen`).
+11. Modalverben (sollen, wollen, können, müssen, dürfen, mögen) in Nebensätzen folgen derselben Umsetzung: `was ich tun sollte` → `was er habe tun sollen` (Ersatzinfinitiv, Modalverb vorverlagert), `dass ich das machen wollte` → `dass er das habe machen wollen`. `wünschte` ist Konjunktiv II und bleibt Konjunktiv II (`Ich wünschte, er käme` → `Sie wünschte, er käme`). Partizipien nach `habe/ist` immer korrekt gebildet: `weinte` → `geweint`, `lachte` → `gelacht`, `bestieg` → `bestiegen`; Bewegungs- und Zustandsverben haben Perfekt mit `sein` (`einschlafen`, `umziehen`, `aufstehen`, `ankommen`, `besteigen`, `eintreffen`)."""
 
 FEWSHOT = [
     # canonical (rules 5, 6)
@@ -84,6 +85,19 @@ FEWSHOT = [
     ("Sie", "Uns fehlte das Geld.", "Ihnen habe das Geld gefehlt."),
     ("Er", "Ich hole uns etwas zu trinken.", "Er hole ihnen etwas zu trinken."),
     ("Sie", "Wir kauften im Supermarkt ein.", "Sie hätten im Supermarkt eingekauft."),
+    # rule 10: dative at clause start, accusative in extended infinitive
+    ("Sie", "Uns war kalt und mir ging es schlecht.", "Ihnen sei kalt gewesen und ihr sei es schlecht gegangen."),
+    ("Er", "Ich habe sie gebeten, mich zu besuchen.", "Er habe sie gebeten, ihn zu besuchen."),
+    ("Er", "Sie half mir, mich einzurichten.", "Sie habe ihm geholfen, sich einzurichten."),
+    # rule 11: modal in subordinate clause, K II stays K II
+    ("Er", "Ich wusste nicht, was ich tun sollte.", "Er habe nicht gewusst, was er habe tun sollen."),
+    ("Sie", "Ich dachte, dass ich das machen wollte.", "Sie habe gedacht, dass sie das habe machen wollen."),
+    ("Er", "Ich wünschte, ich wäre bei euch gewesen.", "Er wünschte, er sei bei ihnen gewesen."),
+    # separable participles in coordination; movement verbs take sein
+    ("Sie", "Wir kauften ein und gingen nach Hause.", "Sie hätten eingekauft und seien nach Hause gegangen."),
+    ("Er", "Wir zogen im Frühling nach Leipzig um.", "Sie seien im Frühling nach Leipzig umgezogen."),
+    ("Sie", "Ich schlief während des Films ein.", "Sie sei während des Films eingeschlafen."),
+    ("Er", "Letztes Jahr bestieg ich den Fuji.", "Er sei letztes Jahr den Fuji bestiegen."),
 ]
 
 SCHEMA = {
