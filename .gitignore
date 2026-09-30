@@ -1,0 +1,14 @@
+.venv/
+node_modules/
+__pycache__/
+.wrangler/
+
+# built / downloaded artifacts; rebuild with the scripts, model weights ship via GitHub releases
+dist/
+worker/chunks.json
+web/model/
+web/vendor/
+out/*
+!out/README.md
+!out/metrics*.json
+data/raw/deu_sentences.tsv.bz2

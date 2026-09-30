@@ -1,0 +1,34 @@
+[project]
+name = "konjunktiv"
+version = "0.1.0"
+description = "German direct → indirect speech with flan-t5-small, exported to ONNX for Transformers.js"
+requires-python = ">=3.12,<3.13"
+# Pinned to the verified set: unpinned, uv backtracked to an unbuildable optimum==0.1.0 sdist.
+dependencies = [
+    "torch==2.14.0",
+    # listed directly only so the [tool.uv.sources] ROCm index mapping below applies to it
+    "triton-rocm; sys_platform == 'linux'",
+    "transformers==4.57.6",
+    "datasets",
+    "sentencepiece",
+    "accelerate",
+    "optimum[onnx]==2.1.0",
+    "onnx",
+    "onnxruntime==1.30.0",
+]
+
+[tool.uv]
+package = false
+
+# Radeon 890M iGPU (gfx1150) via ROCm 7.2: 0.47 s per optimizer step vs ~1.1 s on 12 CPU threads.
+# The ROCm build also runs on CPU, so export/quantize are unaffected.
+[tool.uv.sources]
+torch = { index = "pytorch-rocm" }
+# torch+rocm depends on triton-rocm, which PyPI only has as a stale 3.0.0rc1;
+# sources only apply to direct dependencies, hence its entry in [project].dependencies
+triton-rocm = { index = "pytorch-rocm" }
+
+[[tool.uv.index]]
+name = "pytorch-rocm"
+url = "https://download.pytorch.org/whl/rocm7.2"
+explicit = true

@@ -1,0 +1,3002 @@
+[
+{
+"id": "5594599",
+"direct": "Ich brauche ein gutes Gefühl.",
+"speaker": "Er"
+},
+{
+"id": "2085916",
+"direct": "Letztes Jahr haben wir den Fuji bestiegen.",
+"speaker": "Sie"
+},
+{
+"id": "7456862",
+"direct": "Sag Tom, dass wir gehen.",
+"speaker": "Sie"
+},
+{
+"id": "13294743",
+"direct": "Ich habe eine Freundin im Rathaus.",
+"speaker": "Sie"
+},
+{
+"id": "786538",
+"direct": "Wir müssen in der Schule eine Schuluniform tragen.",
+"speaker": "Sie"
+},
+{
+"id": "1103478",
+"direct": "Ich bin Larry Ewing, amerikanischer Staatsbürger mit Wurzeln in Katar.",
+"speaker": "Er"
+},
+{
+"id": "11214161",
+"direct": "Ich kann ohne eine Aufgabe nicht leben. Ich sitze den ganzen Tag zu Hause und grübele über meine Zukunft nach.",
+"speaker": "Er"
+},
+{
+"id": "1489799",
+"direct": "Ich hatte eine schöne Zeit.",
+"speaker": "Sie"
+},
+{
+"id": "6645631",
+"direct": "Das habe ich auch gesehen.",
+"speaker": "Er"
+},
+{
+"id": "12415801",
+"direct": "Ich warte bis 14.30 Uhr.",
+"speaker": "Sie"
+},
+{
+"id": "913626",
+"direct": "Wir werden jedem ein Auto kaufen.",
+"speaker": "Er"
+},
+{
+"id": "10248144",
+"direct": "Ich wollte nicht so früh aufstehen.",
+"speaker": "Er"
+},
+{
+"id": "2879045",
+"direct": "Ich wünschte, ich wüsste, wer Tom war.",
+"speaker": "Sie"
+},
+{
+"id": "685010",
+"direct": "Wir haben diesen Winter schon eine ganze Menge Schnee gehabt.",
+"speaker": "Sie"
+},
+{
+"id": "1345537",
+"direct": "Ich war sehr dankbar dafür.",
+"speaker": "Er"
+},
+{
+"id": "8342125",
+"direct": "Wir müssen den Bericht vor Monatsende einreichen.",
+"speaker": "Sie"
+},
+{
+"id": "8055364",
+"direct": "Ich weiß, warum er das tut.",
+"speaker": "Sie"
+},
+{
+"id": "1047365",
+"direct": "Ich kann es nicht ungeschehen machen.",
+"speaker": "Er"
+},
+{
+"id": "3279744",
+"direct": "Ich glaube, dass Tom mich auf den Arm genommen hat. Es ist ja der erste April.",
+"speaker": "Er"
+},
+{
+"id": "1421580",
+"direct": "So ist die Menschheit; so sind wir.",
+"speaker": "Er"
+},
+{
+"id": "11817576",
+"direct": "Ich hasse es, hintergangen zu werden.",
+"speaker": "Er"
+},
+{
+"id": "8188358",
+"direct": "Ich mag keine Ideologien. Ich glaube an Vernunft und Ehre.",
+"speaker": "Sie"
+},
+{
+"id": "919501",
+"direct": "Es wäre schön, wenn wir uns wiedersehen könnten.",
+"speaker": "Er"
+},
+{
+"id": "12151019",
+"direct": "Wir bleiben drei Tage in Paris.",
+"speaker": "Er"
+},
+{
+"id": "1807189",
+"direct": "Ich hätte gerne eine Fahrkarte nach Boston.",
+"speaker": "Sie"
+},
+{
+"id": "2997298",
+"direct": "Nun ja, wir sind halt Nachbarn. Ich werde öfter mal vorbeischauen.",
+"speaker": "Er"
+},
+{
+"id": "12862836",
+"direct": "Wir werden bald die Wahrheit erfahren.",
+"speaker": "Sie"
+},
+{
+"id": "12798740",
+"direct": "Ich kann den neuen Freund meiner Mutter nicht ausstehen.",
+"speaker": "Er"
+},
+{
+"id": "12417009",
+"direct": "Ich möchte in den Laden gehen.",
+"speaker": "Sie"
+},
+{
+"id": "937363",
+"direct": "Ich bin noch nie in einem Flugzeug gewesen.",
+"speaker": "Sie"
+},
+{
+"id": "12354201",
+"direct": "Ich nehme an, dass ihr einen Reisepass habt.",
+"speaker": "Er"
+},
+{
+"id": "12427906",
+"direct": "Wir bleiben für immer hier.",
+"speaker": "Er"
+},
+{
+"id": "7478461",
+"direct": "Ich erwarte nicht, dass Sie sich erinnern.",
+"speaker": "Er"
+},
+{
+"id": "795931",
+"direct": "Wir würden gerne einen Kleinbus mieten.",
+"speaker": "Sie"
+},
+{
+"id": "2974121",
+"direct": "Ich bin gestern hier eingetroffen.",
+"speaker": "Sie"
+},
+{
+"id": "777486",
+"direct": "Ich sage nie die Unwahrheit.",
+"speaker": "Sie"
+},
+{
+"id": "11956620",
+"direct": "Ich komme mit jedem aus.",
+"speaker": "Er"
+},
+{
+"id": "1893973",
+"direct": "Wir können nicht zulassen, dass noch jemand stirbt.",
+"speaker": "Sie"
+},
+{
+"id": "4572973",
+"direct": "Ich habe ihr Buch gelesen.",
+"speaker": "Er"
+},
+{
+"id": "8075032",
+"direct": "Ich bin mir sicher, dass das stimmt.",
+"speaker": "Er"
+},
+{
+"id": "1981452",
+"direct": "Deswegen habe ich gestern gefehlt in der Schule.",
+"speaker": "Sie"
+},
+{
+"id": "11457224",
+"direct": "Wir sind nicht verwandt, sondern haben nur denselben Nachnamen.",
+"speaker": "Er"
+},
+{
+"id": "1754202",
+"direct": "Ich kann nicht glauben, dass sie zusammen geschlafen haben.",
+"speaker": "Er"
+},
+{
+"id": "12243997",
+"direct": "Wir wollen uns doch nicht scheiden lassen.",
+"speaker": "Er"
+},
+{
+"id": "5172033",
+"direct": "Ich bin von der außerordentlichen Flexibilität dieser Sprache fasziniert.",
+"speaker": "Er"
+},
+{
+"id": "12013857",
+"direct": "Ich habe ein braunes Pferd.",
+"speaker": "Er"
+},
+{
+"id": "13736479",
+"direct": "Wir machen nur wenig Dinge gleichzeitig.",
+"speaker": "Er"
+},
+{
+"id": "2441302",
+"direct": "Wir konnten aufgrund eines Taifuns nicht nach Okinawa reisen.",
+"speaker": "Er"
+},
+{
+"id": "1589464",
+"direct": "Ich lerne seit zwei Jahren Französisch.",
+"speaker": "Sie"
+},
+{
+"id": "12406807",
+"direct": "Zum Fernsehen habe ich keine Zeit.",
+"speaker": "Er"
+},
+{
+"id": "12249124",
+"direct": "Ich war überrascht davon, was ich erfahren habe.",
+"speaker": "Sie"
+},
+{
+"id": "13013664",
+"direct": "Ich kann diese Fragen nicht beantworten.",
+"speaker": "Sie"
+},
+{
+"id": "2535039",
+"direct": "Endlich habe ich mein Auto wiedergefunden.",
+"speaker": "Er"
+},
+{
+"id": "6828338",
+"direct": "Als ich Maria sah, erkannte ich sie sofort.",
+"speaker": "Er"
+},
+{
+"id": "1526934",
+"direct": "Ich habe ein paar Briefmarken gekauft.",
+"speaker": "Er"
+},
+{
+"id": "11720719",
+"direct": "Vor drei Wochen habe ich meine Frau das letzte Mal gesehen.",
+"speaker": "Sie"
+},
+{
+"id": "943059",
+"direct": "Wir haben es nicht geschafft, ihn zu überreden.",
+"speaker": "Sie"
+},
+{
+"id": "12121109",
+"direct": "In ein paar Wochen werde ich 30.",
+"speaker": "Er"
+},
+{
+"id": "923660",
+"direct": "Ich fürchte, dass ich nicht sofort eine Entscheidung treffen kann.",
+"speaker": "Sie"
+},
+{
+"id": "12688039",
+"direct": "Ich habe von eurer Situation gehört.",
+"speaker": "Er"
+},
+{
+"id": "2761055",
+"direct": "Ich band Toms und Marias Schuhe zusammen.",
+"speaker": "Er"
+},
+{
+"id": "10087449",
+"direct": "Ich geh’ mal kurz auf Klo.",
+"speaker": "Er"
+},
+{
+"id": "13725868",
+"direct": "Ich mache etwas nur für mich.",
+"speaker": "Sie"
+},
+{
+"id": "11077499",
+"direct": "Ich fühle mich hier behütet, geschützt durch die Liebe von all jenen, die mir wichtig sind.",
+"speaker": "Sie"
+},
+{
+"id": "8244461",
+"direct": "Man hat mir nicht gesagt, dass ich ein Visum brauche.",
+"speaker": "Er"
+},
+{
+"id": "5298822",
+"direct": "Tom und ich sind keine Feiglinge.",
+"speaker": "Sie"
+},
+{
+"id": "8989117",
+"direct": "Ich glaube nicht, dass ich es schaffe.",
+"speaker": "Er"
+},
+{
+"id": "12427920",
+"direct": "Ich habe sie gebeten, mich zu besuchen.",
+"speaker": "Er"
+},
+{
+"id": "8816638",
+"direct": "Ich weinte vor lauter Freude.",
+"speaker": "Er"
+},
+{
+"id": "6643557",
+"direct": "Ich werde nach Tom Ausschau halten.",
+"speaker": "Sie"
+},
+{
+"id": "4886930",
+"direct": "Ich hab’s nicht übers Herz gebracht, es ihm zu sagen.",
+"speaker": "Sie"
+},
+{
+"id": "3406721",
+"direct": "Ich habe Sie wiederholt darum gebeten.",
+"speaker": "Sie"
+},
+{
+"id": "2431302",
+"direct": "Ich bin auch früher nicht im Baströckchen rumgelaufen und habe meine Blöße nicht mit Blättern abgedeckt.",
+"speaker": "Er"
+},
+{
+"id": "13950723",
+"direct": "Ich wünschte, mein Vater könnte hier sein.",
+"speaker": "Sie"
+},
+{
+"id": "3337660",
+"direct": "Ich wollte einfach nur Toms Aufmerksamkeit erregen.",
+"speaker": "Sie"
+},
+{
+"id": "1293954",
+"direct": "Das Auto ist kaputtgegangen und ich habe es zur Werkstatt gebracht, um es reparieren zu lassen.",
+"speaker": "Er"
+},
+{
+"id": "12293909",
+"direct": "Ich habe etwas über die griechische Kultur gelernt.",
+"speaker": "Er"
+},
+{
+"id": "4894610",
+"direct": "Endlich waren wir an der Stelle angekommen, wo wir uns zu Mittag ausruhen wollten.",
+"speaker": "Er"
+},
+{
+"id": "10788680",
+"direct": "Ich bringe Ihnen noch etwas Kaffee.",
+"speaker": "Er"
+},
+{
+"id": "10079398",
+"direct": "Wenn ich doch nur auf Tom gehört hätte! Dann wäre mir viel Elend erspart geblieben.",
+"speaker": "Sie"
+},
+{
+"id": "6111340",
+"direct": "Ich habe um acht Uhr einen Termin.",
+"speaker": "Sie"
+},
+{
+"id": "8696797",
+"direct": "Das wollte ich schon seit langem.",
+"speaker": "Sie"
+},
+{
+"id": "4488718",
+"direct": "Ich verliebe mich sofort, wenn Männer nett zu mir sind.",
+"speaker": "Er"
+},
+{
+"id": "12605489",
+"direct": "Ich wollte Sie damit überraschen.",
+"speaker": "Er"
+},
+{
+"id": "1108974",
+"direct": "Ich empfehle diesen Ort sehr als Ziel eines entspannenden Spaziergangs.",
+"speaker": "Sie"
+},
+{
+"id": "1757971",
+"direct": "Ich denke, dass Tom niemals berühmt wird.",
+"speaker": "Er"
+},
+{
+"id": "10344555",
+"direct": "Ich kann meine Entschlüsse von damals nicht rückgängig machen.",
+"speaker": "Sie"
+},
+{
+"id": "8054085",
+"direct": "Ich habe genug Geld für den Rest meines Lebens, außer wenn ich mir etwas kaufe.",
+"speaker": "Sie"
+},
+{
+"id": "2242477",
+"direct": "Im Winter verreise ich gern allein.",
+"speaker": "Er"
+},
+{
+"id": "6079978",
+"direct": "Ich beobachtete es durch das Schlüsselloch.",
+"speaker": "Er"
+},
+{
+"id": "2108870",
+"direct": "Ich esse sehr gerne hartgekochte Eier.",
+"speaker": "Sie"
+},
+{
+"id": "10021389",
+"direct": "Ich muss wirklich meine Hausaufgaben fertig machen.",
+"speaker": "Sie"
+},
+{
+"id": "8110775",
+"direct": "Ich muss noch ein paar Fragen stellen.",
+"speaker": "Sie"
+},
+{
+"id": "707484",
+"direct": "Ich habe angefangen, das Buch zu lesen.",
+"speaker": "Sie"
+},
+{
+"id": "13557162",
+"direct": "So lange werde ich nicht warten.",
+"speaker": "Sie"
+},
+{
+"id": "1220744",
+"direct": "Wir neigen dazu, Politiker mit Heuchelei zu assoziieren.",
+"speaker": "Sie"
+},
+{
+"id": "11978197",
+"direct": "Wir haben uns letztes Jahr am 20. Oktober kennengelernt.",
+"speaker": "Er"
+},
+{
+"id": "12279992",
+"direct": "Wir versuchen, das Beste aus einer schlechten Situation zu machen.",
+"speaker": "Er"
+},
+{
+"id": "5291024",
+"direct": "Hier möchte ich ein Haus bauen.",
+"speaker": "Sie"
+},
+{
+"id": "6028392",
+"direct": "Ich hoffe, dass ich dafür nicht rausfliege.",
+"speaker": "Er"
+},
+{
+"id": "13907353",
+"direct": "Mama, wir haben in der Kunststunde ein Bild von unserer Stadt gemalt.",
+"speaker": "Sie"
+},
+{
+"id": "6372496",
+"direct": "Ich wüsste gerne, warum Tom Verdacht geschöpft hat.",
+"speaker": "Er"
+},
+{
+"id": "12499741",
+"direct": "Wir haben den Fahrstuhl hinunter in den zweiten Stock genommen.",
+"speaker": "Sie"
+},
+{
+"id": "10089007",
+"direct": "Ich bin hier am Verlieren.",
+"speaker": "Sie"
+},
+{
+"id": "12395072",
+"direct": "Wir wohnen am Ende der Welt.",
+"speaker": "Er"
+},
+{
+"id": "8838394",
+"direct": "Ich kenne das genaue Datum.",
+"speaker": "Sie"
+},
+{
+"id": "1023484",
+"direct": "Ich fühle mich überhaupt nicht gut.",
+"speaker": "Sie"
+},
+{
+"id": "1475679",
+"direct": "Das ist die schmackhafteste Birne, die ich je gegessen habe.",
+"speaker": "Sie"
+},
+{
+"id": "3850290",
+"direct": "Ich habe nicht erwartet, dass ihr antwortet.",
+"speaker": "Er"
+},
+{
+"id": "9430601",
+"direct": "Ich suche nach einer Mango zum Essen.",
+"speaker": "Er"
+},
+{
+"id": "13928447",
+"direct": "Ich werde mein Haus streichen lassen.",
+"speaker": "Er"
+},
+{
+"id": "13480974",
+"direct": "Ich will Ihnen mal zeigen, wie man das macht.",
+"speaker": "Er"
+},
+{
+"id": "967428",
+"direct": "Als ich ihn das letzte Mal gesehen habe, trug er ein blaues Hemd und eine weiße Hose.",
+"speaker": "Er"
+},
+{
+"id": "930364",
+"direct": "Lassen wir heute denjenigen den Abwasch machen, der beim Schere, Stein, Papier verliert.",
+"speaker": "Sie"
+},
+{
+"id": "13993128",
+"direct": "Als wir anfingen, hatten wir nur sechs Mitarbeiter.",
+"speaker": "Sie"
+},
+{
+"id": "5207937",
+"direct": "Ich war wegen dieser Angelegenheit bereits bei Tom.",
+"speaker": "Er"
+},
+{
+"id": "13190675",
+"direct": "Wir sind nach Hause gegangen um unsere Freunde zu sehen.",
+"speaker": "Sie"
+},
+{
+"id": "12372410",
+"direct": "Ich möchte so schnell wie möglich anfangen.",
+"speaker": "Er"
+},
+{
+"id": "13730662",
+"direct": "Ich spreche Deutsch auf sehr hohem Niveau.",
+"speaker": "Sie"
+},
+{
+"id": "8642322",
+"direct": "Ich habe lange Zeit nichts von Tom gehört.",
+"speaker": "Er"
+},
+{
+"id": "4329666",
+"direct": "Ich stehe jeden Morgen um sechs Uhr auf.",
+"speaker": "Sie"
+},
+{
+"id": "7205174",
+"direct": "Ich wusste nicht, dass Mary Toms Schwester ist.",
+"speaker": "Sie"
+},
+{
+"id": "13565551",
+"direct": "Ich habe gehört, Tom und Maria hätten sich scheiden lassen.",
+"speaker": "Sie"
+},
+{
+"id": "6214803",
+"direct": "Wir küssten einander nur einmal.",
+"speaker": "Er"
+},
+{
+"id": "495146",
+"direct": "Wenn ich anfange zu kochen, verduftet er immer.",
+"speaker": "Er"
+},
+{
+"id": "8898173",
+"direct": "Ich hämmerte auf die Türe, aber niemand kam.",
+"speaker": "Er"
+},
+{
+"id": "6572906",
+"direct": "Wenn Tom Hilfe braucht, können wir sie ihm geben.",
+"speaker": "Sie"
+},
+{
+"id": "2293468",
+"direct": "Ich versichere Ihnen, das ist nur vorübergehend.",
+"speaker": "Sie"
+},
+{
+"id": "12623480",
+"direct": "Ich kann es nicht behalten.",
+"speaker": "Sie"
+},
+{
+"id": "1743471",
+"direct": "Ich habe sehr bedauert, dass ich ihnen so viel Schwierigkeiten bereitet hatte.",
+"speaker": "Sie"
+},
+{
+"id": "10067628",
+"direct": "Ich möchte beenden, was ich hier begonnen habe.",
+"speaker": "Er"
+},
+{
+"id": "918329",
+"direct": "Ich kann mir bei Kopfschmerzen nicht anders helfen, als ein Schmerzmittel zu nehmen.",
+"speaker": "Sie"
+},
+{
+"id": "2928019",
+"direct": "Wir halten Tom für einen ehrlichen Mann.",
+"speaker": "Sie"
+},
+{
+"id": "4471202",
+"direct": "Wir könnten zusammen dorthin gehen.",
+"speaker": "Sie"
+},
+{
+"id": "1847412",
+"direct": "Wir sprachen über dieses und jenes.",
+"speaker": "Sie"
+},
+{
+"id": "3395783",
+"direct": "Ich mag diese Krawatte nicht. Zeigen Sie mir eine andere.",
+"speaker": "Er"
+},
+{
+"id": "7523437",
+"direct": "Ich werde sie bis morgen Nachmittag fertig haben.",
+"speaker": "Sie"
+},
+{
+"id": "7361510",
+"direct": "Ich möchte meine Verlegung in eine andere Anstalt beantragen.",
+"speaker": "Er"
+},
+{
+"id": "10088554",
+"direct": "Wir haben morgen eine Sitzung.",
+"speaker": "Sie"
+},
+{
+"id": "1275134",
+"direct": "Ich spreche Englisch nicht als Muttersprache, und mir wird klar, dass ich noch viel zu lernen habe.",
+"speaker": "Sie"
+},
+{
+"id": "2271663",
+"direct": "Hier ist der Apfel, den ich gefunden habe.",
+"speaker": "Sie"
+},
+{
+"id": "8708137",
+"direct": "Ich habe im Moment nichts zu tun.",
+"speaker": "Er"
+},
+{
+"id": "7592365",
+"direct": "Ich sagte Tom, dass er Maria helfen soll.",
+"speaker": "Er"
+},
+{
+"id": "11784181",
+"direct": "Wir müssen endlich damit aufhören, die Erde zu ermorden.",
+"speaker": "Er"
+},
+{
+"id": "4075879",
+"direct": "Ich habe das Buch da nicht zu Ende gelesen.",
+"speaker": "Sie"
+},
+{
+"id": "1924452",
+"direct": "Ich empfehle Ihnen diese Lektüre.",
+"speaker": "Sie"
+},
+{
+"id": "8301194",
+"direct": "Wir möchten gerne Abstand von unserem Alltag gewinnen.",
+"speaker": "Sie"
+},
+{
+"id": "11808158",
+"direct": "Wir beleuchten die Hintergründe, welche die anderen ausblenden, damit man hoffentlich nicht nur eine Meinung habe, sondern eine Ahnung.",
+"speaker": "Er"
+},
+{
+"id": "4096373",
+"direct": "Ich habe seiner Bestattung beigewohnt.",
+"speaker": "Sie"
+},
+{
+"id": "14056271",
+"direct": "Wir kaufen und essen gleich etwas.",
+"speaker": "Sie"
+},
+{
+"id": "7947877",
+"direct": "Nur ich und Tom sind jetzt hier.",
+"speaker": "Er"
+},
+{
+"id": "6625828",
+"direct": "Ich werde das für Tom tun.",
+"speaker": "Sie"
+},
+{
+"id": "13742811",
+"direct": "Ich fahre mit dem Aufzug nach oben.",
+"speaker": "Sie"
+},
+{
+"id": "7010818",
+"direct": "Wir Schwaben würden unsere Fehler zugeben – wenn wir welche hätten.",
+"speaker": "Sie"
+},
+{
+"id": "3097752",
+"direct": "Ich muss eine Teilzeitbeschäftigung finden.",
+"speaker": "Er"
+},
+{
+"id": "2087468",
+"direct": "Ich würde diesen Sommer gerne arbeiten.",
+"speaker": "Sie"
+},
+{
+"id": "1308691",
+"direct": "Wir spielen nach der Schule oft Schach.",
+"speaker": "Er"
+},
+{
+"id": "2390580",
+"direct": "Wenn ich die Feder in der Hand habe, schrecke ich vor nichts zurück.",
+"speaker": "Er"
+},
+{
+"id": "2095156",
+"direct": "Ich halte ihn für einen bedeutenden Wissenschaftler.",
+"speaker": "Sie"
+},
+{
+"id": "3111936",
+"direct": "Ich danke Ihnen für die freundliche Berücksichtigung meines Vorschlags.",
+"speaker": "Er"
+},
+{
+"id": "13404055",
+"direct": "Er hat mir gesagt, ich soll das Fenster offen lassen.",
+"speaker": "Er"
+},
+{
+"id": "3135091",
+"direct": "Ich hatte ein gutes Essen auf seine Kosten.",
+"speaker": "Sie"
+},
+{
+"id": "390555",
+"direct": "Dies habe ich in der Höhle gefunden.",
+"speaker": "Sie"
+},
+{
+"id": "9971331",
+"direct": "Ich habe einen kleinen Fehler gemacht.",
+"speaker": "Sie"
+},
+{
+"id": "12454838",
+"direct": "Ich bin mit dem Brauch vertraut.",
+"speaker": "Er"
+},
+{
+"id": "2457539",
+"direct": "Mich ergreift, ich weiß nicht wie, himmlisches Behagen.",
+"speaker": "Sie"
+},
+{
+"id": "3700551",
+"direct": "Ich ging aus dem Haus.",
+"speaker": "Sie"
+},
+{
+"id": "4220094",
+"direct": "Ich weiß nicht viel über Australien.",
+"speaker": "Er"
+},
+{
+"id": "347977",
+"direct": "Ich habe einen schlimmen Sonnenbrand.",
+"speaker": "Sie"
+},
+{
+"id": "1995626",
+"direct": "Ich fahre lieber mit der Bahn nach Amsterdam.",
+"speaker": "Er"
+},
+{
+"id": "8072546",
+"direct": "Ich versuche schon seit gestern, Tom zu erreichen.",
+"speaker": "Er"
+},
+{
+"id": "11182588",
+"direct": "Ich lebe in den USA.",
+"speaker": "Er"
+},
+{
+"id": "6759849",
+"direct": "Ich habe tief geschlafen und nichts gehört.",
+"speaker": "Sie"
+},
+{
+"id": "12612796",
+"direct": "Ich sah im Fenster eine weibliche Silhouette.",
+"speaker": "Sie"
+},
+{
+"id": "12165010",
+"direct": "Ich habe das schon gesehen.",
+"speaker": "Er"
+},
+{
+"id": "5379517",
+"direct": "Ich werde nicht nach Prag fahren.",
+"speaker": "Sie"
+},
+{
+"id": "1817173",
+"direct": "Schau, Maria, von hier können wir den ganzen Hafen sehen.",
+"speaker": "Sie"
+},
+{
+"id": "13837419",
+"direct": "Wir sind Tataren, und unsere Sprache ist das Tatarische.",
+"speaker": "Er"
+},
+{
+"id": "10526912",
+"direct": "Wir sollten uns ein Versteck suchen.",
+"speaker": "Er"
+},
+{
+"id": "12674247",
+"direct": "Ich habe Tom und Maria gebeten, sie mögen morgen hierher kommen.",
+"speaker": "Er"
+},
+{
+"id": "13360585",
+"direct": "Ich wollte ein Lied schreiben. Es soll erzählen, was passiert ist.",
+"speaker": "Sie"
+},
+{
+"id": "13677839",
+"direct": "Ich bin froh, daß sich niemand verletzt hat.",
+"speaker": "Sie"
+},
+{
+"id": "842127",
+"direct": "Ich möchte lieber einen Spaziergang machen, als den Film zu sehen.",
+"speaker": "Sie"
+},
+{
+"id": "8848609",
+"direct": "Ich kann mir das Video leider erst später ansehen, aber aus Erfahrung gebe ich schon einmal einen Daumen nach oben.",
+"speaker": "Sie"
+},
+{
+"id": "13727365",
+"direct": "Am Samstag gehe ich mit meiner Tochter zum ersten Mal ins Kabarett.",
+"speaker": "Sie"
+},
+{
+"id": "11998861",
+"direct": "Ich habe den Kommentar, den ich unter dem Satz geschrieben hatte, gelöscht.",
+"speaker": "Sie"
+},
+{
+"id": "7413145",
+"direct": "Ich weiß, dass ihr etwas verbergt.",
+"speaker": "Sie"
+},
+{
+"id": "7525493",
+"direct": "Ich habe Hunger, aber ich bin zu faul, um das Mittagessen aufzuwärmen.",
+"speaker": "Sie"
+},
+{
+"id": "7535758",
+"direct": "Ich stieg aus dem Wagen und schloss die Tür.",
+"speaker": "Er"
+},
+{
+"id": "7441676",
+"direct": "Ich rutschte am Seil hinunter.",
+"speaker": "Sie"
+},
+{
+"id": "1599682",
+"direct": "Ich schäme mich, dass mein Sohn das getan hat.",
+"speaker": "Sie"
+},
+{
+"id": "9828492",
+"direct": "O Mann, ich habe Marias Nabel gesehen.",
+"speaker": "Sie"
+},
+{
+"id": "12920942",
+"direct": "Wenn sich mein Terminplan ändert, sage ich Ihnen Bescheid.",
+"speaker": "Er"
+},
+{
+"id": "7568017",
+"direct": "Ich glaube, Tom wird nicht weinen.",
+"speaker": "Er"
+},
+{
+"id": "940193",
+"direct": "Ich habe nur halb so viel Bücher wie er.",
+"speaker": "Er"
+},
+{
+"id": "2591488",
+"direct": "Ich wünschte, ich wäre da bei ihr gewesen.",
+"speaker": "Er"
+},
+{
+"id": "1000051",
+"direct": "Ich denke, was ich sage.",
+"speaker": "Er"
+},
+{
+"id": "2786573",
+"direct": "Ich habe nichts, wonach ich mich richten kann.",
+"speaker": "Sie"
+},
+{
+"id": "8548404",
+"direct": "Vielen Dank! Ich bin Ihnen zutiefst verbunden.",
+"speaker": "Er"
+},
+{
+"id": "2220737",
+"direct": "Ich komm sofort ins QQ.",
+"speaker": "Sie"
+},
+{
+"id": "1685279",
+"direct": "Ich kann Taninnas Antlitz nicht vergessen.",
+"speaker": "Sie"
+},
+{
+"id": "6027598",
+"direct": "So wie ich Toki Pona kenne, werde ich damit dem Wahnsinn verfallen.",
+"speaker": "Sie"
+},
+{
+"id": "12553216",
+"direct": "Wenn Sie nicht zu mir kommen, komme ich zu Ihnen.",
+"speaker": "Sie"
+},
+{
+"id": "824706",
+"direct": "Ich schätze, dass wir zwei Tage brauchen werden, um mit der Arbeit fertig zu werden.",
+"speaker": "Er"
+},
+{
+"id": "1583199",
+"direct": "Ich bin nicht daran gewöhnt, dass man mich so behandelt.",
+"speaker": "Er"
+},
+{
+"id": "196",
+"direct": "Ich hasse es, wenn viele Leute da sind.",
+"speaker": "Er"
+},
+{
+"id": "12170782",
+"direct": "Den Hund habe ich gesehen.",
+"speaker": "Er"
+},
+{
+"id": "2093697",
+"direct": "Ich dachte, das würde Sie interessieren.",
+"speaker": "Er"
+},
+{
+"id": "11236026",
+"direct": "Wenn Tom Schwimmen geht, gehe ich auch Schwimmen.",
+"speaker": "Sie"
+},
+{
+"id": "1569433",
+"direct": "Ich plane, mit meiner Freundin Ski zu fahren.",
+"speaker": "Er"
+},
+{
+"id": "6644263",
+"direct": "Ich komme aus einer großen Familie.",
+"speaker": "Sie"
+},
+{
+"id": "12647283",
+"direct": "An Ihrer Stelle würde ich Tom nicht mehr helfen.",
+"speaker": "Er"
+},
+{
+"id": "555021",
+"direct": "Ich bin gerade auf dem Campus.",
+"speaker": "Sie"
+},
+{
+"id": "1054911",
+"direct": "Ich werde rechtzeitig zum Geburtstag meiner Mutter zurück sein.",
+"speaker": "Sie"
+},
+{
+"id": "2780284",
+"direct": "Still! Ich fürchte, dass man uns belauscht.",
+"speaker": "Er"
+},
+{
+"id": "12650977",
+"direct": "Ich konnte mich kaum beherrschen.",
+"speaker": "Er"
+},
+{
+"id": "6918988",
+"direct": "Ich dachte nicht, dass ich der Erste sein werde.",
+"speaker": "Sie"
+},
+{
+"id": "2051181",
+"direct": "Ich werde morgen früh anrufen.",
+"speaker": "Sie"
+},
+{
+"id": "12921847",
+"direct": "Ich hoffe, ich habe Ihnen keine Angst gemacht.",
+"speaker": "Sie"
+},
+{
+"id": "3479885",
+"direct": "Ich habe diese Geschichte schon dutzendmal gehört.",
+"speaker": "Er"
+},
+{
+"id": "6275896",
+"direct": "Es ging alles so schnell, dass wir keine Zeit hatten, die Geschehnisse zu verarbeiten.",
+"speaker": "Sie"
+},
+{
+"id": "12561437",
+"direct": "Ich spürte eine Hand auf meiner Schulter.",
+"speaker": "Sie"
+},
+{
+"id": "6644428",
+"direct": "Ich glaube nicht, dass ich das mag.",
+"speaker": "Sie"
+},
+{
+"id": "9432616",
+"direct": "Ich habe mir etwas Süßes in den Mund gesteckt, da ging’s mir besser.",
+"speaker": "Er"
+},
+{
+"id": "1799995",
+"direct": "Ich kann es nicht lassen, es zu tun.",
+"speaker": "Sie"
+},
+{
+"id": "1724032",
+"direct": "Ich weiß, was er denkt.",
+"speaker": "Sie"
+},
+{
+"id": "10012758",
+"direct": "Gestern habe ich die Nacht unter der Brücke verbracht, und heute trinke ich Champagner in einem schicken Restaurant.",
+"speaker": "Sie"
+},
+{
+"id": "8995855",
+"direct": "Ich bin noch immer nicht draufgekommen.",
+"speaker": "Er"
+},
+{
+"id": "9767531",
+"direct": "Das Buch ist zu schwierig für mich, ich kann es nicht lesen.",
+"speaker": "Er"
+},
+{
+"id": "9953247",
+"direct": "Wir haben die Küche ganz neu gestaltet.",
+"speaker": "Er"
+},
+{
+"id": "5251281",
+"direct": "Ich habe mich bei dem Unfall am rechten Bein verletzt.",
+"speaker": "Sie"
+},
+{
+"id": "1345312",
+"direct": "Entschuldigen Sie bitte die Umstände, die ich jedes Mal bereite.",
+"speaker": "Er"
+},
+{
+"id": "1980617",
+"direct": "Ich habe vor, nächstes Jahr im Ausland zu studieren, in Amerkia.",
+"speaker": "Sie"
+},
+{
+"id": "1578925",
+"direct": "Wir müssen die Möglichkeit haben, schnell und entschieden gegen den Terrorismus, der sich gegen uns richtet, zu reagieren, wo immer er auftritt.",
+"speaker": "Sie"
+},
+{
+"id": "6091135",
+"direct": "Ich gehe regelmäßig im Park laufen.",
+"speaker": "Sie"
+},
+{
+"id": "3752907",
+"direct": "Ich liebe die kurdische Sprache.",
+"speaker": "Sie"
+},
+{
+"id": "9681975",
+"direct": "44 Jahre haben wir warten müssen – jetzt sind wir mit England quitt.",
+"speaker": "Sie"
+},
+{
+"id": "13859454",
+"direct": "Wir haben Lieder im Chor gesungen.",
+"speaker": "Er"
+},
+{
+"id": "2214057",
+"direct": "Ich glaube nicht, dass Tom allein gelassen werden kann.",
+"speaker": "Er"
+},
+{
+"id": "10548035",
+"direct": "Ich bin die letzten zwei Wochen wirklich einsam gewesen.",
+"speaker": "Er"
+},
+{
+"id": "508487",
+"direct": "Ich habe Biologie immer gehasst.",
+"speaker": "Sie"
+},
+{
+"id": "2755278",
+"direct": "Ich ruhe mich ein wenig aus.",
+"speaker": "Sie"
+},
+{
+"id": "10928027",
+"direct": "Ich bin ohne Zähneputzen ins Bett gegangen.",
+"speaker": "Sie"
+},
+{
+"id": "6643606",
+"direct": "Ich werde es mit Tom aufnehmen.",
+"speaker": "Er"
+},
+{
+"id": "2016122",
+"direct": "Ich werde den nächsten Sonntag damit verbringen, Romane zu lesen.",
+"speaker": "Er"
+},
+{
+"id": "13830120",
+"direct": "Ich trinke jeden Morgen Kaffee.",
+"speaker": "Sie"
+},
+{
+"id": "11531385",
+"direct": "Ich muss wissen, wie lange Sie brauchen.",
+"speaker": "Sie"
+},
+{
+"id": "575876",
+"direct": "Ich spreche kein Deutsch, aber ich bin germanophil.",
+"speaker": "Sie"
+},
+{
+"id": "10921588",
+"direct": "Ich schenke lieber, als dass ich etwas geschenkt bekomme.",
+"speaker": "Er"
+},
+{
+"id": "4843422",
+"direct": "Ich weiß es, ehrlich gesagt, nicht.",
+"speaker": "Er"
+},
+{
+"id": "13065636",
+"direct": "Ich vermisse Tom noch immer sehr.",
+"speaker": "Er"
+},
+{
+"id": "1428457",
+"direct": "Ich nenne ihn meinen Freund.",
+"speaker": "Er"
+},
+{
+"id": "13918638",
+"direct": "Es wäre schön, wenn ich ein Hund wäre. Eine Katze zu sein, wäre auch schön. Pinkeln wo ich will, kackern wo ich will.",
+"speaker": "Er"
+},
+{
+"id": "3662824",
+"direct": "Ich kann nicht glauben, was ich gesehen habe.",
+"speaker": "Er"
+},
+{
+"id": "10622967",
+"direct": "Ich fahre gern, wenn auch nicht gut.",
+"speaker": "Sie"
+},
+{
+"id": "6682581",
+"direct": "Dafür haben wir heute keine Zeit.",
+"speaker": "Er"
+},
+{
+"id": "2289108",
+"direct": "Sag mir bloß nicht, was ich machen muss.",
+"speaker": "Er"
+},
+{
+"id": "6581595",
+"direct": "Ich küsse sowieso nicht jeden.",
+"speaker": "Er"
+},
+{
+"id": "2991899",
+"direct": "Das Problem ist, wie wir die bestehenden Schwierigkeiten bewältigen sollen.",
+"speaker": "Er"
+},
+{
+"id": "11107726",
+"direct": "Ich würde mir weniger Sorgen machen, wenn sie nicht alle so geheimnisvoll täten. Schon seit zwei, drei Tagen geht das so.",
+"speaker": "Er"
+},
+{
+"id": "11486284",
+"direct": "Wir sind im Moment dabei, von Katastrophen umzingelt zu werden.",
+"speaker": "Er"
+},
+{
+"id": "10160570",
+"direct": "Ich habe Tom danach nicht wiedergesehen.",
+"speaker": "Sie"
+},
+{
+"id": "5769902",
+"direct": "Ich glaube, ich erinnere mich an Sie.",
+"speaker": "Er"
+},
+{
+"id": "12959150",
+"direct": "Tom und ich wissen beide, dass Sie lügen.",
+"speaker": "Sie"
+},
+{
+"id": "2995446",
+"direct": "Ich glaube, dass Tom mich liebt.",
+"speaker": "Sie"
+},
+{
+"id": "12643506",
+"direct": "Ich habe einen kleinen Tisch zwischen die beiden Stühle gestellt, damit es einen Platz für den Kaffee gibt.",
+"speaker": "Er"
+},
+{
+"id": "2656587",
+"direct": "Ich bin schon viel zu lange hier.",
+"speaker": "Er"
+},
+{
+"id": "3261654",
+"direct": "Ich werde mit den Konsequenzen leben.",
+"speaker": "Er"
+},
+{
+"id": "7580066",
+"direct": "Ich brauchte nur mal eine Schulter, an der ich mich ausweinen konnte.",
+"speaker": "Sie"
+},
+{
+"id": "3044393",
+"direct": "Ich bin noch nicht darüber weg.",
+"speaker": "Er"
+},
+{
+"id": "2706349",
+"direct": "Ich bewundere die Autoren dieser Bücher sehr.",
+"speaker": "Sie"
+},
+{
+"id": "10589461",
+"direct": "Ich fahre sein Auto nicht.",
+"speaker": "Sie"
+},
+{
+"id": "10060802",
+"direct": "Ich hätte gern noch etwas Kaffee.",
+"speaker": "Er"
+},
+{
+"id": "6576472",
+"direct": "Ich lege meine Hand für niemanden ins Feuer.",
+"speaker": "Er"
+},
+{
+"id": "601494",
+"direct": "Ich werde mit Mohan Ball spielen.",
+"speaker": "Er"
+},
+{
+"id": "588962",
+"direct": "Ich kann nicht weniger nehmen.",
+"speaker": "Sie"
+},
+{
+"id": "4126651",
+"direct": "Ich wollte, wir hätten eure Probleme.",
+"speaker": "Sie"
+},
+{
+"id": "9277632",
+"direct": "Ich höre immer Musik beim Arbeiten.",
+"speaker": "Sie"
+},
+{
+"id": "3608573",
+"direct": "Tu genau, was ich sage.",
+"speaker": "Sie"
+},
+{
+"id": "2631330",
+"direct": "Ich will meinen Mitschülern oder dem Lehrer davon nichts sagen.",
+"speaker": "Er"
+},
+{
+"id": "13865817",
+"direct": "Endlich habe ich ihn kennengelernt.",
+"speaker": "Sie"
+},
+{
+"id": "12581802",
+"direct": "Ich glaube nicht, daß Tom Ihnen böse sein wird.",
+"speaker": "Er"
+},
+{
+"id": "6134894",
+"direct": "Ich habe mir seine Sätze fest eingeprägt.",
+"speaker": "Er"
+},
+{
+"id": "8663550",
+"direct": "Ich sagte ihr, es wäre eine schlechte Idee.",
+"speaker": "Er"
+},
+{
+"id": "6328963",
+"direct": "Es fing an zu regnen, als ich aus dem Haus ging.",
+"speaker": "Sie"
+},
+{
+"id": "6644549",
+"direct": "Ich denke, es wird uns gut gehen.",
+"speaker": "Sie"
+},
+{
+"id": "1274172",
+"direct": "Ich weiß nicht, ob jetzt Morgen oder Abend ist.",
+"speaker": "Er"
+},
+{
+"id": "2967260",
+"direct": "Ich kann nicht glauben, dass er tot ist.",
+"speaker": "Er"
+},
+{
+"id": "1578016",
+"direct": "Ich habe viele Freunde kennen gelernt.",
+"speaker": "Er"
+},
+{
+"id": "3046010",
+"direct": "Ebenso können wir unsere Gedanken, Pläne und Vorhaben anderen darlegen.",
+"speaker": "Sie"
+},
+{
+"id": "9150236",
+"direct": "Ich habe ein Kätzchen aus dem Tierheim gerettet.",
+"speaker": "Sie"
+},
+{
+"id": "2669840",
+"direct": "Ich habe mit anderen gesprochen, die sich in der gleichen Lage befinden.",
+"speaker": "Er"
+},
+{
+"id": "5986333",
+"direct": "Ich gehe in den Supermarkt.",
+"speaker": "Sie"
+},
+{
+"id": "2748921",
+"direct": "Ich will auch so wie Tom werden.",
+"speaker": "Er"
+},
+{
+"id": "9928638",
+"direct": "Ich liebe alle, die in sich ein zerrissenes Herz haben.",
+"speaker": "Sie"
+},
+{
+"id": "12728284",
+"direct": "Ich kann meine eigenen Probleme lösen.",
+"speaker": "Sie"
+},
+{
+"id": "12616375",
+"direct": "Ich finde diesen Typen unglaublich nervig.",
+"speaker": "Er"
+},
+{
+"id": "331910",
+"direct": "Ich will ein gutes Wörterbuch.",
+"speaker": "Sie"
+},
+{
+"id": "9709893",
+"direct": "Ich habe meinen Führerschein zu Hause vergessen.",
+"speaker": "Er"
+},
+{
+"id": "13330269",
+"direct": "Als wir eintrafen, war nur noch ein Welpe da. Wir haben also den gekriegt, der am Ende als schwächster noch übrig war.",
+"speaker": "Sie"
+},
+{
+"id": "6130113",
+"direct": "Ich habe letzte Nacht schlecht geschlafen.",
+"speaker": "Sie"
+},
+{
+"id": "13066785",
+"direct": "Ich erinnere mich an einige seltsame Verse, die mir durch den Kopf gehen.",
+"speaker": "Sie"
+},
+{
+"id": "1331191",
+"direct": "Gestern habe ich eine wirklich interessante Geschichte gelesen.",
+"speaker": "Sie"
+},
+{
+"id": "13425163",
+"direct": "Ich wohne gern dort, wo ich wohne.",
+"speaker": "Er"
+},
+{
+"id": "1769388",
+"direct": "Ich bin eine freundliche und gut aussehende Frau, die den Mann meines Lebens sucht.",
+"speaker": "Er"
+},
+{
+"id": "7325439",
+"direct": "Ich war in der Dusche.",
+"speaker": "Sie"
+},
+{
+"id": "2699404",
+"direct": "Bücher sind, das habe ich gefunden, der beste Proviant, den man auf die Lebensreise mitnehmen kann.",
+"speaker": "Er"
+},
+{
+"id": "9649590",
+"direct": "Wenn wir etwas erreichen wollen, müssen wir Risiko auf uns nehmen.",
+"speaker": "Er"
+},
+{
+"id": "2418845",
+"direct": "Vorgestern sandte ich Tom einen Netzbrief, doch bislang ist noch keine Antwort eingetroffen.",
+"speaker": "Sie"
+},
+{
+"id": "8346524",
+"direct": "Ich bin mit etwas Wichtigem beschäftigt.",
+"speaker": "Er"
+},
+{
+"id": "12944408",
+"direct": "Ich mag das Lied. Als Student habe ich es oft vor mich hingesummt.",
+"speaker": "Sie"
+},
+{
+"id": "5844392",
+"direct": "Ich will Tom so gern sehen.",
+"speaker": "Er"
+},
+{
+"id": "1358824",
+"direct": "Ich wünschte, ich hätte sie besucht.",
+"speaker": "Er"
+},
+{
+"id": "7464151",
+"direct": "Ich weiß, dass Tom allzu selbstsicher ist.",
+"speaker": "Sie"
+},
+{
+"id": "8920460",
+"direct": "Diesen Hinweis habe ich von einer Dame aus Deutschland erhalten.",
+"speaker": "Er"
+},
+{
+"id": "7590750",
+"direct": "Ich trinke, wenn ich Gelegenheit habe, und manchmal auch ohne.",
+"speaker": "Sie"
+},
+{
+"id": "1333485",
+"direct": "Als ich das Café betrat, traf ich zwei Jugendliche an, die im Fernsehen einen Ringkampf ansahen.",
+"speaker": "Sie"
+},
+{
+"id": "2182910",
+"direct": "Ich ging frühzeitig dorthin, um mir noch einen guten Platz zu sichern.",
+"speaker": "Er"
+},
+{
+"id": "2310155",
+"direct": "Ich glaube, da lag eine Art Fehler vor.",
+"speaker": "Sie"
+},
+{
+"id": "1832942",
+"direct": "Ich hatte Zweifel, aber diese letzte Unterhaltung hat sie alle zerstreut.",
+"speaker": "Er"
+},
+{
+"id": "584435",
+"direct": "Ich habe Hausarrest, weil meine Mama böse auf mich ist.",
+"speaker": "Er"
+},
+{
+"id": "2091621",
+"direct": "Ich kann nicht Auto fahren, ich habe keinen Führerschein.",
+"speaker": "Sie"
+},
+{
+"id": "12460245",
+"direct": "Ich will nicht arm enden.",
+"speaker": "Sie"
+},
+{
+"id": "8982498",
+"direct": "Ich will ihr keine Umstände bereiten.",
+"speaker": "Er"
+},
+{
+"id": "13375343",
+"direct": "Nein, erkläre es mir so, dass ich es verstehe.",
+"speaker": "Er"
+},
+{
+"id": "2003350",
+"direct": "Ich habe den Brief fertig geschrieben.",
+"speaker": "Sie"
+},
+{
+"id": "12629690",
+"direct": "Da ich nicht wusste, was ich tun sollte, tat ich nichts.",
+"speaker": "Er"
+},
+{
+"id": "12513161",
+"direct": "Ich bin froh, daß wir beste Freunde sind.",
+"speaker": "Er"
+},
+{
+"id": "9443735",
+"direct": "Ehrlich gesagt, habe ich Angst vor Tom.",
+"speaker": "Er"
+},
+{
+"id": "13392286",
+"direct": "Ich kann Auto fahren, habe aber keinen Führerschein.",
+"speaker": "Er"
+},
+{
+"id": "6373642",
+"direct": "Ich glaube, dass Tom schon weiß, warum Mary das tun musste.",
+"speaker": "Sie"
+},
+{
+"id": "2148414",
+"direct": "Ich bin heute nicht hingegangen und werde mit Sicherheit auch morgen nicht hingehen.",
+"speaker": "Er"
+},
+{
+"id": "11765824",
+"direct": "Ich mag Kabyle, weil es meine Muttersprache ist.",
+"speaker": "Er"
+},
+{
+"id": "11752721",
+"direct": "Wir sind zu müde zum Lernen.",
+"speaker": "Er"
+},
+{
+"id": "1865305",
+"direct": "Ich arbeite viel für die Schulzeitung.",
+"speaker": "Sie"
+},
+{
+"id": "465589",
+"direct": "Ich lebe in Akasaka in Tokyo.",
+"speaker": "Sie"
+},
+{
+"id": "403706",
+"direct": "Ich mag Geschichte lieber als Geografie.",
+"speaker": "Sie"
+},
+{
+"id": "13267424",
+"direct": "Ich habe alle seine Bücher gelesen.",
+"speaker": "Er"
+},
+{
+"id": "1586838",
+"direct": "Ich glaube, dieser Satz ist fehlerfrei.",
+"speaker": "Er"
+},
+{
+"id": "10838752",
+"direct": "Wir sind zwei Kilometer gelaufen.",
+"speaker": "Er"
+},
+{
+"id": "1952460",
+"direct": "Ich kann Maria nicht einfach im Regen stehen lassen.",
+"speaker": "Sie"
+},
+{
+"id": "8345372",
+"direct": "Ich möchte eine Pizza bestellen.",
+"speaker": "Er"
+},
+{
+"id": "2650540",
+"direct": "Ich bin mit meiner Arbeit zum Teil fertig.",
+"speaker": "Er"
+},
+{
+"id": "2817269",
+"direct": "Er sagte mir, dass wir Nara nächsten Monat besuchen würden.",
+"speaker": "Sie"
+},
+{
+"id": "589939",
+"direct": "Er ist drei Jahre jünger als ich.",
+"speaker": "Er"
+},
+{
+"id": "3470233",
+"direct": "Ich habe das überflüssige Komma entfernt.",
+"speaker": "Sie"
+},
+{
+"id": "2846036",
+"direct": "Was uns aber eigentlich zu Bewusstsein kommen sollte und schon lange vorher hätte kommen sollen, ist das, dass wir als Übermenschen Unmenschen geworden sind.",
+"speaker": "Sie"
+},
+{
+"id": "4694765",
+"direct": "Ich hol mal eben Maria vom Bahnhof ab.",
+"speaker": "Sie"
+},
+{
+"id": "10130115",
+"direct": "Ich begleite meine kleine Schwester jeden Morgen auf dem Schulweg.",
+"speaker": "Sie"
+},
+{
+"id": "3277487",
+"direct": "Ich gab das Buch meinem Freund.",
+"speaker": "Sie"
+},
+{
+"id": "12436752",
+"direct": "Mein kleiner Bruder ist größer als ich.",
+"speaker": "Er"
+},
+{
+"id": "5664701",
+"direct": "Ich war drei Jahre Toms Französischlehrer.",
+"speaker": "Er"
+},
+{
+"id": "3609091",
+"direct": "Ich finde den Teppich furchtbar.",
+"speaker": "Er"
+},
+{
+"id": "11563828",
+"direct": "Ich versuche, fit zu werden.",
+"speaker": "Er"
+},
+{
+"id": "8073502",
+"direct": "Ich glaub’, da stimmt was nicht.",
+"speaker": "Sie"
+},
+{
+"id": "1865587",
+"direct": "Ich denke, ich werde die Prüfung leicht schaffen.",
+"speaker": "Er"
+},
+{
+"id": "931704",
+"direct": "Ich lachte so viel, ich dachte, ich würde sterben.",
+"speaker": "Sie"
+},
+{
+"id": "6483041",
+"direct": "Maria will, dass ich aufhöre, mit Tom zu sprechen.",
+"speaker": "Sie"
+},
+{
+"id": "8871231",
+"direct": "Tom sagte, ich wäre zu alt für ihn.",
+"speaker": "Er"
+},
+{
+"id": "13451061",
+"direct": "Einmal habe ich sogar auf dem Bahnhof übernachtet.",
+"speaker": "Er"
+},
+{
+"id": "12419749",
+"direct": "Ich bin Serbin und komme aus Belgrad.",
+"speaker": "Sie"
+},
+{
+"id": "10563939",
+"direct": "Ich will mich vor Tom nicht verneigen.",
+"speaker": "Sie"
+},
+{
+"id": "8097079",
+"direct": "Ich wollte verhindern, dass das geschähe.",
+"speaker": "Sie"
+},
+{
+"id": "10137628",
+"direct": "Wir dürfen Schmidt 2 nicht von der Firma gehen lassen.",
+"speaker": "Sie"
+},
+{
+"id": "1863487",
+"direct": "Das werde ich nie wieder tun.",
+"speaker": "Er"
+},
+{
+"id": "11078731",
+"direct": "Ich sah drei Autos auf der Brücke.",
+"speaker": "Er"
+},
+{
+"id": "2107783",
+"direct": "Wenn ich früher gewusst hätte, wie fleißig die Konkurrenz heutzutage arbeitet, wäre ich nicht so lange im Wald geblieben.",
+"speaker": "Sie"
+},
+{
+"id": "10750311",
+"direct": "Ich hätte es der Polizei melden müssen.",
+"speaker": "Er"
+},
+{
+"id": "10303805",
+"direct": "Ich habe fünf Minuten lang auf ein und dieselbe GIF-Animation gestarrt.",
+"speaker": "Sie"
+},
+{
+"id": "441388",
+"direct": "Wir müssen aus der Stadt flüchten.",
+"speaker": "Sie"
+},
+{
+"id": "8516911",
+"direct": "Ich habe mir das Video noch nicht angeschaut.",
+"speaker": "Er"
+},
+{
+"id": "2464825",
+"direct": "Wir dürfen nicht vergessen, dass der estnische Markt eng begrenzt ist.",
+"speaker": "Sie"
+},
+{
+"id": "12602761",
+"direct": "Ich hoffe, dass ihr das für mich erledigen könnt.",
+"speaker": "Sie"
+},
+{
+"id": "345466",
+"direct": "Er ist der größte Mann, den ich je gesehen habe.",
+"speaker": "Sie"
+},
+{
+"id": "2063726",
+"direct": "Ich brauche ein bisschen Kaffee.",
+"speaker": "Er"
+},
+{
+"id": "2340461",
+"direct": "Wir sprechen zu Hause kein Englisch.",
+"speaker": "Sie"
+},
+{
+"id": "1965778",
+"direct": "Ich bin mir nicht sicher, ob das ein Kompliment ist oder eine Beleidigung.",
+"speaker": "Er"
+},
+{
+"id": "9387592",
+"direct": "Ich sage es ihm, wenn ich es nicht vergesse.",
+"speaker": "Sie"
+},
+{
+"id": "12688117",
+"direct": "Ich muß das geträumt haben.",
+"speaker": "Er"
+},
+{
+"id": "1774994",
+"direct": "Wir haben jetzt die Chance zur Korrektur.",
+"speaker": "Sie"
+},
+{
+"id": "11948692",
+"direct": "Ich bin hier seit 2013.",
+"speaker": "Er"
+},
+{
+"id": "936470",
+"direct": "Der Regenwurm zappelte, als ich ihn berührte.",
+"speaker": "Sie"
+},
+{
+"id": "5664635",
+"direct": "Ich kann Tom einfach nicht ab.",
+"speaker": "Er"
+},
+{
+"id": "13738491",
+"direct": "Ich würde gern alle Universitätskurse, die ich belegt habe, in mein offizielles Zeugnis einbeziehen.",
+"speaker": "Er"
+},
+{
+"id": "10622780",
+"direct": "Ich weiss, dass Tom nicht wusste, dass ich das nicht oft mache.",
+"speaker": "Sie"
+},
+{
+"id": "11044792",
+"direct": "Wir sind das ausgewählte Volk der Plejadier und so stehen wir über allen anderen Nationen.",
+"speaker": "Er"
+},
+{
+"id": "11923967",
+"direct": "Wir können nicht auf sie warten.",
+"speaker": "Er"
+},
+{
+"id": "9922269",
+"direct": "Ich habe gestern Abend etwas gegessen.",
+"speaker": "Sie"
+},
+{
+"id": "1632540",
+"direct": "Von Zeit zu Zeit sah ich nach draußem, um zu sehen ob es noch schneit.",
+"speaker": "Sie"
+},
+{
+"id": "12014323",
+"direct": "Ich bin ein Latino, der Esperanto spricht.",
+"speaker": "Sie"
+},
+{
+"id": "903914",
+"direct": "Ich kam bei der Buchhandlung vorbei und kaufte ein interessantes Buch.",
+"speaker": "Sie"
+},
+{
+"id": "3406885",
+"direct": "Wenn das die offizielle Schreibung ist, so werde ich sie verwenden, wenngleich sie mir nicht gefällt.",
+"speaker": "Er"
+},
+{
+"id": "2601003",
+"direct": "Ich bin sehr bemüht, keine Fehler zuzulassen.",
+"speaker": "Sie"
+},
+{
+"id": "4046134",
+"direct": "Wir halten unseren Jungen für ein Genie. Es mag natürlich sein, dass wir voreingenommen sind.",
+"speaker": "Sie"
+},
+{
+"id": "739448",
+"direct": "Schließlich haben wir nicht gebeichtet.",
+"speaker": "Sie"
+},
+{
+"id": "1527859",
+"direct": "Ich habe bereits zu Mittag gegessen.",
+"speaker": "Sie"
+},
+{
+"id": "10254629",
+"direct": "Ich fühlte mich so allein.",
+"speaker": "Er"
+},
+{
+"id": "8803068",
+"direct": "Ich hole uns mal etwas zu essen.",
+"speaker": "Er"
+},
+{
+"id": "12050129",
+"direct": "Ich habe noch keine Antwort erhalten.",
+"speaker": "Er"
+},
+{
+"id": "588680",
+"direct": "Ich stehe Ihnen ganz zu Diensten.",
+"speaker": "Er"
+},
+{
+"id": "944753",
+"direct": "Ich hab keine Ahnung, was der Kerl sich denkt.",
+"speaker": "Er"
+},
+{
+"id": "8599435",
+"direct": "Ich habe nicht verstanden, was Tom gesagt hat.",
+"speaker": "Sie"
+},
+{
+"id": "5656435",
+"direct": "Ich geh nach Frankreich über den Sommer.",
+"speaker": "Sie"
+},
+{
+"id": "12636123",
+"direct": "Ich bin froh, daß Sie zurechtgewiesen haben.",
+"speaker": "Sie"
+},
+{
+"id": "10201165",
+"direct": "Ich war gestern bei Juana.",
+"speaker": "Sie"
+},
+{
+"id": "12589814",
+"direct": "Ich werde davon keinen kaufen, zumindest jetzt noch nicht.",
+"speaker": "Sie"
+},
+{
+"id": "10350768",
+"direct": "Ich bin Palistinienserin und stolz darauf.",
+"speaker": "Sie"
+},
+{
+"id": "2700271",
+"direct": "Broccoli mag ich, aber ich hasse Blumenkohl.",
+"speaker": "Er"
+},
+{
+"id": "13867835",
+"direct": "Wir haben den Laden verkauft, weil uns die Kundschaft fehlte.",
+"speaker": "Sie"
+},
+{
+"id": "4051521",
+"direct": "Treffen wir uns vor dem Hotel.",
+"speaker": "Er"
+},
+{
+"id": "8805497",
+"direct": "Ich bin seit drei Jahren nicht mehr in Boston gewesen.",
+"speaker": "Er"
+},
+{
+"id": "10263705",
+"direct": "Anfangs lief ich einmal die Woche, jetzt jeden Tag.",
+"speaker": "Sie"
+},
+{
+"id": "11140738",
+"direct": "Ich dachte, Tom hätte mich genauso gern wie ich ihn.",
+"speaker": "Er"
+},
+{
+"id": "9649599",
+"direct": "Ich habe keine Angst vor dem Altern. Ich finde nur die Nebenwirkungen, die dieser Prozess mit sich bringt, schrecklich.",
+"speaker": "Er"
+},
+{
+"id": "10256214",
+"direct": "Wir sind müde vom langen Spaziergang.",
+"speaker": "Sie"
+},
+{
+"id": "3399661",
+"direct": "Ich habe Tom nichts davon gesagt, weil ich ihm den Tag nicht verderben wollte.",
+"speaker": "Sie"
+},
+{
+"id": "13957608",
+"direct": "Ich habe schon eine Stelle.",
+"speaker": "Sie"
+},
+{
+"id": "10741150",
+"direct": "Wir gehen jetzt anders vor.",
+"speaker": "Sie"
+},
+{
+"id": "3614624",
+"direct": "Das Tor war verschlossen. Wir mussten über den Bauzaun klettern.",
+"speaker": "Er"
+},
+{
+"id": "12001062",
+"direct": "Ich möchte das Konto schließen.",
+"speaker": "Er"
+},
+{
+"id": "2732723",
+"direct": "Ich hatte nur eine befristete Anstellung.",
+"speaker": "Sie"
+},
+{
+"id": "8670035",
+"direct": "Als ich den Mut fand, sie anzusprechen, war ich stets zu nervös, als nur zu stammeln oder ihr Dummheiten zu äußern.",
+"speaker": "Er"
+},
+{
+"id": "1927250",
+"direct": "Ich hab nen Tinnitus im Ohr! Ich höre nur Pfeifen.",
+"speaker": "Er"
+},
+{
+"id": "7980230",
+"direct": "Den Tom finde ich auch ziemlich süß.",
+"speaker": "Sie"
+},
+{
+"id": "1791005",
+"direct": "Ich habe dem Wohungsdesigner gesagt, dass das Interieur des Badezimmers völlig neu sein solle, und selbstverständlich viel schöner, dass jedoch die Wände unverändert bleiben sollen.",
+"speaker": "Er"
+},
+{
+"id": "7413115",
+"direct": "Ich weiß nicht, ob sie zum Begräbnis werden kommen können.",
+"speaker": "Er"
+},
+{
+"id": "8588399",
+"direct": "Ich fand die Tür offen.",
+"speaker": "Sie"
+},
+{
+"id": "5322019",
+"direct": "Vor einiger Zeit entdeckte ich meine Leidenschaft für Sprachen.",
+"speaker": "Sie"
+},
+{
+"id": "1104096",
+"direct": "Es war billiger, als ich gedacht hatte.",
+"speaker": "Er"
+},
+{
+"id": "13602892",
+"direct": "Wichtig ist jetzt, was wir tun werden, nicht, was wir bereits getan haben.",
+"speaker": "Sie"
+},
+{
+"id": "3279595",
+"direct": "Ich lag mit einer schweren Erkältung eine Woche lang im Bett.",
+"speaker": "Er"
+},
+{
+"id": "8267204",
+"direct": "Wer hätte gedacht, dass ich den Tag erleben muss, an dem ich durch eine Maschine ersetzt werde.",
+"speaker": "Er"
+},
+{
+"id": "1107732",
+"direct": "Ich habe hier zehn Jahre lang gearbeitet.",
+"speaker": "Sie"
+},
+{
+"id": "2844566",
+"direct": "Ich will nicht derjenige sein, der das Tom sagen muss.",
+"speaker": "Er"
+},
+{
+"id": "13585675",
+"direct": "Ich habe wie Sie zwei Kilo Reis gekauft.",
+"speaker": "Er"
+},
+{
+"id": "4949407",
+"direct": "Ich muss jetzt zur Arbeit.",
+"speaker": "Er"
+},
+{
+"id": "1795727",
+"direct": "Ich mache das Panna cotta ohne Gelatine zu nehmen.",
+"speaker": "Sie"
+},
+{
+"id": "2136024",
+"direct": "Ich habe keine Ahnung, wie der Tod ist.",
+"speaker": "Sie"
+},
+{
+"id": "13070117",
+"direct": "Ich habe vor, ihn am Montag zu sehen.",
+"speaker": "Sie"
+},
+{
+"id": "13423790",
+"direct": "Aber wie dem auch sei – ich wollte das Gespräch gar nicht auf dieses Thema lenken.",
+"speaker": "Er"
+},
+{
+"id": "6672437",
+"direct": "Sobald der Wecker klingelt, muss ich aufstehen.",
+"speaker": "Er"
+},
+{
+"id": "1970581",
+"direct": "Ich bin durch den Park gegangen.",
+"speaker": "Er"
+},
+{
+"id": "3497882",
+"direct": "Ich hoffe, es macht Ihnen nichts aus zu laufen.",
+"speaker": "Sie"
+},
+{
+"id": "1928533",
+"direct": "Ich hatte ein nettes Gespräch mit ihr.",
+"speaker": "Sie"
+},
+{
+"id": "9040744",
+"direct": "Ich mag Rind lieber als Lamm.",
+"speaker": "Er"
+},
+{
+"id": "2945061",
+"direct": "Falls Sie eine bessere Formulierung vorschlagen, werde ich mich freuen.",
+"speaker": "Er"
+},
+{
+"id": "7528677",
+"direct": "Wir würden Ihnen gerne helfen, aber unsere Hände sind gebunden.",
+"speaker": "Sie"
+},
+{
+"id": "10002770",
+"direct": "Ich möchte ein gutes Messer.",
+"speaker": "Sie"
+},
+{
+"id": "2224858",
+"direct": "Ich benutzte es, als ich letzten Sommer in China war.",
+"speaker": "Sie"
+},
+{
+"id": "13553973",
+"direct": "Tom sagte mir, ich sei in Sicherheit.",
+"speaker": "Sie"
+},
+{
+"id": "2999936",
+"direct": "Ich weiß, warum Tom gekündigt hat.",
+"speaker": "Sie"
+},
+{
+"id": "2214084",
+"direct": "Ich glaube, ich komme allein damit zurecht.",
+"speaker": "Sie"
+},
+{
+"id": "14055055",
+"direct": "Ich kann meine Kopfhörer nicht finden.",
+"speaker": "Sie"
+},
+{
+"id": "8307885",
+"direct": "Ich bin von Boston nach Chicago geflogen.",
+"speaker": "Er"
+},
+{
+"id": "10527642",
+"direct": "Ich bezweifle, dass mir jemand folgt.",
+"speaker": "Sie"
+},
+{
+"id": "7713711",
+"direct": "Ich habe die gleichen Probleme.",
+"speaker": "Er"
+},
+{
+"id": "6007473",
+"direct": "Ich bleibe in diesem Gebäude.",
+"speaker": "Er"
+},
+{
+"id": "8102422",
+"direct": "Wir handelten mit voller Ehrlichkeit.",
+"speaker": "Er"
+},
+{
+"id": "2660191",
+"direct": "Ich fürchte, wir haben ein Problem.",
+"speaker": "Er"
+},
+{
+"id": "6597316",
+"direct": "Ich kann mich nicht erinnern, wo ich das Auto stehen lassen habe.",
+"speaker": "Er"
+},
+{
+"id": "5377333",
+"direct": "Ich habe ein paarmal mit Tom geredet.",
+"speaker": "Sie"
+},
+{
+"id": "1450360",
+"direct": "Da es sehr kalt ist, können wir Schlittschuh laufen.",
+"speaker": "Er"
+},
+{
+"id": "6669381",
+"direct": "Ich werde Ihnen mit Freude behilflich sein.",
+"speaker": "Sie"
+},
+{
+"id": "445273",
+"direct": "Ich habe gestern Christine getroffen.",
+"speaker": "Er"
+},
+{
+"id": "5990482",
+"direct": "Im Moment essen wir lieber drinnen.",
+"speaker": "Sie"
+},
+{
+"id": "11881375",
+"direct": "Ich glaube, dass Tom am Boden zerstört ist.",
+"speaker": "Sie"
+},
+{
+"id": "8872139",
+"direct": "Ich bin noch immer mit Tom zusammen.",
+"speaker": "Er"
+},
+{
+"id": "8543873",
+"direct": "Montag bin ich den ganzen Tag im Büro.",
+"speaker": "Er"
+},
+{
+"id": "14014366",
+"direct": "Ich muss heute Abend echt lernen.",
+"speaker": "Er"
+},
+{
+"id": "437333",
+"direct": "Ich möchte in Zukunft ein Nachrichtensprecher im Fernsehen werden.",
+"speaker": "Sie"
+},
+{
+"id": "7124521",
+"direct": "Ich habe den ganzen Morgen darauf gewartet, dass das passiert.",
+"speaker": "Er"
+},
+{
+"id": "5806113",
+"direct": "Ich bin gerade von einer Reise zurückgekommen.",
+"speaker": "Er"
+},
+{
+"id": "10587881",
+"direct": "Ich kann das nicht haben.",
+"speaker": "Er"
+},
+{
+"id": "12727292",
+"direct": "Ich habe ein ernstes Problem.",
+"speaker": "Sie"
+},
+{
+"id": "4774894",
+"direct": "Ich werde die Polizei rufen.",
+"speaker": "Er"
+},
+{
+"id": "10351673",
+"direct": "Ich hatte gern Krawatte und Taschentuch passend.",
+"speaker": "Sie"
+},
+{
+"id": "955991",
+"direct": "Ich habe noch so viel zu tun.",
+"speaker": "Sie"
+},
+{
+"id": "1708006",
+"direct": "Wir haben schon alles probiert.",
+"speaker": "Er"
+},
+{
+"id": "3069816",
+"direct": "Wenn ich glücklich bin, gibt es nichts, was ich nicht tun könnte.",
+"speaker": "Sie"
+},
+{
+"id": "1618459",
+"direct": "Wir alle müssen diesem Vertrag Folge leisten.",
+"speaker": "Er"
+},
+{
+"id": "1322773",
+"direct": "Ich würde freuen, wenn man dieses Kompliment mir machen könnte.",
+"speaker": "Er"
+},
+{
+"id": "3763571",
+"direct": "Ich bemühe mich, Englisch zu lernen.",
+"speaker": "Er"
+},
+{
+"id": "3887725",
+"direct": "Ich kenne einige der Jungen.",
+"speaker": "Er"
+},
+{
+"id": "712580",
+"direct": "Ich nahm jede Gelegenheit wahr, mein Englisch zu verbessern.",
+"speaker": "Er"
+},
+{
+"id": "2450217",
+"direct": "Ich behaupte, dass das nicht stimmt.",
+"speaker": "Er"
+},
+{
+"id": "3856233",
+"direct": "Ich kann so einigermaßen Klavier spielen.",
+"speaker": "Sie"
+},
+{
+"id": "1848734",
+"direct": "Ich fürchte, dass ich etwas außer Form bin.",
+"speaker": "Er"
+},
+{
+"id": "8123577",
+"direct": "Ich wüsste gerne, warum Tom nicht gewonnen hat.",
+"speaker": "Sie"
+},
+{
+"id": "13671530",
+"direct": "Wir haben ihn dazu gebracht, unsere Tasche zu tragen.",
+"speaker": "Sie"
+},
+{
+"id": "3596747",
+"direct": "Das ist die innere Fensterleibung, ich sprach jedoch von der äußeren.",
+"speaker": "Er"
+},
+{
+"id": "7770720",
+"direct": "Ich kann mich nicht erinnern, ob er mir das Buch geliehen hat oder ob ich es aus der Bibliothek habe.",
+"speaker": "Er"
+},
+{
+"id": "2059662",
+"direct": "Ich möchte mit Ihnen reden.",
+"speaker": "Sie"
+},
+{
+"id": "11236019",
+"direct": "Ich mach sowas nicht oft.",
+"speaker": "Er"
+},
+{
+"id": "10503417",
+"direct": "Ich kann mir gerade kein neues Auto leisten.",
+"speaker": "Er"
+},
+{
+"id": "12233012",
+"direct": "Ich möchte Tom ein Sparschwein kaufen.",
+"speaker": "Sie"
+},
+{
+"id": "10074386",
+"direct": "Ich weiß nicht mehr, was ich denken soll.",
+"speaker": "Sie"
+},
+{
+"id": "13974891",
+"direct": "Ich glaube, der Regen kommt bald.",
+"speaker": "Er"
+},
+{
+"id": "5694121",
+"direct": "Ich verstehe nicht, warum wir das machen müssen.",
+"speaker": "Er"
+},
+{
+"id": "1403414",
+"direct": "Ich nehme mir kein Blatt vor den Mund.",
+"speaker": "Er"
+},
+{
+"id": "4115356",
+"direct": "Ich gehe alle heiligen Zeiten mal in die Kirche.",
+"speaker": "Sie"
+},
+{
+"id": "910502",
+"direct": "Ich würde gerne mit Ihnen zusammen frühstücken.",
+"speaker": "Er"
+},
+{
+"id": "13808447",
+"direct": "Ich werde auf unserem Land leben und sterben.",
+"speaker": "Er"
+},
+{
+"id": "2467517",
+"direct": "Uns rührt die Erzählung jeder guten Tat, uns rührt das Anschauen jedes harmonischen Gegenstandes, wir fühlen dabei, dass wir nicht ganz in der Fremde sind.",
+"speaker": "Er"
+},
+{
+"id": "8205567",
+"direct": "Ich werde nicht vorgeben, jemand zu sein, der ich nicht bin.",
+"speaker": "Sie"
+},
+{
+"id": "1103422",
+"direct": "In freien Momenten treffe ich mich gerne mit Freunden.",
+"speaker": "Sie"
+},
+{
+"id": "3832488",
+"direct": "Das Kohlendioxid, das wir in die Luft eintragen, durchdringt auch das Meer und verursacht seine Versauerung.",
+"speaker": "Sie"
+},
+{
+"id": "417487",
+"direct": "Ich bin in einer Stunde wieder zurück.",
+"speaker": "Er"
+},
+{
+"id": "12921918",
+"direct": "Ich finde, Sie sollten sich nicht für alles die Schuld geben.",
+"speaker": "Sie"
+},
+{
+"id": "1392955",
+"direct": "Ich komme nicht auf seinen Namen.",
+"speaker": "Er"
+},
+{
+"id": "3640474",
+"direct": "Ich kann keine sehr heißen Sachen essen oder trinken.",
+"speaker": "Er"
+},
+{
+"id": "1316687",
+"direct": "Ich werde Himmel und Hölle in Bewegung setzen, um dieses Wahnsinnsprojekt zu verhindern.",
+"speaker": "Er"
+},
+{
+"id": "12601446",
+"direct": "Ich bin mir sicher, daß sie eine völlig unschuldige Erklärung haben wird.",
+"speaker": "Sie"
+},
+{
+"id": "2987953",
+"direct": "Ich weiß nicht, was das sein mag, das ewige Leben. Aber dieses hier, das diesseitige, ist ein schlechter Scherz.",
+"speaker": "Sie"
+},
+{
+"id": "987991",
+"direct": "Wir sind seines Erfolges sicher.",
+"speaker": "Er"
+},
+{
+"id": "3750114",
+"direct": "Ich wünsche allen queeren Jugendlichen, dass sie auf Tumblr Gesellschaft finden.",
+"speaker": "Sie"
+},
+{
+"id": "1791552",
+"direct": "Ich kann nicht erklären, was passiert ist.",
+"speaker": "Er"
+},
+{
+"id": "8819383",
+"direct": "Ich habe das in einem Buch gelesen.",
+"speaker": "Sie"
+},
+{
+"id": "383163",
+"direct": "Ich habe einen Brief auf Englisch geschrieben.",
+"speaker": "Er"
+},
+{
+"id": "6007642",
+"direct": "Ich werde bei meinen Eltern bleiben.",
+"speaker": "Er"
+},
+{
+"id": "11859431",
+"direct": "Der Doktor hat gesagt, dass ich eine Woche lang im Bett bleiben solle.",
+"speaker": "Er"
+},
+{
+"id": "8043882",
+"direct": "Danach habe ich nie wieder von ihm gehört.",
+"speaker": "Sie"
+},
+{
+"id": "3799499",
+"direct": "Ich wusste, dass das nicht funktionieren wird.",
+"speaker": "Sie"
+},
+{
+"id": "12701742",
+"direct": "Ich frage mich, warum Toms Hunde nicht gebellt haben.",
+"speaker": "Sie"
+},
+{
+"id": "1847111",
+"direct": "Sei ruhig, wenn ich spreche.",
+"speaker": "Sie"
+},
+{
+"id": "747847",
+"direct": "Es ist Grün. Gehen wir rüber.",
+"speaker": "Sie"
+},
+{
+"id": "10847212",
+"direct": "Ich habe sie mir minutenlang angesehen, wie sie die Wäsche aufhing.",
+"speaker": "Sie"
+},
+{
+"id": "3245891",
+"direct": "Ich habe Lust auf etwas Süßes.",
+"speaker": "Er"
+},
+{
+"id": "1683226",
+"direct": "Er war in Rage, weil ich es abgelehnt hatte, ihm zu helfen.",
+"speaker": "Sie"
+},
+{
+"id": "2214073",
+"direct": "Ich habe es schon immer vorgezogen, allein zu arbeiten.",
+"speaker": "Sie"
+},
+{
+"id": "3681857",
+"direct": "Ich bin einfach zu beschäftigt, um jetzt Urlaub zu nehmen.",
+"speaker": "Sie"
+},
+{
+"id": "802294",
+"direct": "Ich würde gerne eines Tages ins Ausland gehen.",
+"speaker": "Sie"
+},
+{
+"id": "2446228",
+"direct": "Ich brauchte drei Tage, um den Raum zu säubern.",
+"speaker": "Er"
+},
+{
+"id": "2722572",
+"direct": "Ich konnte den Hund bellen hören.",
+"speaker": "Sie"
+},
+{
+"id": "5255261",
+"direct": "Ich habe das Wasser nicht getrunken.",
+"speaker": "Er"
+},
+{
+"id": "12824931",
+"direct": "Er kennt zehnmal mehr englische Vokabeln als ich.",
+"speaker": "Sie"
+},
+{
+"id": "5034991",
+"direct": "Ich habe mein Baby gestillt.",
+"speaker": "Sie"
+},
+{
+"id": "11058738",
+"direct": "Fisch esse ich nicht sehr oft.",
+"speaker": "Er"
+},
+{
+"id": "2760038",
+"direct": "Wir hatten ein reizendes kleines Café gefunden, setzten uns an einen Tisch unter einem großen Sonnenschirm und bestellten Erfrischungsgetränke.",
+"speaker": "Er"
+},
+{
+"id": "4606772",
+"direct": "Ich kann nicht fassen, dass ich nicht eingeladen wurde.",
+"speaker": "Sie"
+},
+{
+"id": "8642984",
+"direct": "Ich denke, dieser Wein ist zu süß.",
+"speaker": "Er"
+},
+{
+"id": "10121177",
+"direct": "Maria liebt mich, auch wenn ich dick bin.",
+"speaker": "Sie"
+},
+{
+"id": "13618969",
+"direct": "Ich sah Tom allein an der Theke sitzen.",
+"speaker": "Er"
+},
+{
+"id": "2410984",
+"direct": "Wir bewahren die Lebensmittel im Kühlschrank.",
+"speaker": "Er"
+},
+{
+"id": "3857705",
+"direct": "Ich dachte, dass ihr dachtet, dass Tom nicht an Sport interessiert sei.",
+"speaker": "Sie"
+},
+{
+"id": "437574",
+"direct": "Ich fühle mich heute besser als gestern.",
+"speaker": "Sie"
+},
+{
+"id": "3442605",
+"direct": "Ich habe ihn ein anderes Mädchen küssen sehen.",
+"speaker": "Sie"
+},
+{
+"id": "678216",
+"direct": "Ich sage ihr dauernd, sie soll sich benehmen.",
+"speaker": "Er"
+},
+{
+"id": "407173",
+"direct": "Wir sind am See picknicken gegangen.",
+"speaker": "Er"
+},
+{
+"id": "439489",
+"direct": "Es tut mir leid, aber ich kann Sie nicht gut hören.",
+"speaker": "Er"
+},
+{
+"id": "10203212",
+"direct": "Ich kann noch nicht Schach spielen.",
+"speaker": "Er"
+},
+{
+"id": "11817579",
+"direct": "Ich hasse es, getäuscht zu werden.",
+"speaker": "Er"
+},
+{
+"id": "2581172",
+"direct": "Ich glaube, wir müssen herausfinden, wo Tom ist.",
+"speaker": "Sie"
+},
+{
+"id": "10481240",
+"direct": "Ich finde, wir sollten noch ein bisschen warten.",
+"speaker": "Er"
+},
+{
+"id": "9455409",
+"direct": "Tom will, dass ich mir mehr Mühe gebe.",
+"speaker": "Sie"
+},
+{
+"id": "3367695",
+"direct": "Ich habe ein Lied über Tatoeba geschrieben.",
+"speaker": "Er"
+},
+{
+"id": "8661867",
+"direct": "Sag Tom, dass ich anrief.",
+"speaker": "Er"
+},
+{
+"id": "1634061",
+"direct": "Ich glaube, dass ich Ihnen diesen Umstand leicht erklären kann.",
+"speaker": "Sie"
+},
+{
+"id": "13401335",
+"direct": "Ich glaube, Tom und Maria mögen mich nicht allzusehr.",
+"speaker": "Sie"
+},
+{
+"id": "13271906",
+"direct": "Ich weiß, daß Sie gesehen haben, wie ich geweint habe.",
+"speaker": "Er"
+},
+{
+"id": "8315863",
+"direct": "Ich halte es für nicht machbar.",
+"speaker": "Er"
+},
+{
+"id": "13384040",
+"direct": "Ich kann mich inzwischen schon nicht einmal mehr erinnern, wer als erster angefangen hat.",
+"speaker": "Er"
+},
+{
+"id": "10078819",
+"direct": "Wir lassen ihn besser in Ruhe.",
+"speaker": "Er"
+},
+{
+"id": "11627931",
+"direct": "Ich bin im Haus und warte.",
+"speaker": "Sie"
+},
+{
+"id": "7424586",
+"direct": "Ich habe Tom nie vergeben.",
+"speaker": "Sie"
+},
+{
+"id": "10236430",
+"direct": "Ich umarmte ihn fest und weinte.",
+"speaker": "Er"
+},
+{
+"id": "5162183",
+"direct": "Mein Bruder und ich sind in derselben Klasse.",
+"speaker": "Sie"
+},
+{
+"id": "13803258",
+"direct": "Entschuldigen Sie bitte, ich bin mir nicht sicher, ob das die richtige Station ist.",
+"speaker": "Er"
+},
+{
+"id": "2882876",
+"direct": "Wir bitten Sie, im Bahnhofsbereich nicht zu rauchen.",
+"speaker": "Er"
+},
+{
+"id": "3081461",
+"direct": "Danach fühlte ich mich schlecht.",
+"speaker": "Sie"
+},
+{
+"id": "6092687",
+"direct": "Ich kenne den Akzent nicht.",
+"speaker": "Sie"
+},
+{
+"id": "2691789",
+"direct": "Ich möchte nicht meine Augen vor der Realität verschließen.",
+"speaker": "Er"
+},
+{
+"id": "14060437",
+"direct": "Ich wäre ein furchtbarer Spion.",
+"speaker": "Sie"
+},
+{
+"id": "12947616",
+"direct": "Ich habe es nicht ausgemessen.",
+"speaker": "Er"
+},
+{
+"id": "1953579",
+"direct": "Am Samstag kann ich nicht gehen.",
+"speaker": "Er"
+},
+{
+"id": "7740454",
+"direct": "Wir sollten uns eine Pause gönnen.",
+"speaker": "Er"
+},
+{
+"id": "6288262",
+"direct": "Wir bekamen 13 % Rabatt.",
+"speaker": "Sie"
+},
+{
+"id": "848521",
+"direct": "Wir haben die Asahi-Zeitung und die Yomiuri-Zeitung abonniert.",
+"speaker": "Er"
+},
+{
+"id": "1851619",
+"direct": "Ich tue es, weil es mir gefällt.",
+"speaker": "Sie"
+},
+{
+"id": "403816",
+"direct": "Ich bin das jüngste Kind.",
+"speaker": "Er"
+},
+{
+"id": "1070465",
+"direct": "Wir müssen jede Anstrengung unternehmen, jegliche Diskriminierung zu beenden.",
+"speaker": "Er"
+},
+{
+"id": "12753987",
+"direct": "Ich wünschte, ich könnte noch eine Woche hierbleiben.",
+"speaker": "Er"
+},
+{
+"id": "3534183",
+"direct": "Wir haben unsere Feinde zermalmt.",
+"speaker": "Sie"
+},
+{
+"id": "8302109",
+"direct": "Ich weiß, dass man sich auf Tom verlassen kann.",
+"speaker": "Er"
+},
+{
+"id": "2226923",
+"direct": "Ich möchte Tom bitten, unserer Gruppe beizutreten.",
+"speaker": "Sie"
+},
+{
+"id": "871935",
+"direct": "Ich verkaufe Kleider im Internet.",
+"speaker": "Sie"
+},
+{
+"id": "1326310",
+"direct": "Mein Herr, der den Drachen getötet hat, ist hier, ich soll bitten um Zuckerwerk, wie es der König isst.",
+"speaker": "Er"
+},
+{
+"id": "13497488",
+"direct": "Wir haben das gewollt. Aber wir haben mehr auf unser Gefühl gehört. Und nur wenig auf unseren Verstand.",
+"speaker": "Er"
+},
+{
+"id": "7015926",
+"direct": "Ich will es allen immer recht machen.",
+"speaker": "Er"
+},
+{
+"id": "10212743",
+"direct": "Wir wollen drei Wochen bleiben.",
+"speaker": "Er"
+},
+{
+"id": "13597657",
+"direct": "Wir haben schon mal mit dem nächsten Video angefangen.",
+"speaker": "Er"
+},
+{
+"id": "12543146",
+"direct": "Ich muss es schnellstmöglich zu Ende bringen.",
+"speaker": "Er"
+},
+{
+"id": "3305357",
+"direct": "Ich glaube, dass ich morgen eventuell nicht zur Arbeit kommen kann.",
+"speaker": "Sie"
+},
+{
+"id": "13867773",
+"direct": "Ich möchte, dass die Übersetzung gut wird.",
+"speaker": "Er"
+},
+{
+"id": "4698767",
+"direct": "Wir sollen ehrlich zueinander sein.",
+"speaker": "Sie"
+},
+{
+"id": "764815",
+"direct": "Das sind die besten Neuigkeiten, die ich seit langem gehört habe.",
+"speaker": "Sie"
+},
+{
+"id": "8879358",
+"direct": "Ich wusste gar nicht, dass Tom früher einmal in Boston gearbeitet hat.",
+"speaker": "Sie"
+},
+{
+"id": "2494263",
+"direct": "Ich glaube, dass dieses Wort zusammengeschrieben wird.",
+"speaker": "Sie"
+},
+{
+"id": "2164583",
+"direct": "Ich dachte, das könnte nützlich sein.",
+"speaker": "Sie"
+},
+{
+"id": "3836238",
+"direct": "Ich habe ihm ein zweiflammiges Feuerzeug geschenkt, das ich in den USA gekauft habe.",
+"speaker": "Er"
+},
+{
+"id": "8643919",
+"direct": "Ich denke, es ist großartig.",
+"speaker": "Sie"
+}
+]

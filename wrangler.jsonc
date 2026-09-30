@@ -1,0 +1,14 @@
+{
+  "name": "konjunktiv-t5",
+  "account_id": "cd1e88db5a44de0f45317275cbcef879",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-09-29",
+  "routes": [{ "pattern": "konjunktiv.jonas-strassel.de", "custom_domain": true }],
+  // The custom domain is the public URL; the *.workers.dev alias would be a second copy of the site
+  "workers_dev": false,
+  // Built by `node scripts/build_site.mjs` from web/
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS"
+  }
+}

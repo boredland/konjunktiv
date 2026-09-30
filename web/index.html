@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Indirekte Rede – Konjunktiv-Umformer, läuft offline im Browser</title>
+  <meta name="description" content="Wandelt direkte Rede in indirekte Rede im Konjunktiv um. Ein kleines Sprachmodell läuft komplett in Ihrem Browser – Ihre Texte verlassen das Gerät nicht.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Indirekte Rede auf Knopfdruck</h1>
+    <p class="lead">
+      Aus <em>„Ich bin 18 Jahre alt und in Nürnberg geboren.“</em> wird
+      <em>Er sei 18 Jahre alt und sei in Nürnberg geboren worden.</em>
+      Ein kleines Sprachmodell setzt Ihre Sätze in den Konjunktiv – direkt in Ihrem Browser, ohne Server.
+    </p>
+  </header>
+
+  <main>
+    <section class="card" id="step-download" aria-labelledby="h-download">
+      <h2 id="h-download"><span class="step">1</span> Modell laden</h2>
+      <p>
+        Das Modell wird einmalig heruntergeladen (<span id="model-size">rund 250&nbsp;MB</span>) und im Browser gespeichert.
+        Danach funktioniert die Seite auch ohne Internetverbindung.
+      </p>
+      <div class="row">
+        <button id="load" type="button">Modell herunterladen</button>
+        <button id="forget" type="button" class="secondary" hidden>Modell vom Gerät löschen</button>
+      </div>
+      <progress id="progress" max="100" value="0" hidden></progress>
+      <p id="load-status" class="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="card" id="step-run" aria-labelledby="h-run">
+      <h2 id="h-run"><span class="step">2</span> Text umwandeln</h2>
+      <label for="direct">Direkte Rede (Ich-Form)</label>
+      <textarea id="direct" rows="5" placeholder="Ich bin 18 Jahre alt und in Nürnberg geboren."></textarea>
+
+      <div class="row">
+        <label for="speaker" class="inline">Wer spricht?</label>
+        <select id="speaker">
+          <option value="Er">Er</option>
+          <option value="Sie">Sie</option>
+        </select>
+        <button id="run" type="button" disabled>In indirekte Rede umwandeln</button>
+      </div>
+      <p id="run-status" class="status" role="status" aria-live="polite">Laden Sie zuerst das Modell (Schritt&nbsp;1).</p>
+
+      <label for="indirect">Indirekte Rede</label>
+      <textarea id="indirect" rows="3" readonly></textarea>
+    </section>
+
+    <section aria-labelledby="h-what">
+      <h2 id="h-what">Was macht das Werkzeug?</h2>
+      <p>
+        Es schreibt Aussagen in der Ich- oder Wir-Form so um, wie man sie in einem Bericht wiedergibt: in der indirekten Rede.
+        Dabei tauscht es die Personen aus (<em>ich → er/sie</em>, <em>mein → sein/ihr</em>, <em>wir → sie</em>)
+        und setzt die Verben in den Konjunktiv.
+      </p>
+      <ul>
+        <li><strong>Gegenwart</strong> wird Konjunktiv&nbsp;I: <em>Ich wohne in Berlin</em> → <em>Er wohne in Berlin.</em></li>
+        <li><strong>Vergangenheit</strong> wird Konjunktiv&nbsp;I Perfekt: <em>Ich kaufte ein</em> → <em>Sie habe eingekauft.</em></li>
+        <li><strong>Gleicht der Konjunktiv&nbsp;I dem Indikativ</strong>, weicht es auf Konjunktiv&nbsp;II aus: <em>Wir haben keine Zeit</em> → <em>Sie hätten keine Zeit.</em></li>
+        <li><strong>Längere Texte</strong> zerlegt es in Sätze und wandelt sie einzeln um.</li>
+      </ul>
+      <p class="note">
+        Grenzen: Das Modell kennt nur die Sprecher <em>er</em> und <em>sie</em>. Fragen, Befehle und Sätze, die jemanden mit
+        <em>du</em> oder <em>ihr</em> ansprechen, verarbeitet es nicht zuverlässig. Wie jedes Sprachmodell macht es gelegentlich Fehler –
+        lesen Sie das Ergebnis gegen, bevor Sie es verwenden.
+      </p>
+    </section>
+
+    <section aria-labelledby="h-offline">
+      <h2 id="h-offline">Warum das komplett offline läuft</h2>
+      <p>
+        Die Seite schickt Ihren Text nirgendwohin. Modell, Rechenlaufzeit und diese Seite liegen alle auf demselben Server
+        und werden einmal geladen. Die Umwandlung selbst rechnet Ihr Browser mit
+        <a href="https://onnxruntime.ai/">ONNX Runtime</a> in WebAssembly.
+        Es gibt kein Backend, keine API und keine Datenbank – nur statische Dateien.
+      </p>
+      <p>
+        Nach dem ersten Laden speichert der Browser das Modell (Cache Storage). Beim nächsten Besuch lädt es in wenigen Sekunden
+        von der Festplatte, auch im Flugmodus. Mit „Modell vom Gerät löschen“ geben Sie den Speicher wieder frei.
+      </p>
+    </section>
+
+    <section aria-labelledby="h-how">
+      <h2 id="h-how">Worauf es basiert und wie es trainiert wurde</h2>
+      <p>
+        Grundlage ist <a href="https://huggingface.co/google/flan-t5-small">Flan-T5 small</a> von Google
+        (77&nbsp;Millionen Parameter, Apache-2.0-Lizenz). Das Modell wurde für genau diese eine Aufgabe feinjustiert:
+      </p>
+      <ol>
+        <li><strong>Sätze sammeln:</strong> rund 40.000 deutsche Ich- und Wir-Sätze aus dem freien Satzkorpus
+          <a href="https://tatoeba.org/">Tatoeba</a> (CC&nbsp;BY&nbsp;2.0&nbsp;FR), ergänzt um Mustersätze für alle Zeitformen
+          und gezielt geschriebene Beispiele für schwierige Fälle wie trennbare Verben.</li>
+        <li><strong>Beispiele erzeugen:</strong> Ein großes Sprachmodell hat jeden Satz nach festen Regeln in die indirekte Rede gesetzt.</li>
+        <li><strong>Prüfen:</strong> Ein zweiter Durchgang hat jedes Paar gegen dieselben Regeln geprüft und fehlerhafte aussortiert (etwa 5&nbsp;%).</li>
+        <li><strong>Trainieren:</strong> Flan-T5 small hat in drei Durchläufen aus diesen Paaren gelernt – auf einer Laptop-Grafikkarte, in gut einer halben Stunde.</li>
+        <li><strong>Verkleinern:</strong> Der Decoder wurde auf 8-Bit-Gewichte komprimiert, damit der Download handlich bleibt.
+          Encoder und Ausgabeschicht bleiben in voller Genauigkeit, weil die Kompression dort seltene Wörter verfälschte.</li>
+      </ol>
+      <p>
+        Auf 1.000 zurückgehaltenen Testsätzen trifft das Modell die erwartete Umformung in <span id="metric-exact">rund 90&nbsp;%</span>
+        der Fälle Wort für Wort. Quellcode, Trainingsdaten und Protokoll:
+        <a href="https://github.com/boredland/konjunktiv">github.com/boredland/konjunktiv</a> (MIT-Lizenz).
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      Modell: Flan-T5 small (Apache&nbsp;2.0), feinjustiert · Laufzeit: Transformers.js und ONNX Runtime Web ·
+      Satzquelle: Tatoeba (CC&nbsp;BY&nbsp;2.0&nbsp;FR) · Code: MIT
+    </p>
+  </footer>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "test_exact_match": 0.897,
+  "test_indicative_leak_rate": 0.0,
+  "challenge_exact": 20,
+  "regression_exact": "11/12",
+  "regression_misses": [
+    {
+      "source": "sprecher: Er | Wir kauften im Supermarkt ein.",
+      "target": "Sie h\u00e4tten im Supermarkt eingekauft.",
+      "pred": "Sie h\u00e4tten im Supermarkt ein gekauft."
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "konjunktiv",
+  "version": "1.0.0",
+  "private": true,
+  "description": "German direct speech → indirect speech (Konjunktiv), fine-tuned Flan-T5 running offline in the browser",
+  "license": "MIT",
+  "author": "Jonas Strassel",
+  "repository": "github:boredland/konjunktiv",
+  "type": "module",
+  "scripts": {
+    "vendor": "node scripts/vendor_runtime.mjs",
+    "build": "node scripts/vendor_runtime.mjs && node scripts/build_site.mjs",
+    "deploy": "npm run build && wrangler deploy",
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "dependencies": {
+    "@huggingface/transformers": "4.3.0"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.63.0"
+  }
+}

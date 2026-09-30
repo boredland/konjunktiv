@@ -1,0 +1,29 @@
+// The model was trained on single sentences capped at 64 tokens; a paragraph in one call gets
+// cut off mid-word, so input is converted sentence by sentence.
+
+// A period after these does not end a sentence ("z. B. Tom", "Dr. Müller").
+const ABBREVIATIONS = new Set([
+  'bzw', 'ca', 'd', 'dr', 'etc', 'evtl', 'ggf', 'hr', 'fr', 'inkl', 'max', 'min', 'nr', 'prof', 'str',
+  'u', 'usw', 'vgl', 'z', 'b', 'a', 'o', 'ä', 'bspw', 'sog', 'St', 'st',
+]);
+
+export function splitSentences(text) {
+  const sentences = [];
+  let start = 0;
+  // candidate boundary: . ! or ? (plus closing quotes), whitespace, then an uppercase letter or opening quote
+  const boundary = /[.!?]["“”»«']?\s+(?=["„“»«']?[A-ZÄÖÜ])/g;
+  for (const match of text.matchAll(boundary)) {
+    const before = text.slice(start, match.index);
+    const lastWord = before.split(/\s+/).pop() ?? '';
+    // "26. September", "1. Mai": a period after a number is an ordinal, not a sentence end
+    if (text[match.index] === '.' && (/\d$/.test(lastWord) || ABBREVIATIONS.has(lastWord.toLowerCase()))) {
+      continue;
+    }
+    const end = match.index + match[0].trimEnd().length;
+    sentences.push(text.slice(start, end).trim());
+    start = match.index + match[0].length;
+  }
+  const rest = text.slice(start).trim();
+  if (rest) sentences.push(rest);
+  return sentences.filter(Boolean);
+}
