@@ -37,3 +37,10 @@ judge: since round 4 the judge fails schema validation on 20-row audit batches; 
 round-6 metrics (PyTorch): test_exact_match 0.941 (round 5: 0.946), indicative leak 0.0, challenge 20/20, regression 12/12, separable 38/40, subclause 24/24. Audit majority flags 12/546 in-scope (0.022; round 5: 16). Remaining: "Wir kaufen jeden Freitag ein." → "würden … einkaufen" (würde-form instead of the -te form), a dropped repeated auxiliary in coordination, rare invented participles ("aufgehinget").
 web model (Transformers.js, same dtypes as the site): identical probe results to PyTorch (94/96), ~200 ms/sentence in Node.
 web/model size: 650M (encoder fp32 439 MB, decoder q8 per-channel with fp32 lm_head 239 MB)
+
+## Round 7 (user-reported interview sentences)
+
+regression set: the three user sentences (gegenübergesessen, schwergefallen, der Atem gestockt) added to data/regression_round2.jsonl; two generated sources overlapping them were held out of training.
+targeted sources: 700 agy sentences (data/raw/agy_sentences7.json): Präteritum with dative experiencer mir/uns and rare verbs (stocken, versagen, schwinden …), "es fiel mir schwer / tat mir leid", dative position verbs (gegenübersitzen, zuhören), wir + separable weak Präsens, coordinated verbs needing their own auxiliary. 94 more pronoun-first labels after a fronted phrase were reordered, 3 dropped. train 43,826.
+round-7 metrics (PyTorch): val loss 0.0289, test_exact_match 0.944, challenge 20/20, regression 15/15, separable 40/40, subclause 23/24 ("klinge" for "klingle"). Audit majority flags 7/548 (0.013). Web model identical to PyTorch on all 99 probe rows.
+remaining audit flags: indicative left in a few subordinate/infinitive constructions ("neigen dazu", "der sich gegen sie richtet"), rare invented forms ("ausblierten", "erschlage" for "ergreife", "aufgewachsen sei" for "aufgehängt habe").
