@@ -36,6 +36,7 @@ const progressBar = $('progress');
 const loadStatus = $('load-status');
 const runButton = $('run');
 const runStatus = $('run-status');
+const runProgress = $('run-progress');
 const direct = $('direct');
 const indirect = $('indirect');
 
@@ -52,9 +53,19 @@ function fitToContent(el) {
 }
 
 const formatMB = (bytes) => `${Math.round(bytes / 1e6)} MB`;
+const nextPaint = () => new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve, 0)));
+
+// Disables the button and swaps its label while work runs; the label element keeps the spinner span intact.
+function setBusy(button, busy, label) {
+  button.disabled = busy;
+  button.classList.toggle('is-busy', busy);
+  button.setAttribute('aria-busy', String(busy));
+  if (label) button.querySelector('.label').textContent = label;
+}
 
 async function loadModel() {
-  loadButton.disabled = true;
+  setBusy(loadButton, true, 'Wird geladen …');
+  runButton.disabled = true;
   forgetButton.hidden = true;
   progressBar.hidden = false;
   progressBar.value = 0;
@@ -74,14 +85,15 @@ async function loadModel() {
     progressBar.value = 100;
     progressBar.hidden = true;
     setStatus(loadStatus, 'Modell ist geladen und auf diesem Gerät gespeichert. Die Umwandlung läuft jetzt offline.', 'ok');
-    loadButton.textContent = 'Modell geladen';
+    setBusy(loadButton, false, 'Modell geladen');
+    loadButton.disabled = true;
     forgetButton.hidden = false;
     runButton.disabled = false;
     setStatus(runStatus, 'Bereit.');
   } catch (error) {
     loading = false;
     progressBar.hidden = true;
-    loadButton.disabled = false;
+    setBusy(loadButton, false, 'Modell herunterladen');
     setStatus(loadStatus, `Fehler beim Laden: ${error.message}`, 'err');
   }
 }
@@ -93,8 +105,7 @@ async function forgetModel() {
     pipe = null;
     const { filesDeleted } = await ModelRegistry.clear_pipeline_cache(TASK, MODEL, PIPELINE_OPTIONS);
     runButton.disabled = true;
-    loadButton.disabled = false;
-    loadButton.textContent = 'Modell herunterladen';
+    setBusy(loadButton, false, 'Modell herunterladen');
     forgetButton.hidden = true;
     setStatus(loadStatus, `Gespeichertes Modell gelöscht (${filesDeleted} Dateien).`);
     setStatus(runStatus, 'Laden Sie zuerst das Modell (Schritt 1).');
@@ -121,14 +132,20 @@ async function convert() {
     setStatus(runStatus, 'Bitte direkte Rede eingeben.', 'err');
     return;
   }
-  runButton.disabled = true;
+  setBusy(runButton, true, 'Wird umgewandelt …');
   indirect.value = '';
   fitToContent(indirect);
+  const sentences = splitSentences(text);
+  runProgress.max = sentences.length;
+  runProgress.value = 0;
+  runProgress.hidden = sentences.length < 2;
   try {
-    const sentences = splitSentences(text);
     const converted = [];
     for (const [i, sentence] of sentences.entries()) {
       setStatus(runStatus, `Wandle um: Satz ${i + 1} von ${sentences.length} …`);
+      // WASM inference blocks the main thread; without a painted frame first, the spinner, progress
+      // bar and status never appear because the browser only repaints after the whole run.
+      await nextPaint();
       const [{ generated_text }] = await pipe(`sprecher: ${speaker} | ${sentence}`, {
         max_new_tokens: 64,
         do_sample: false,
@@ -136,12 +153,14 @@ async function convert() {
       converted.push(generated_text);
       indirect.value = converted.join(' ');
       fitToContent(indirect);
+      runProgress.value = i + 1;
     }
     setStatus(runStatus, 'Fertig.', 'ok');
   } catch (error) {
     setStatus(runStatus, `Fehler: ${error.message}`, 'err');
   } finally {
-    runButton.disabled = false;
+    setBusy(runButton, false, 'In indirekte Rede umwandeln');
+    runProgress.hidden = true;
   }
 }
 

@@ -105,6 +105,24 @@ button {
 }
 button.secondary { background: transparent; color: var(--accent); }
 button:disabled { opacity: 0.45; cursor: not-allowed; }
+button { display: inline-flex; align-items: center; gap: 0.5rem; }
+
+/* Busy state: the button stays disabled but readable, with a spinner in front of its label. */
+.spinner { display: none; }
+button.is-busy { opacity: 0.85; cursor: progress; }
+button.is-busy .spinner {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 700ms linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  button.is-busy .spinner { animation: none; border-right-color: currentColor; opacity: 0.6; }
+}
 
 progress { width: 100%; height: 0.6rem; margin-top: 1rem; accent-color: var(--accent); }
 

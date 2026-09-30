@@ -25,7 +25,7 @@
         Danach funktioniert die Seite auch ohne Internetverbindung.
       </p>
       <div class="row">
-        <button id="load" type="button">Modell herunterladen</button>
+        <button id="load" type="button"><span class="spinner" aria-hidden="true"></span><span class="label">Modell herunterladen</span></button>
         <button id="forget" type="button" class="secondary" hidden>Modell vom Gerät löschen</button>
       </div>
       <progress id="progress" max="100" value="0" hidden></progress>
@@ -43,9 +43,10 @@
           <option value="Er">Er</option>
           <option value="Sie">Sie</option>
         </select>
-        <button id="run" type="button" disabled>In indirekte Rede umwandeln</button>
+        <button id="run" type="button" disabled><span class="spinner" aria-hidden="true"></span><span class="label">In indirekte Rede umwandeln</span></button>
       </div>
       <p id="run-status" class="status" role="status" aria-live="polite">Laden Sie zuerst das Modell (Schritt&nbsp;1).</p>
+      <progress id="run-progress" max="1" value="0" hidden></progress>
 
       <label for="indirect">Indirekte Rede</label>
       <textarea id="indirect" rows="3" readonly></textarea>
