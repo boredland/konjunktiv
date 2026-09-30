@@ -24,3 +24,16 @@ decoder quantization: per-channel q8 with lm_head kept fp32 (109 MB decoder, web
 
 round-2 metrics (PyTorch, out/metrics.json): test_exact_match 0.897 (round 1: 0.899), indicative leak 0.0, challenge 20/20, regression set (data/regression_round2.jsonl) 11/12 (round 1: 4/12). Remaining miss: "Wir kauften im Supermarkt ein." → "ein gekauft" (eingekauft appears in 5 training targets).
 web/model size: 242M
+
+## Rounds 3–6 (audit-driven fix loop)
+
+Each round: hand-written probe sets with gold targets (data/probe_separable.jsonl, data/probe_subclause.jsonl), an LLM-judged audit of 600 unseen Tatoeba sentences (ids in data/audit_ids.json, never used as sources), new targeted sources for the error classes found, relabelling of inconsistent existing pairs, retrain.
+round 3 (flan-t5-small): rule 9 (every finite verb in subordinate clauses converted). 1,877 of 2,058 changed subordinate-clause labels passed a 2/2 re-judge. test 0.905, probes: separable 37/40, subclause 14/24.
+round 4 (flan-t5-small): rules 10–11 (dative uns/mir → ihnen/ihm/ihr, never sich; modal verbs in subordinate clauses; sein-Perfekt for verbs of motion), 900 agy sentences. test 0.913, separable 35/40, subclause 18/24. Remaining errors were invented participles ("eingelud", "zusammengewerkt"), so the base model was switched.
+round 5 (flan-t5-base, 248M, 1.9 s/step on the iGPU, 2 h 6 min): val loss 0.0309 (small: 0.0508). test 0.946, separable 39/40, subclause 23/24, regression 10/12: both misses moved a fronted adverbial behind the pronoun ("Er habe vom 1. bis …"). 131 training pairs did the same, contradicting rule 8 and 1,007 consistent pairs; 123 were reordered deterministically (the label with only the fronted phrase restored), 7 dropped.
+round 6 (flan-t5-base): 800 agy sentences (weak -r/-l/-hl stems, wir + weak Präsens, mögen/sollen in dependent clauses, dative mir/uns with gehören/gehen/rühren, colloquial "ich hol/hab", Präteritum relative clauses); 784 kept. kept pairs 46,912 of 49,159, train 43,205. The first run died at epoch 2 (harness job lost); train.py now resumes from the last epoch checkpoint. val loss 0.0297.
+judge: since round 4 the judge fails schema validation on 20-row audit batches; scripts/audit_judge.py now uses 4-row batches and a 3-vote majority (single verdicts: 46 of 76 round-4 flags had an empty or identical fix).
+
+round-6 metrics (PyTorch): test_exact_match 0.941 (round 5: 0.946), indicative leak 0.0, challenge 20/20, regression 12/12, separable 38/40, subclause 24/24. Audit majority flags 12/546 in-scope (0.022; round 5: 16). Remaining: "Wir kaufen jeden Freitag ein." → "würden … einkaufen" (würde-form instead of the -te form), a dropped repeated auxiliary in coordination, rare invented participles ("aufgehinget").
+web model (Transformers.js, same dtypes as the site): identical probe results to PyTorch (94/96), ~200 ms/sentence in Node.
+web/model size: 650M (encoder fp32 439 MB, decoder q8 per-channel with fp32 lm_head 239 MB)

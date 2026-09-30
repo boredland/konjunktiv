@@ -21,7 +21,7 @@
     <section class="card" id="step-download" aria-labelledby="h-download">
       <h2 id="h-download"><span class="step">1</span> Modell laden</h2>
       <p>
-        Das Modell wird einmalig heruntergeladen (<span id="model-size">rund 250&nbsp;MB</span>) und im Browser gespeichert.
+        Das Modell wird einmalig heruntergeladen (<span id="model-size">rund 680&nbsp;MB</span>) und im Browser gespeichert.
         Danach funktioniert die Seite auch ohne Internetverbindung.
       </p>
       <div class="row">
@@ -89,21 +89,22 @@
     <section aria-labelledby="h-how">
       <h2 id="h-how">Worauf es basiert und wie es trainiert wurde</h2>
       <p>
-        Grundlage ist <a href="https://huggingface.co/google/flan-t5-small">Flan-T5 small</a> von Google
-        (77&nbsp;Millionen Parameter, Apache-2.0-Lizenz). Das Modell wurde für genau diese eine Aufgabe feinjustiert:
+        Grundlage ist <a href="https://huggingface.co/google/flan-t5-base">Flan-T5 base</a> von Google
+        (248&nbsp;Millionen Parameter, Apache-2.0-Lizenz). Das Modell wurde für genau diese eine Aufgabe feinjustiert:
       </p>
       <ol>
-        <li><strong>Sätze sammeln:</strong> rund 40.000 deutsche Ich- und Wir-Sätze aus dem freien Satzkorpus
+        <li><strong>Sätze sammeln:</strong> rund 49.000 deutsche Ich- und Wir-Sätze aus dem freien Satzkorpus
           <a href="https://tatoeba.org/">Tatoeba</a> (CC&nbsp;BY&nbsp;2.0&nbsp;FR), ergänzt um Mustersätze für alle Zeitformen
           und gezielt geschriebene Beispiele für schwierige Fälle wie trennbare Verben.</li>
         <li><strong>Beispiele erzeugen:</strong> Ein großes Sprachmodell hat jeden Satz nach festen Regeln in die indirekte Rede gesetzt.</li>
         <li><strong>Prüfen:</strong> Ein zweiter Durchgang hat jedes Paar gegen dieselben Regeln geprüft und fehlerhafte aussortiert (etwa 5&nbsp;%).</li>
-        <li><strong>Trainieren:</strong> Flan-T5 small hat in drei Durchläufen aus diesen Paaren gelernt – auf einer Laptop-Grafikkarte, in gut einer halben Stunde.</li>
+        <li><strong>Trainieren:</strong> Flan-T5 base hat in drei Durchläufen aus diesen Paaren gelernt – auf einer Laptop-Grafikkarte, in gut zwei Stunden.
+          Nach jedem Trainingslauf wurden die Fehler auf unbekannten Sätzen ausgewertet und gezielt neue Beispiele ergänzt.</li>
         <li><strong>Verkleinern:</strong> Der Decoder wurde auf 8-Bit-Gewichte komprimiert, damit der Download handlich bleibt.
           Encoder und Ausgabeschicht bleiben in voller Genauigkeit, weil die Kompression dort seltene Wörter verfälschte.</li>
       </ol>
       <p>
-        Auf 1.000 zurückgehaltenen Testsätzen trifft das Modell die erwartete Umformung in <span id="metric-exact">rund 90&nbsp;%</span>
+        Auf 1.000 zurückgehaltenen Testsätzen trifft das Modell die erwartete Umformung in <span id="metric-exact">rund 94&nbsp;%</span>
         der Fälle Wort für Wort. Quellcode, Trainingsdaten und Protokoll:
         <a href="https://github.com/boredland/konjunktiv">github.com/boredland/konjunktiv</a> (MIT-Lizenz).
       </p>
@@ -112,7 +113,7 @@
 
   <footer>
     <p>
-      Modell: Flan-T5 small (Apache&nbsp;2.0), feinjustiert · Laufzeit: Transformers.js und ONNX Runtime Web ·
+      Modell: Flan-T5 base (Apache&nbsp;2.0), feinjustiert · Laufzeit: Transformers.js und ONNX Runtime Web ·
       Satzquelle: Tatoeba (CC&nbsp;BY&nbsp;2.0&nbsp;FR) · Code: MIT
     </p>
   </footer>

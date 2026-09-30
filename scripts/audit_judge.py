@@ -2,12 +2,15 @@
 
 Run in the eval kernel after `%load scripts/synthesize_pairs.py` (needs completion(), RULES, _run_pool):
     %load scripts/audit_judge.py
-    audit()          # writes out/audit_report.json, prints counts and every genuine flag
+    audit()          # writes out/audit_report.json, prints counts and every majority flag
 Categories follow the round-2 audit; project conventions the judge must accept are stated explicitly,
 because an unconstrained judge flagged allowed forms (-te Konjunktiv II, original word order).
+A single verdict is noisy (round 4: 46 of 76 flags had an empty or identical "fix"), so each row is judged in
+`votes` independent rounds and counts as an error only when a majority names the same error category.
+Batches stay at 4 rows: since round 4 the judge fails schema validation on 20-row batches.
 """
 import json
-from collections import Counter
+from collections import Counter, defaultdict
 
 AUDIT_PREDS = ROOT / "out" / "audit_preds.jsonl"
 AUDIT_REPORT = ROOT / "out" / "audit_report.json"
@@ -43,31 +46,48 @@ Nur echte Fehler beanstanden. Antworte nur als JSON:
 {lines}"""
 
 
-def audit(path=AUDIT_PREDS, label="audit"):
+def audit(path=AUDIT_PREDS, label="audit", votes=3, batch_size=4):
     rows = [json.loads(l) for l in open(path, encoding="utf-8")]
-    verdicts = {}
+    ballots = defaultdict(list)
 
-    def on_result(batch, res):
-        want = {r["id"] for r in batch}
-        try:
-            if isinstance(res, str):
-                res = json.loads(res)
-            for v in (res or {}).get("verdicts", []):
-                if v.get("id") in want and v.get("category") in CATS:
-                    verdicts[v["id"]] = v
-        except Exception as e:  # noqa: BLE001
-            print("parse", e)
-        return [r for r in batch if r["id"] not in verdicts]
+    for round_no in range(votes):
+        seen = set()
 
-    _run_pool([rows[i:i + 20] for i in range(0, len(rows), 20)],
-              lambda b: completion(audit_prompt(b), model="default", schema=AUDIT_SCHEMA), on_result, label)
-    report = [{**r, **verdicts[r["id"]]} for r in rows if r["id"] in verdicts]
+        def on_result(batch, res):
+            want = {r["id"] for r in batch}
+            try:
+                if isinstance(res, str):
+                    res = json.loads(res)
+                for v in (res or {}).get("verdicts", []):
+                    if v.get("id") in want and v.get("category") in CATS and v["id"] not in seen:
+                        seen.add(v["id"])
+                        ballots[v["id"]].append(v)
+            except Exception as e:  # noqa: BLE001
+                print("parse", e)
+            return [r for r in batch if r["id"] not in seen]
+
+        _run_pool([rows[i:i + batch_size] for i in range(0, len(rows), batch_size)],
+                  lambda b: completion(audit_prompt(b), model="default", schema=AUDIT_SCHEMA), on_result,
+                  f"{label}-v{round_no + 1}")
+
+    need = votes // 2 + 1
+    report = []
+    for r in rows:
+        cats = Counter(v["category"] for v in ballots.get(r["id"], []))
+        if not cats:
+            continue
+        cat, n = cats.most_common(1)[0]
+        if n < need:
+            cat = "ok"
+        fix = next((v["corrected"] for v in ballots[r["id"]] if v["category"] == cat and v["corrected"].strip()), "")
+        report.append({**r, "category": cat, "corrected": fix, "votes": dict(cats)})
     AUDIT_REPORT.write_text(json.dumps(report, ensure_ascii=False, indent=1), encoding="utf-8")
     counts = Counter(r["category"] for r in report)
     errors = [r for r in report if r["category"] not in NOT_ERRORS]
     in_scope = len(report) - counts["out_of_scope_input"]
+    print(f"judged {len(report)}/{len(rows)} rows, {votes} votes each")
     print(dict(counts))
-    print(f"genuine flags: {len(errors)}/{in_scope} in-scope ({len(errors) / max(in_scope, 1):.3f})")
+    print(f"majority flags: {len(errors)}/{in_scope} in-scope ({len(errors) / max(in_scope, 1):.3f})")
     for r in sorted(errors, key=lambda r: r["category"]):
         print(f"[{r['category']}] {r['direct']}\n    got: {r['indirect']}\n    fix: {r['corrected']}")
     return report

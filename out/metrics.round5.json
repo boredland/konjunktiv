@@ -1,0 +1,18 @@
+{
+  "test_exact_match": 0.946,
+  "test_indicative_leak_rate": 0.0,
+  "challenge_exact": 20,
+  "regression_exact": "10/12",
+  "regression_misses": [
+    {
+      "source": "sprecher: Er | Vom 1. bis zum 26. September 2026 absolvierte ich im Rahmen meiner Schulausbildung ein vierw\u00f6chiges Betriebspraktikum in der Stadtbibliothek Stuttgart.",
+      "target": "Vom 1. bis zum 26. September 2026 habe er im Rahmen seiner Schulausbildung ein vierw\u00f6chiges Betriebspraktikum in der Stadtbibliothek Stuttgart absolviert.",
+      "pred": "Er habe vom 1. bis zum 26. September 2026 im Rahmen seiner Schulausbildung ein vierw\u00f6chiges Betriebspraktikum in der Stadtbibliothek Stuttgart absolviert."
+    },
+    {
+      "source": "sprecher: Sie | Im Anschluss digitalisierte ich alte Zeitungsbest\u00e4nde und katalogisierte neue Medien.",
+      "target": "Im Anschluss habe sie alte Zeitungsbest\u00e4nde digitalisiert und habe neue Medien katalogisiert.",
+      "pred": "Sie habe im Anschluss alte Zeitungsbest\u00e4nde digitalisiert und habe neue Medien katalogisiert."
+    }
+  ]
+}

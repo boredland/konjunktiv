@@ -106,6 +106,8 @@ button {
 button.secondary { background: transparent; color: var(--accent); }
 button:disabled { opacity: 0.45; cursor: not-allowed; }
 button { display: inline-flex; align-items: center; gap: 0.5rem; }
+/* An author `display` beats the UA `[hidden]` rule, so restate it; otherwise hidden buttons stay visible. */
+[hidden] { display: none !important; }
 
 /* Busy state: the button stays disabled but readable, with a spinner in front of its label. */
 .spinner { display: none; }

@@ -84,7 +84,16 @@ async function loadModel() {
     loading = false;
     progressBar.value = 100;
     progressBar.hidden = true;
-    setStatus(loadStatus, 'Modell ist geladen und auf diesem Gerät gespeichert. Die Umwandlung läuft jetzt offline.', 'ok');
+    // Private windows cap Cache Storage: the 439 MB encoder then fails to store while the model still runs
+    // from memory, so only claim "stored" when the files really are in the cache.
+    const stored = await ModelRegistry.is_pipeline_cached(TASK, MODEL, PIPELINE_OPTIONS).catch(() => false);
+    setStatus(
+      loadStatus,
+      stored
+        ? 'Modell ist geladen und auf diesem Gerät gespeichert. Die Umwandlung läuft jetzt offline.'
+        : 'Modell ist geladen, die Umwandlung läuft offline. Speichern war nicht möglich (etwa im privaten Fenster) – beim nächsten Besuch wird es neu heruntergeladen.',
+      'ok',
+    );
     setBusy(loadButton, false, 'Modell geladen');
     loadButton.disabled = true;
     forgetButton.hidden = false;

@@ -1,4 +1,4 @@
-"""Fine-tune google/flan-t5-small on direct -> indirect speech pairs (Konjunktiv-T5)."""
+"""Fine-tune Flan-T5 on direct -> indirect speech pairs (Konjunktiv-T5)."""
 
 import json
 import os
@@ -15,6 +15,7 @@ from transformers import (
     Seq2SeqTrainingArguments,
     TrainerCallback,
 )
+from transformers.trainer_utils import get_last_checkpoint
 
 # flan-t5-base (248M) instead of -small (77M): the download budget allows ~1 GB, and the small model's
 # remaining errors (invented participles, rare verbs) are capacity errors that more data did not remove.
@@ -143,7 +144,11 @@ def train_round(model, tokenizer, train_rows, val_rows, *, num_train_epochs, lea
         processing_class=tokenizer,
         callbacks=[guard] if guard is not None else None,
     )
-    trainer.train()
+    # A base-size run takes ~2 h; if the process dies, continue from the last epoch checkpoint instead of from scratch
+    last = get_last_checkpoint(str(output_dir)) if Path(output_dir).is_dir() else None
+    if last:
+        print(f"resuming from {last}")
+    trainer.train(resume_from_checkpoint=last)
     if guard is not None and guard.tripped:
         return False
     trainer.save_model(str(output_dir))

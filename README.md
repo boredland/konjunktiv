@@ -18,11 +18,11 @@ browser keeps the model in Cache Storage and the page works offline.
 
 | Step | What | Script |
 |---|---|---|
-| Sources | ~43k German `ich`/`wir` sentences from [Tatoeba](https://tatoeba.org) plus templated sentences for every tense and LLM-written sentences for hard cases (separable verbs, rare verbs, subordinate clauses, capital umlauts) | `collect_sentences.py`, `templates.py`, `add_targeted_sources.py` |
+| Sources | ~49k German `ich`/`wir` sentences from [Tatoeba](https://tatoeba.org) plus templated sentences for every tense and LLM-written sentences for hard cases (separable verbs, rare verbs, subordinate clauses, dative pronouns, capital umlauts) | `collect_sentences.py`, `templates.py`, `add_targeted_sources.py` |
 | Labels | An LLM rewrites every sentence into indirect speech under fixed rules (`RULES` in `synthesize_pairs.py`) | `synthesize_pairs.py` (run in an agent kernel with `completion()`) |
 | Filter | A second LLM pass judges every pair against the same rules; rejects are re-checked twice | `synthesize_pairs.py` |
 | Tokenizer | Flan-T5's SentencePiece vocab lacks capital Ä/Ö/ẞ; they are added as real pieces | `build_tokenizer.py` |
-| Train | Fine-tune [`google/flan-t5-small`](https://huggingface.co/google/flan-t5-small) (77M params), 3 epochs | `train.py` |
+| Train | Fine-tune [`google/flan-t5-base`](https://huggingface.co/google/flan-t5-base) (248M params), 3 epochs; `KONJUNKTIV_BASE_MODEL=google/flan-t5-small` for a faster, weaker run | `train.py` |
 | Evaluate | Exact match on 1,000 held-out pairs, hand-written challenge/probe sets, LLM-judged audit on unseen Tatoeba sentences | `eval_model.py`, `probe.py`, `audit_predict.py`, `audit_judge.py` |
 | Export | ONNX export; decoder int8 per-channel with the output projection kept fp32, encoder fp32 | `export_onnx.sh`, `quantize.py` |
 | Web | Static page; runtime vendored, files > 20 MiB split for Cloudflare Workers assets and reassembled by a tiny Worker | `vendor_runtime.mjs`, `build_site.mjs`, `worker/index.js` |
@@ -65,6 +65,6 @@ Code: [MIT](LICENSE) © Jonas Strassel.
 
 Third-party material has its own terms and is **not** covered by the MIT license:
 
-- Base model `google/flan-t5-small`: Apache-2.0. The fine-tuned weights are a derivative and are distributed under Apache-2.0.
+- Base model `google/flan-t5-base`: Apache-2.0. The fine-tuned weights are a derivative and are distributed under Apache-2.0.
 - Tatoeba sentences in `data/`: CC BY 2.0 FR, © Tatoeba contributors (https://tatoeba.org).
 - Transformers.js and ONNX Runtime Web (vendored into the built site): Apache-2.0 and MIT respectively.
