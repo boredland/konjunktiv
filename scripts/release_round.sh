@@ -27,9 +27,18 @@ timeout 600 node scripts/smoke.mjs < /dev/null
 
 timeout 600 npm run build < /dev/null
 timeout 1800 wrangler deploy < /dev/null
-for f in onnx/encoder_model.onnx onnx/decoder_model_merged_quantized.onnx tokenizer.json; do
-  timeout 600 curl -sSf -o /tmp/konj-live.bin "$site/model/$f" < /dev/null
-  cmp -s /tmp/konj-live.bin "web/model/$f" || { echo "live $f differs from web/model/$f" >&2; exit 1; }
+# Right after a deploy some edge locations still serve the previous chunks (round 13 saw the old encoder once,
+# identical a minute later), so retry for up to 5 minutes before calling the deploy broken.
+live_ok() {
+  for f in onnx/encoder_model.onnx onnx/decoder_model_merged_quantized.onnx tokenizer.json; do
+    timeout 600 curl -sSf -o /tmp/konj-live.bin "$site/model/$f" < /dev/null || return 1
+    cmp -s /tmp/konj-live.bin "web/model/$f" || { echo "live $f differs from web/model/$f" >&2; return 1; }
+  done
+}
+for attempt in 1 2 3 4 5 6; do
+  live_ok && break
+  [ "$attempt" = 6 ] && { rm -f /tmp/konj-live.bin; exit 1; }
+  sleep 60
 done
 rm -f /tmp/konj-live.bin
 echo "live model files identical"

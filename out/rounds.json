@@ -113,13 +113,24 @@
   "test": 0.953,
   "accounts": "34/393",
   "reported": "15/15",
+  "change": "Plusquamperfekt ohne zusätzliches „gewesen“, lange Verbketten, kurze Alltagssätze"
+ },
+ {
+  "round": 13,
+  "model": "base",
+  "deployed": true,
+  "release": true,
+  "train": 51835,
+  "test": 0.947,
+  "accounts": "25/393",
+  "reported": "15/15",
   "data": {
    "tatoeba": 39679,
    "template": 3301,
-   "agy": 11973,
-   "narratives": 145
+   "agy": 13280,
+   "narratives": 170
   },
-  "remaining": "fehlende oder doppelte Hilfsverben in langen Aufzählungen, „sich“ statt „sie“ und einzelne falsch gebildete Partizipien („aufsucht“ statt „aufgesucht“)",
-  "change": "Plusquamperfekt ohne zusätzliches „gewesen“, lange Verbketten, kurze Alltagssätze"
+  "remaining": "fehlende Hilfsverben in langen Aufzählungen, „haben“ statt „sein“ (und umgekehrt) bei einzelnen Verben und gelegentlich „sie“ statt „sich“",
+  "change": "„mich“ und „uns“ als Objekt in Infinitiven, lange Verbketten, 25 weitere Vernehmungen"
  }
 ]
