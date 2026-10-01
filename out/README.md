@@ -44,3 +44,14 @@ regression set: the three user sentences (gegenübergesessen, schwergefallen, de
 targeted sources: 700 agy sentences (data/raw/agy_sentences7.json): Präteritum with dative experiencer mir/uns and rare verbs (stocken, versagen, schwinden …), "es fiel mir schwer / tat mir leid", dative position verbs (gegenübersitzen, zuhören), wir + separable weak Präsens, coordinated verbs needing their own auxiliary. 94 more pronoun-first labels after a fronted phrase were reordered, 3 dropped. train 43,826.
 round-7 metrics (PyTorch): val loss 0.0289, test_exact_match 0.944, challenge 20/20, regression 15/15, separable 40/40, subclause 23/24 ("klinge" for "klingle"). Audit majority flags 7/548 (0.013). Web model identical to PyTorch on all 99 probe rows.
 remaining audit flags: indicative left in a few subordinate/infinitive constructions ("neigen dazu", "der sich gegen sie richtet"), rare invented forms ("ausblierten", "erschlage" for "ergreife", "aufgewachsen sei" for "aufgehängt habe").
+
+## Rounds 8–10 (realistic accounts: asylum hearings, police interviews)
+
+real-text check: 35 first-person sentences from published refugee accounts (spiegel.de, uno-fluechtlingshilfe.de; kept local, copyrighted) had 8 majority flags on round 7 (23 %) against 1.3 % on Tatoeba: doubled Plusquamperfekt ("hierhergekommen gewesen"), separable Präteritum ("angriffen hätten"), invented participles ("gegrungen").
+rules: 12 (Plusquamperfekt → Konjunktiv I Perfekt without extra gewesen/gehabt; joined participles of separable verbs), 13 (sitzen/stehen/liegen take haben; 30 sein-labels normalized — they made round 9 write "gegenübergesehen").
+narratives (agy, fictional): 60 asylum-hearing and 40 police-interview accounts for training (data/raw/agy_hearings1.json, agy_police1.json; 1,779 kept sentences), 12 + 10 held out (data/probe_hearings.json, data/probe_police.json; 393 sentences). Each sentence keeps the narrator's gender as speaker; third-person sentences of an account are converted too.
+round 8: 800 targeted sentences (-eln/-ern verbs in subclauses, relative clauses, neigen dazu) + 913 hearing-style sentences. Trained before the narratives existed. test 0.945, regression 15/15, held-out accounts 94/393 flagged (round 7: 101). Released, not deployed.
+round 9: + narratives. test 0.945, regression 14/15 (gegenübergesehen), accounts 72/393, Tatoeba audit 3/546. Released, not deployed.
+round 10: + 1,087 sentences for participles of weak/strong/prefixed verbs, haben vs sein, mich/uns as accusative objects; rule 13. val loss 0.0286, test 0.951, challenge 20/20, regression 14/15 ("schwer gefallen" for "schwergefallen", both spellings are accepted by Duden), separable 40/40, subclause 22/24, held-out accounts 51/393 (hearings 22/246, police 29/147), Tatoeba audit 2/547.
+publishing: scripts/release_round.sh exports, deploys, verifies the live model bytes, commits and creates the GitHub release for every round.
+web/model size: 650M
