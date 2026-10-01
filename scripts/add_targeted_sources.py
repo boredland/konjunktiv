@@ -17,6 +17,12 @@ from collect_sentences import FORBIDDEN, OUT, RE_SECOND, filter_sentences, norma
 
 # one file per request to the agy bridge; the file stem prefixes the ids so batches never collide
 AGY_FILES = sorted(Path("data/raw").glob("agy_sentences*.json"))
+# Whole fictional narratives (agy): asylum hearings and police interviews. Every sentence is part of the
+# narrator's account, so "Die Polizei durchsuchte das Haus." needs converting too and no first-person pronoun is
+# required; the narrator's gender is stored per sentence so a whole text keeps one speaker.
+# data/probe_hearings.json and data/probe_police.json are held out and deliberately do not match these globs.
+NARRATIVE_FILES = sorted(Path("data/raw").glob("agy_hearings*.json")) + sorted(Path("data/raw").glob("agy_police*.json"))
+SENTENCE_END = re.compile(r"(?<=[.!])\s+(?=[A-ZÄÖÜ])")
 AUDIT_IDS = Path("data/audit_ids.json")
 PARTICLES = ("ab|an|auf|aus|bei|ein|fest|fort|her|hin|los|mit|nach|vor|weg|zu|zurück|zusammen|statt|teil|um|dar"
              "|herum|heraus|vorbei|weiter")
@@ -47,13 +53,13 @@ def main():
     seen_text = {r["direct"].lower() for r in existing}
     added = []
 
-    def add(sid, text, origin):
+    def add(sid, text, origin, speaker=None):
         text = normalize(text)
         if sid in seen_ids or text.lower() in seen_text:
             return
         seen_ids.add(sid)
         seen_text.add(text.lower())
-        added.append({"id": sid, "direct": text, "origin": origin})
+        added.append({"id": sid, "direct": text, "origin": origin, **({"speaker": speaker} if speaker else {})})
 
     for sid, _, text in filter_sentences(5, 25):
         if any(p.search(normalize(text)) for p in TARGETED):
@@ -64,13 +70,28 @@ def main():
     for agy_file in AGY_FILES:
         prefix = agy_file.stem.replace("agy_sentences", "agy") or "agy"
         for i, text in enumerate(json.loads(agy_file.read_text(encoding="utf-8"))):
-            # the agy brief asked for these constraints; enforce them instead of trusting the output
-            ok = (5 <= len(text.split()) <= 25 and text.endswith(".") and not (set(text) & FORBIDDEN)
-                  and not RE_SECOND.search(text) and FIRST_PERSON.search(text))
+            # the agy brief asked for these constraints; enforce them instead of trusting the output.
+            # From batch 10 on the briefs ask for whole-account sentences ("Die Beamten fassten den Täter."),
+            # which need converting without a first-person word; earlier batches keep the original filter.
+            account_style = int(re.sub(r"\D", "", prefix) or 0) >= 10
+            ok = (5 <= len(text.split()) <= 30 and text.endswith(".") and not (set(text) & FORBIDDEN)
+                  and not RE_SECOND.search(text) and (account_style or FIRST_PERSON.search(text)))
             if ok:
                 add(f"{prefix}-{i}", text, "agy")
             else:
                 rejected += 1
+
+    for narrative_file in NARRATIVE_FILES:
+        prefix = narrative_file.stem.replace("agy_hearings", "hear").replace("agy_police", "pol")
+        for h, narrative in enumerate(json.loads(narrative_file.read_text(encoding="utf-8"))):
+            sentences = [s.strip() for p in narrative["text"].split("\n\n") for s in SENTENCE_END.split(p) if s.strip()]
+            for i, text in enumerate(sentences):
+                ok = (4 <= len(text.split()) <= 40 and text.endswith(".") and not (set(text) & FORBIDDEN)
+                      and not RE_SECOND.search(text))
+                if ok:
+                    add(f"{prefix}-{h}-{i}", text, "agy", narrative["speaker"])
+                else:
+                    rejected += 1
 
     with OUT.open("a", encoding="utf-8") as out:
         for r in added:

@@ -47,10 +47,12 @@ RULES = """Regeln (Verhaltensspezifikation):
 5. `ich bin … geboren` → `er sei … geboren worden` (Vorgangspassiv Perfekt, Konjunktiv I). Andere `sein`-Perfekt-Verben (`gestorben, gegangen, aufgewachsen`) bekommen nur `sei` und kein `worden`.
 6. Teilen sich koordinierte Teilsätze (`… und …`) ein finites Verb, wird das Konjunktiv-Hilfsverb in jedem Teilsatz wiederholt (`Er sei 18 Jahre alt und sei in Nürnberg geboren worden.`).
 7. Nur den wiedergegebenen Satz ausgeben: kein `dass`, kein Redeverb (kein „Er sagte, …“), keine Anführungszeichen. Das Subjektpronomen steht am Anfang mit Großbuchstaben, der Satz endet mit `.`.
-8. Sonst nichts ändern: gleiche Inhaltswörter, gleiche Wortstellung, abgesehen von dem, was 1–7 und 9–11 verlangen.
+8. Sonst nichts ändern: gleiche Inhaltswörter, gleiche Wortstellung, abgesehen von dem, was 1–7 und 9–12 verlangen.
 9. Auch in Nebensätzen (dass-, weil-, wenn-, als-, sobald-Sätze, Relativsätze, indirekte Fragen) werden ALLE finiten Verben der wiedergegebenen Rede nach Regel 2–4 umgesetzt, egal welches Subjekt sie haben (`dass er kommt` → `dass er komme`, `was er denkt` → `was er denke`, `die sich dort befinden` → `die sich dort befänden`, `als ich ankam` → `als er angekommen sei`). Kein Indikativ bleibt stehen.
 10. `uns`/`mir` als Dativobjekt oder Dativsubjekt, das sich NICHT auf das Subjekt bezieht, wird `ihnen`/`ihm|ihr`, niemals `sich` (`Uns fehlte die Zeit` → `Ihnen habe die Zeit gefehlt`, `Ich hole uns etwas` → `Er hole ihnen etwas`, `Mir geht es gut` → `Ihm gehe es gut`, `Uns war kalt` → `Ihnen sei kalt gewesen`). Auch als Dativ am Satzanfang. Ein Akkusativobjekt im erweiterten Infinitiv wird `ihn|sie` (`sie baten, mich zu besuchen` → `sie baten, ihn zu besuchen`). Partizipien trennbarer Verben immer zusammen und mit -ge- in der Mitte (`kaufte ein` → `eingekauft`, `schaute an` → `angeschaut`, `lud ein` → `eingeladen`).
-11. Modalverben (sollen, wollen, können, müssen, dürfen, mögen) in Nebensätzen folgen derselben Umsetzung: `was ich tun sollte` → `was er habe tun sollen` (Ersatzinfinitiv, Modalverb vorverlagert), `dass ich das machen wollte` → `dass er das habe machen wollen`. `wünschte` ist Konjunktiv II und bleibt Konjunktiv II (`Ich wünschte, er käme` → `Sie wünschte, er käme`). Partizipien nach `habe/ist` immer korrekt gebildet: `weinte` → `geweint`, `lachte` → `gelacht`, `bestieg` → `bestiegen`; Bewegungs- und Zustandsverben haben Perfekt mit `sein` (`einschlafen`, `umziehen`, `aufstehen`, `ankommen`, `besteigen`, `eintreffen`)."""
+11. Modalverben (sollen, wollen, können, müssen, dürfen, mögen) in Nebensätzen folgen derselben Umsetzung: `was ich tun sollte` → `was er habe tun sollen` (Ersatzinfinitiv, Modalverb vorverlagert), `dass ich das machen wollte` → `dass er das habe machen wollen`. `wünschte` ist Konjunktiv II und bleibt Konjunktiv II (`Ich wünschte, er käme` → `Sie wünschte, er käme`). Partizipien nach `habe/ist` immer korrekt gebildet: `weinte` → `geweint`, `lachte` → `gelacht`, `bestieg` → `bestiegen`; Bewegungs- und Zustandsverben haben Perfekt mit `sein` (`einschlafen`, `umziehen`, `aufstehen`, `ankommen`, `besteigen`, `eintreffen`).
+12. Plusquamperfekt → Konjunktiv I Perfekt, ohne zusätzliches `gewesen`/`gehabt` (`er war hierhergekommen` → `er sei hierhergekommen`, `was er gesagt hatte` → `was er gesagt habe`, `nachdem wir gegessen hatten` → `nachdem sie gegessen hätten`). Trennbare Verben im Präteritum bekommen das zusammengesetzte Partizip (`griffen an` → `angegriffen`, `grub aus` → `ausgegraben`, `hoben auf` → `aufgehoben`, `fühlte sich an` → `sich angefühlt`).
+13. `sitzen`, `stehen`, `liegen` und ihre Zusammensetzungen (`gegenübersitzen`, `gegenüberstehen`, `zur Seite stehen`) bilden das Perfekt mit `haben` (`Mir saß ein Beamter gegenüber` → `Ihm habe ein Beamter gegenübergesessen`, `Wir standen vor der Tür` → `Sie hätten vor der Tür gestanden`)."""
 
 FEWSHOT = [
     # canonical (rules 5, 6)
@@ -139,7 +141,10 @@ def load_sources():
     rows = [json.loads(l) for l in SOURCES.open(encoding="utf-8")]
     rng = random.Random(42)
     for r in rows:
-        r["speaker"] = "Er" if rng.random() < 0.5 else "Sie"
+        # draw for every row so the random speakers of older rows stay unchanged; narrative sentences
+        # (hearings, police interviews) keep their narrator's gender
+        drawn = "Er" if rng.random() < 0.5 else "Sie"
+        r["speaker"] = r.get("speaker") or drawn
     return rows
 
 

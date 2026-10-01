@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Publish one training round: ONNX export + quantize, parity smoke, site deploy, live byte check,
+# commit + push, GitHub release with the web model archive.
+#   scripts/release_round.sh <round-number> "<release notes>"
+# Expects the trained checkpoint at out/konjunktiv-t5.round<N>.
+# Every network/long step has a hard timeout and no TTY input: an interactive pager once blocked a
+# release for 40 minutes.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+round="$1"
+notes="$2"
+model="out/konjunktiv-t5.round${round}"
+tag="model-round${round}"
+site="https://konjunktiv.jonas-strassel.de"
+archive="/tmp/konjunktiv-model-round${round}.tar.gz"
+export GIT_PAGER=cat PAGER=cat GH_PAGER=cat GH_PROMPT_DISABLED=1 GIT_TERMINAL_PROMPT=0
+
+[ -d "$model" ] || { echo "missing $model" >&2; exit 1; }
+rm -rf out/onnx-fp32
+timeout 1800 uv run optimum-cli export onnx --task text2text-generation-with-past --model "$model" out/onnx-fp32 < /dev/null
+timeout 1200 uv run python scripts/quantize.py < /dev/null
+timeout 600 node scripts/smoke.mjs < /dev/null
+
+timeout 600 npm run build < /dev/null
+timeout 1800 wrangler deploy < /dev/null
+for f in onnx/encoder_model.onnx onnx/decoder_model_merged_quantized.onnx tokenizer.json; do
+  timeout 600 curl -sSf -o /tmp/konj-live.bin "$site/model/$f" < /dev/null
+  cmp -s /tmp/konj-live.bin "web/model/$f" || { echo "live $f differs from web/model/$f" >&2; exit 1; }
+done
+rm -f /tmp/konj-live.bin
+echo "live model files identical"
+
+git add -A README.md data out/README.md out/metrics*.json scripts web
+git diff --cached --quiet || git commit -q -m "Round ${round}: ${notes%%.*}"
+timeout 300 git push -q < /dev/null
+
+timeout 600 tar -C web -czf "$archive" model
+timeout 3000 gh release create "$tag" "$archive" --title "Model round ${round} (flan-t5-base)" --notes "$notes" < /dev/null
+rm -f "$archive"
+timeout 120 gh release view "$tag" --json assets -q '.assets[] | "\(.name) \(.size) \(.state)"' < /dev/null

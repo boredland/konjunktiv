@@ -1,0 +1,7 @@
+{
+  "test_exact_match": 0.945,
+  "test_indicative_leak_rate": 0.0,
+  "challenge_exact": 20,
+  "regression_exact": "15/15",
+  "regression_misses": []
+}
