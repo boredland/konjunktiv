@@ -11,4 +11,5 @@ web/vendor/
 out/*
 !out/README.md
 !out/metrics*.json
+!out/rounds.json
 data/raw/deu_sentences.tsv.bz2

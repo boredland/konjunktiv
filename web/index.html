@@ -63,7 +63,7 @@
         <li><strong>Gegenwart</strong> wird Konjunktiv&nbsp;I: <em>Ich wohne in Berlin</em> → <em>Er wohne in Berlin.</em></li>
         <li><strong>Vergangenheit</strong> wird Konjunktiv&nbsp;I Perfekt: <em>Ich kaufte ein</em> → <em>Sie habe eingekauft.</em></li>
         <li><strong>Gleicht der Konjunktiv&nbsp;I dem Indikativ</strong>, weicht es auf Konjunktiv&nbsp;II aus: <em>Wir haben keine Zeit</em> → <em>Sie hätten keine Zeit.</em></li>
-        <li><strong>Längere Texte</strong> zerlegt es in Sätze und wandelt sie einzeln um.</li>
+        <li><strong>Längere Texte</strong> zerlegt es in Sätze und wandelt sie einzeln um. Absätze und Zeilenumbrüche bleiben erhalten.</li>
       </ul>
       <p class="note">
         Grenzen: Das Modell kennt nur die Sprecher <em>er</em> und <em>sie</em>. Fragen, Befehle und Sätze, die jemanden mit
@@ -93,19 +93,51 @@
         (248&nbsp;Millionen Parameter, Apache-2.0-Lizenz). Das Modell wurde für genau diese eine Aufgabe feinjustiert:
       </p>
       <ol>
-        <li><strong>Sätze sammeln:</strong> rund 49.000 deutsche Ich- und Wir-Sätze aus dem freien Satzkorpus
-          <a href="https://tatoeba.org/">Tatoeba</a> (CC&nbsp;BY&nbsp;2.0&nbsp;FR), ergänzt um Mustersätze für alle Zeitformen
-          und gezielt geschriebene Beispiele für schwierige Fälle wie trennbare Verben.</li>
+        <li><strong>Sätze sammeln:</strong> rund {{TATOEBA}} deutsche Ich- und Wir-Sätze aus dem freien Satzkorpus
+          <a href="https://tatoeba.org/">Tatoeba</a> (CC&nbsp;BY&nbsp;2.0&nbsp;FR), dazu Mustersätze für alle Zeitformen.</li>
+        <li><strong>Schwierige Fälle ergänzen:</strong> rund {{GENERATED}} Sätze hat ein Sprachmodell gezielt für die Fehler geschrieben,
+          die das Modell noch machte – darunter {{NARRATIVES}} erfundene Asylanhörungen und Polizeivernehmungen,
+          weil lange, realistische Schilderungen anfangs deutlich mehr Fehler hatten als kurze Sätze.</li>
         <li><strong>Beispiele erzeugen:</strong> Ein großes Sprachmodell hat jeden Satz nach festen Regeln in die indirekte Rede gesetzt.</li>
-        <li><strong>Prüfen:</strong> Ein zweiter Durchgang hat jedes Paar gegen dieselben Regeln geprüft und fehlerhafte aussortiert (etwa 5&nbsp;%).</li>
-        <li><strong>Trainieren:</strong> Flan-T5 base hat in drei Durchläufen aus diesen Paaren gelernt – auf einer Laptop-Grafikkarte, in gut zwei Stunden.
-          Nach jedem Trainingslauf wurden die Fehler auf unbekannten Sätzen ausgewertet und gezielt neue Beispiele ergänzt.</li>
+        <li><strong>Prüfen:</strong> Ein zweiter Durchgang hat jedes Paar gegen dieselben Regeln geprüft und fehlerhafte aussortiert (etwa 5&nbsp;%).
+          Am Ende blieben {{TRAIN}} Trainingspaare.</li>
+        <li><strong>Trainieren:</strong> drei Durchläufe auf einer Laptop-Grafikkarte, knapp drei Stunden pro Runde.</li>
         <li><strong>Verkleinern:</strong> Der Decoder wurde auf 8-Bit-Gewichte komprimiert, damit der Download handlich bleibt.
           Encoder und Ausgabeschicht bleiben in voller Genauigkeit, weil die Kompression dort seltene Wörter verfälschte.</li>
       </ol>
+    </section>
+
+    <section aria-labelledby="h-rounds">
+      <h2 id="h-rounds">{{ROUNDS}} Trainingsrunden</h2>
       <p>
-        Auf 1.000 zurückgehaltenen Testsätzen trifft das Modell die erwartete Umformung in <span id="metric-exact">rund 95&nbsp;%</span>
-        der Fälle Wort für Wort. Quellcode, Trainingsdaten und Protokoll:
+        Nach jeder Runde wird das Modell an Sätzen geprüft, die es im Training nie gesehen hat. Die Fehler, die dabei auffallen,
+        bestimmen, welche Beispiele die nächste Runde bekommt. Hier läuft Runde&nbsp;{{ROUND}}.
+      </p>
+      <ul>
+        <li><strong>Testsätze:</strong> Auf 1.000 zurückgehaltenen Sätzen trifft es die erwartete Umformung in
+          <span id="metric-exact">{{TEST}}</span> der Fälle Wort für Wort.</li>
+        <li><strong>Lange Schilderungen:</strong> In 22 zurückgehaltenen Anhörungen und Vernehmungen ({{ACC_TOTAL}} Sätze)
+          enthalten noch {{ACC_ERR}} Sätze einen Fehler ({{ACC_PCT}}). In Runde&nbsp;7 waren es 101.</li>
+        <li><strong>Häufigste verbleibende Fehler:</strong> {{REMAINING}}.</li>
+      </ul>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Runde</th><th>Modell</th><th>Was neu war</th><th>Testsätze</th><th>Fehlerhafte Sätze in Schilderungen</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+{{ROUNDS_TABLE}}
+          </tbody>
+        </table>
+      </div>
+      <p class="note">
+        „Testsätze“ zählt nur wortgleiche Treffer; eine gleichwertige andere Formulierung gilt dort als Fehler.
+        Die Fehler in den Schilderungen hat ein zweites Sprachmodell in drei unabhängigen Durchgängen bewertet;
+        gezählt ist ein Satz, wenn mindestens zwei Durchgänge denselben Fehler fanden.
+      </p>
+      <p>
+        Ab Runde&nbsp;6 ist jede Runde als Modelldatei veröffentlicht, unter
+        <a href="https://github.com/boredland/konjunktiv/releases">Releases</a>. Quellcode, Trainingsdaten und Protokoll:
         <a href="https://github.com/boredland/konjunktiv">github.com/boredland/konjunktiv</a> (MIT-Lizenz).
       </p>
     </section>

@@ -46,9 +46,40 @@ for (const dep of ['sentences.js', 'vendor/transformers.min.js']) {
   mainJs = mainJs.replace(`'./${dep}'`, `'./${dep}?v=${fileHash(join(SRC, dep))}'`);
 }
 writeFileSync(join(DIST, 'main.js'), mainJs);
-const indexHtml = readFileSync(join(SRC, 'index.html'), 'utf8')
+
+// Training statistics on the page come from out/rounds.json (one entry per round, written after its
+// evaluation), so the copy cannot drift from the published model.
+const rounds = JSON.parse(readFileSync('out/rounds.json', 'utf8'));
+const live = rounds.filter((r) => r.deployed).at(-1);
+const de = (n) => n.toLocaleString('de-DE');
+const pct = (x) => `${(x * 100).toLocaleString('de-DE', { maximumFractionDigits: 1 })}&nbsp;%`;
+const [accErr, accTotal] = live.accounts.split('/').map(Number);
+const row = (r) => `<tr${r === live ? ' class="live"' : ''}>`
+  + `<td>${r.round}</td><td>${r.model}</td><td>${r.change}</td>`
+  + `<td class="num">${pct(r.test)}</td>`
+  + `<td class="num">${r.accounts ? r.accounts.replace('/', '&nbsp;von&nbsp;') : '–'}</td>`
+  + `<td>${r === live ? 'live' : r.deployed ? 'war live' : r.release ? 'nur Release' : '–'}</td></tr>`;
+const stats = {
+  ROUND: String(live.round),
+  ROUNDS: String(rounds.length),
+  TATOEBA: de(Math.round(live.data.tatoeba / 1000) * 1000),
+  GENERATED: de(Math.round(live.data.agy / 1000) * 1000),
+  NARRATIVES: String(live.data.narratives),
+  TRAIN: de(live.train),
+  TEST: pct(live.test),
+  ACC_ERR: String(accErr),
+  ACC_TOTAL: String(accTotal),
+  ACC_PCT: pct(accErr / accTotal),
+  REMAINING: live.remaining,
+  ROUNDS_TABLE: rounds.map(row).join('\n'),
+};
+let indexHtml = readFileSync(join(SRC, 'index.html'), 'utf8')
   .replace('src="main.js"', `src="main.js?v=${hashOf(mainJs)}"`)
   .replace('href="style.css"', `href="style.css?v=${fileHash(join(SRC, 'style.css'))}"`);
+indexHtml = indexHtml.replace(/\{\{(\w+)\}\}/g, (m, key) => {
+  if (!(key in stats)) throw new Error(`index.html uses unknown placeholder ${m}`);
+  return stats[key];
+});
 writeFileSync(join(DIST, 'index.html'), indexHtml);
 
 mkdirSync('worker', { recursive: true });

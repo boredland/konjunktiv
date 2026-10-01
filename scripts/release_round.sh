@@ -2,7 +2,8 @@
 # Publish one training round: ONNX export + quantize, parity smoke, site deploy, live byte check,
 # commit + push, GitHub release with the web model archive.
 #   scripts/release_round.sh <round-number> "<release notes>"
-# Expects the trained checkpoint at out/konjunktiv-t5.round<N>.
+# Expects the trained checkpoint at out/konjunktiv-t5.round<N> and its entry in out/rounds.json (the page's
+# training statistics are built from that file).
 # Every network/long step has a hard timeout and no TTY input: an interactive pager once blocked a
 # release for 40 minutes.
 set -euo pipefail
@@ -17,6 +18,8 @@ archive="/tmp/konjunktiv-model-round${round}.tar.gz"
 export GIT_PAGER=cat PAGER=cat GH_PAGER=cat GH_PROMPT_DISABLED=1 GIT_TERMINAL_PROMPT=0
 
 [ -d "$model" ] || { echo "missing $model" >&2; exit 1; }
+node -e "const r=require('./out/rounds.json'); if(!r.some(x=>x.round===${round})) process.exit(1)" \
+  || { echo "add round ${round} to out/rounds.json first" >&2; exit 1; }
 rm -rf out/onnx-fp32
 timeout 1800 uv run optimum-cli export onnx --task text2text-generation-with-past --model "$model" out/onnx-fp32 < /dev/null
 timeout 1200 uv run python scripts/quantize.py < /dev/null
@@ -31,7 +34,7 @@ done
 rm -f /tmp/konj-live.bin
 echo "live model files identical"
 
-git add -A README.md data out/README.md out/metrics*.json scripts web
+git add -A README.md .gitignore data out/README.md out/metrics*.json out/rounds.json scripts web
 git diff --cached --quiet || git commit -q -m "Round ${round}: ${notes%%.*}"
 timeout 300 git push -q < /dev/null
 
