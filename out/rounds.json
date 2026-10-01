@@ -124,13 +124,24 @@
   "test": 0.947,
   "accounts": "25/393",
   "reported": "15/15",
+  "change": "„mich“ und „uns“ als Objekt in Infinitiven, lange Verbketten, 25 weitere Vernehmungen"
+ },
+ {
+  "round": 14,
+  "model": "base",
+  "deployed": true,
+  "release": true,
+  "train": 52663,
+  "test": 0.954,
+  "accounts": "21/393",
+  "reported": "15/15",
   "data": {
    "tatoeba": 39679,
    "template": 3301,
-   "agy": 13280,
+   "agy": 14179,
    "narratives": 170
   },
-  "remaining": "fehlende Hilfsverben in langen Aufzählungen, „haben“ statt „sein“ (und umgekehrt) bei einzelnen Verben und gelegentlich „sie“ statt „sich“",
-  "change": "„mich“ und „uns“ als Objekt in Infinitiven, lange Verbketten, 25 weitere Vernehmungen"
+  "remaining": "fehlende Wörter in langen Aufzählungen (vor allem das zweite Hilfsverb), einzelne Zeitformen in Nebensätzen und gelegentlich „sich“ statt „sie“",
+  "change": "Jedes Partizip bekommt sein eigenes Hilfsverb, auch in Nebensätzen; „mich“ und „uns“ als Objekt beim Retten und Helfen"
  }
 ]
