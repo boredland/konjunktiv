@@ -23,9 +23,11 @@ browser keeps the model in Cache Storage and the page works offline.
 | Filter | A second LLM pass judges every pair against the same rules; rejects are re-checked twice | `synthesize_pairs.py` |
 | Tokenizer | Flan-T5's SentencePiece vocab lacks capital Ä/Ö/ẞ; they are added as real pieces | `build_tokenizer.py` |
 | Train | Fine-tune [`google/flan-t5-base`](https://huggingface.co/google/flan-t5-base) (248M params), 3 epochs; `KONJUNKTIV_BASE_MODEL=google/flan-t5-small` for a faster, weaker run | `train.py` |
-| Evaluate | Exact match on 1,000 held-out pairs, hand-written challenge/probe sets, LLM-judged audit on unseen Tatoeba sentences | `eval_model.py`, `probe.py`, `audit_predict.py`, `audit_judge.py` |
+| Average | The published model is the uniform weight average of the last four rounds; single rounds swing (each fixes its targets and breaks other cases), the average keeps the gains | `average_models.py` |
+| Evaluate | Exact match on 1,000 held-out pairs, hand-written challenge/probe sets, LLM-judged audit on unseen Tatoeba sentences and on 22 held-out fictional asylum-hearing and police-interview accounts | `eval_model.py`, `probe.py`, `audit_predict.py`, `audit_judge.py` |
 | Export | ONNX export; decoder int8 per-channel with the output projection kept fp32, encoder fp32 | `export_onnx.sh`, `quantize.py` |
-| Web | Static page; runtime vendored, files > 20 MiB split for Cloudflare Workers assets and reassembled by a tiny Worker | `vendor_runtime.mjs`, `build_site.mjs`, `worker/index.js` |
+| Web | Static page; runtime vendored, files > 20 MiB split for Cloudflare Workers assets and reassembled by a tiny Worker; training statistics on the page come from `out/rounds.json` | `vendor_runtime.mjs`, `build_site.mjs`, `worker/index.js` |
+| Publish | Export, deploy, live byte check, commit and GitHub release per round | `release_round.sh` |
 
 Run log, measured numbers and every deviation from the original plan: [`out/README.md`](out/README.md).
 

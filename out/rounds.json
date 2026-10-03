@@ -146,15 +146,7 @@
   "test": 0.951,
   "accounts": "15/393",
   "reported": "14/15",
-  "change": "Modalverben in beiden Satzteilen, Passiv mit Modalverb, Zustandspassiv neben Plusquamperfekt",
-  "live": true,
-  "data": {
-   "tatoeba": 39679,
-   "template": 3301,
-   "agy": 15078,
-   "narratives": 170
-  },
-  "remaining": "einzelne Hilfsverben, die nicht zum Subjekt passen („Ihm habe zwei Personen gegenübergesessen“), „haben“ statt „sein“ bei einzelnen Verben und gelegentlich falsche Zeitformen in Nebensätzen"
+  "change": "Modalverben in beiden Satzteilen, Passiv mit Modalverb, Zustandspassiv neben Plusquamperfekt"
  },
  {
   "round": 16,
@@ -166,5 +158,24 @@
   "accounts": "21/393",
   "reported": "14/15",
   "change": "Vorangestellter Dativ mit Subjekt im Plural, Gefühlsverben mit „haben“ – schlechter als Runde 15, deshalb wieder zurückgenommen"
+ },
+ {
+  "round": 17,
+  "model": "base",
+  "deployed": true,
+  "release": true,
+  "live": true,
+  "train": 54213,
+  "test": 0.948,
+  "accounts": "14/393",
+  "reported": "15/15",
+  "data": {
+   "tatoeba": 39679,
+   "template": 3301,
+   "agy": 15874,
+   "narratives": 170
+  },
+  "remaining": "einzelne falsch gebildete Partizipien, falsche Zeitformen in Nebensätzen und „haben“ statt „sein“ bei einzelnen Verben",
+  "change": "Kein neues Training: Mittelwert der Gewichte aus Runde 13 bis 16 – gleicht die Schwankungen zwischen den Runden aus"
  }
 ]

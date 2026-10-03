@@ -1,0 +1,10 @@
+{
+  "test_exact_match": 0.948,
+  "challenge_exact": 20,
+  "regression_exact": "15/15",
+  "separable": "40/40",
+  "subclause": "23/24",
+  "accounts": "14/393",
+  "tatoeba_audit": "4/546",
+  "method": "mean of rounds 13-16"
+}
