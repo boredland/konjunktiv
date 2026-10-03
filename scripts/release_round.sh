@@ -20,6 +20,9 @@ export GIT_PAGER=cat PAGER=cat GH_PAGER=cat GH_PROMPT_DISABLED=1 GIT_TERMINAL_PR
 [ -d "$model" ] || { echo "missing $model" >&2; exit 1; }
 node -e "const r=require('./out/rounds.json'); if(!r.some(x=>x.round===${round})) process.exit(1)" \
   || { echo "add round ${round} to out/rounds.json first" >&2; exit 1; }
+# Put an already released round back live (after a regressing round): deploy and commit, keep its release.
+redeploy=false
+timeout 120 gh release view "$tag" < /dev/null > /dev/null 2>&1 && redeploy=true
 rm -rf out/onnx-fp32
 timeout 1800 uv run optimum-cli export onnx --task text2text-generation-with-past --model "$model" out/onnx-fp32 < /dev/null
 timeout 1200 uv run python scripts/quantize.py < /dev/null
@@ -47,7 +50,11 @@ git add -A README.md .gitignore data out/README.md out/metrics*.json out/rounds.
 git diff --cached --quiet || git commit -q -m "Round ${round}: ${notes%%.*}"
 timeout 300 git push -q < /dev/null
 
-timeout 600 tar -C web -czf "$archive" model
-timeout 3000 gh release create "$tag" "$archive" --title "Model round ${round} (flan-t5-base)" --notes "$notes" < /dev/null
-rm -f "$archive"
+if $redeploy; then
+  echo "redeployed existing release $tag"
+else
+  timeout 600 tar -C web -czf "$archive" model
+  timeout 3000 gh release create "$tag" "$archive" --title "Model round ${round} (flan-t5-base)" --notes "$notes" < /dev/null
+  rm -f "$archive"
+fi
 timeout 120 gh release view "$tag" --json assets -q '.assets[] | "\(.name) \(.size) \(.state)"' < /dev/null

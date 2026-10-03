@@ -50,7 +50,9 @@ writeFileSync(join(DIST, 'main.js'), mainJs);
 // Training statistics on the page come from out/rounds.json (one entry per round, written after its
 // evaluation), so the copy cannot drift from the published model.
 const rounds = JSON.parse(readFileSync('out/rounds.json', 'utf8'));
-const live = rounds.filter((r) => r.deployed).at(-1);
+// The live round is marked explicitly: after a regressing round the previous model can be put back live.
+const live = rounds.find((r) => r.live);
+if (!live?.data || !live.remaining) throw new Error('out/rounds.json needs exactly one round with "live": true, "data" and "remaining"');
 const de = (n) => n.toLocaleString('de-DE');
 const pct = (x) => `${(x * 100).toLocaleString('de-DE', { maximumFractionDigits: 1 })}&nbsp;%`;
 const [accErr, accTotal] = live.accounts.split('/').map(Number);
