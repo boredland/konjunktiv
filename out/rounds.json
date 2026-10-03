@@ -146,13 +146,24 @@
   "test": 0.951,
   "accounts": "15/393",
   "reported": "14/15",
+  "change": "Modalverben in beiden Satzteilen, Passiv mit Modalverb, Zustandspassiv neben Plusquamperfekt"
+ },
+ {
+  "round": 16,
+  "model": "base",
+  "deployed": true,
+  "release": true,
+  "train": 54213,
+  "test": 0.952,
+  "accounts": "21/393",
+  "reported": "14/15",
   "data": {
    "tatoeba": 39679,
    "template": 3301,
-   "agy": 15078,
+   "agy": 15874,
    "narratives": 170
   },
-  "remaining": "„habe“ statt „hätten“ bei einem Subjekt im Plural hinter einem vorangestellten Dativ („Ihm habe zwei Personen gegenübergesessen“), „haben“ statt „sein“ bei einzelnen Verben und gelegentlich falsche Zeitformen in Nebensätzen",
-  "change": "Modalverben in beiden Satzteilen, Passiv mit Modalverb, Zustandspassiv neben Plusquamperfekt"
+  "remaining": "ausgelassene Wörter in langen Sätzen mit Einschüben, „haben“ statt „sein“ bei einzelnen Verben und gelegentlich „sie“ statt „sich“",
+  "change": "Vorangestellter Dativ mit Subjekt im Plural („Ihm hätten zwei Personen …“), Gefühlsverben mit „haben“"
  }
 ]
