@@ -54,7 +54,7 @@ const rounds = JSON.parse(readFileSync('out/rounds.json', 'utf8'));
 const live = rounds.find((r) => r.live);
 if (!live?.data || !live.remaining) throw new Error('out/rounds.json needs exactly one round with "live": true, "data" and "remaining"');
 const de = (n) => n.toLocaleString('de-DE');
-const pct = (x) => `${(x * 100).toLocaleString('de-DE', { maximumFractionDigits: 1 })}&nbsp;%`;
+const pct = (x) => `${(x * 100).toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}&nbsp;%`;
 const [accErr, accTotal] = live.accounts.split('/').map(Number);
 const row = (r) => `<tr${r === live ? ' class="live"' : ''}>`
   + `<td>${r.round}</td><td>${r.model}</td><td>${r.change}</td>`

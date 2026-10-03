@@ -82,7 +82,8 @@
         Die Seite schickt Ihren Text nirgendwohin. Modell, Rechenlaufzeit und diese Seite liegen alle auf demselben Server
         und werden einmal geladen. Die Umwandlung selbst rechnet Ihr Browser mit
         <a href="https://onnxruntime.ai/">ONNX Runtime</a> in WebAssembly.
-        Es gibt kein Backend, keine API und keine Datenbank – nur statische Dateien.
+        Es gibt kein Backend, keine API und keine Datenbank – nur statische Dateien. Einzige Ausnahme ist ein anonymer
+        Besucherzähler von Cloudflare, dem Hoster der Seite; er sieht Ihren Text nicht.
       </p>
       <p>
         Nach dem ersten Laden speichert der Browser das Modell (Cache Storage). Beim nächsten Besuch lädt es in wenigen Sekunden
@@ -103,9 +104,11 @@
           die das Modell noch machte – darunter {{NARRATIVES}} erfundene Asylanhörungen und Polizeivernehmungen,
           weil lange, realistische Schilderungen anfangs deutlich mehr Fehler hatten als kurze Sätze.</li>
         <li><strong>Beispiele erzeugen:</strong> Ein großes Sprachmodell hat jeden Satz nach festen Regeln in die indirekte Rede gesetzt.</li>
-        <li><strong>Prüfen:</strong> Ein zweiter Durchgang hat jedes Paar gegen dieselben Regeln geprüft und fehlerhafte aussortiert (etwa 5&nbsp;%).
+        <li><strong>Prüfen:</strong> Ein zweiter Durchgang hat jedes Paar gegen dieselben Regeln geprüft und fehlerhafte aussortiert (etwa 4&nbsp;%).
           Am Ende blieben {{TRAIN}} Trainingspaare.</li>
-        <li><strong>Trainieren:</strong> drei Durchläufe auf einer Laptop-Grafikkarte, knapp drei Stunden pro Runde.</li>
+        <li><strong>Trainieren:</strong> drei Durchläufe auf einer Laptop-Grafikkarte, gut drei Stunden pro Runde.</li>
+        <li><strong>Mitteln:</strong> Das Modell auf dieser Seite ist der Mittelwert mehrerer Trainingsrunden. Einzelne Runden
+          schwanken – jede behebt die Fehler, auf die sie zielt, und macht dafür andere. Der Mittelwert behält die Verbesserungen.</li>
         <li><strong>Verkleinern:</strong> Der Decoder wurde auf 8-Bit-Gewichte komprimiert, damit der Download handlich bleibt.
           Encoder und Ausgabeschicht bleiben in voller Genauigkeit, weil die Kompression dort seltene Wörter verfälschte.</li>
       </ol>
@@ -114,9 +117,10 @@
     <section aria-labelledby="h-rounds">
       <h2 id="h-rounds">{{ROUNDS}} Trainingsrunden</h2>
       <p>
-        Nach jeder Runde wird das Modell an Sätzen geprüft, die es im Training nie gesehen hat. Die Fehler, die dabei auffallen,
-        bestimmen, welche Beispiele die nächste Runde bekommt. Nicht jede Runde wird besser: Ist eine schlechter als die vorige,
-        läuft hier weiter die bessere. Zurzeit ist das Runde&nbsp;{{ROUND}}.
+        Nach jeder Runde wurde das Modell an Sätzen geprüft, die es im Training nie gesehen hatte. Die Fehler, die dabei auffielen,
+        bestimmten, welche Beispiele die nächste Runde bekam. Nicht jede Runde wurde besser: War eine schlechter als die vorige,
+        lief hier weiter die bessere. Ab Runde&nbsp;15 kam weder eine neue Runde noch ein Mittelwert unter 14&nbsp;fehlerhafte
+        Sätze in den Schilderungen, deshalb endete das Training mit Runde&nbsp;18. Hier läuft Runde&nbsp;{{ROUND}}.
       </p>
       <ul>
         <li><strong>Testsätze:</strong> Auf 1.000 zurückgehaltenen Sätzen trifft es die erwartete Umformung in
@@ -138,7 +142,8 @@
       <p class="note">
         „Testsätze“ zählt nur wortgleiche Treffer; eine gleichwertige andere Formulierung gilt dort als Fehler.
         Die Fehler in den Schilderungen hat ein zweites Sprachmodell in drei unabhängigen Durchgängen bewertet;
-        gezählt ist ein Satz, wenn mindestens zwei Durchgänge denselben Fehler fanden.
+        gezählt ist ein Satz, wenn mindestens zwei Durchgänge denselben Fehler fanden. Wiederholt man diese Bewertung
+        für dasselbe Modell, schwankt das Ergebnis um etwa einen Satz.
       </p>
       <p>
         Ab Runde&nbsp;6 ist jede Runde als Modelldatei veröffentlicht, unter
