@@ -39,6 +39,8 @@ const runStatus = $('run-status');
 const runProgress = $('run-progress');
 const direct = $('direct');
 const indirect = $('indirect');
+const copyButton = $('copy');
+const copyStatus = $('copy-status');
 
 let pipe = null;
 
@@ -142,6 +144,8 @@ async function convert() {
     return;
   }
   setBusy(runButton, true, 'Wird umgewandelt …');
+  copyButton.disabled = true;
+  setStatus(copyStatus, '');
   indirect.value = '';
   fitToContent(indirect);
   const paragraphs = splitParagraphs(text).map((p) => ({ ...p, sentences: splitSentences(p.text), out: [] }));
@@ -175,13 +179,29 @@ async function convert() {
   } finally {
     setBusy(runButton, false, 'In indirekte Rede umwandeln');
     runProgress.hidden = true;
+    copyButton.disabled = !indirect.value;
   }
+}
+
+async function copyOutput() {
+  try {
+    await navigator.clipboard.writeText(indirect.value);
+  } catch {
+    // The async clipboard needs a secure context and permission; fall back to selecting the text so the
+    // user can copy it with the keyboard instead of getting nothing.
+    indirect.select();
+    setStatus(copyStatus, 'Kopieren nicht möglich – Text ist markiert, bitte Strg+C drücken.', 'err');
+    return;
+  }
+  setStatus(copyStatus, 'Kopiert.', 'ok');
+  setTimeout(() => setStatus(copyStatus, ''), 2000);
 }
 
 async function init() {
   loadButton.addEventListener('click', loadModel);
   forgetButton.addEventListener('click', forgetModel);
   runButton.addEventListener('click', convert);
+  copyButton.addEventListener('click', copyOutput);
   // Without it, the page itself (not the model) needs a network connection on the next visit.
   navigator.serviceWorker?.register('./sw.js').catch(() => {});
   // Reopening the page after a download should not ask for another click: load from the local cache.

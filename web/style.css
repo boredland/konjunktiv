@@ -131,6 +131,8 @@ progress { width: 100%; height: 0.6rem; margin-top: 1rem; accent-color: var(--ac
 .status { color: var(--muted); min-height: 1.55em; margin: 0.6rem 0 0; }
 .status.ok { color: var(--ok); }
 .status.err { color: var(--err); }
+/* Sits next to the copy button; setStatus() rewrites className, so this is keyed on the id. */
+#copy-status { margin: 0; }
 
 .note { color: var(--muted); font-size: 0.95rem; }
 ul, ol { padding-left: 1.3rem; }
