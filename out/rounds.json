@@ -177,5 +177,16 @@
   },
   "remaining": "einzelne falsch gebildete Partizipien, falsche Zeitformen in Nebensätzen und „haben“ statt „sein“ bei einzelnen Verben",
   "change": "Kein neues Training: Mittelwert der Gewichte aus Runde 13 bis 16 – gleicht die Schwankungen zwischen den Runden aus"
+ },
+ {
+  "round": 18,
+  "model": "base",
+  "deployed": false,
+  "release": true,
+  "train": 55046,
+  "test": 0.96,
+  "accounts": "19/393",
+  "reported": "15/15",
+  "change": "„sich erschrecken“, Zustände mit „war“, Infinitive nach „versuchen“; einzeln schlechter, im Mittelwert ohne Gewinn"
  }
 ]

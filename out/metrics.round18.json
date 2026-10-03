@@ -1,0 +1,19 @@
+{
+  "test_exact_match": 0.96,
+  "challenge_exact": 20,
+  "regression_exact": "15/15",
+  "separable": "40/40",
+  "subclause": "23/24",
+  "accounts": "19/393",
+  "tatoeba_audit": "6/545",
+  "averages": {
+    "rounds 14,15,16,18": {
+      "test": 0.947,
+      "accounts": "14/393"
+    },
+    "rounds 15,16,18 + soup13-16": {
+      "test": 0.949,
+      "accounts": "14/393"
+    }
+  }
+}

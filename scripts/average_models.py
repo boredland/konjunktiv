@@ -16,7 +16,8 @@ from safetensors.torch import load_file, save_file
 def main():
     out_dir = Path(sys.argv[1])
     rounds = sys.argv[2:]
-    srcs = [Path(f"out/konjunktiv-t5.round{r}") for r in rounds]
+    # a bare number is a round (out/konjunktiv-t5.round<N>); anything else is a checkpoint directory
+    srcs = [Path(f"out/konjunktiv-t5.round{r}") if r.isdigit() else Path(r) for r in rounds]
     total = None
     for src in srcs:
         state = load_file(src / "model.safetensors")
