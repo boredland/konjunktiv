@@ -135,13 +135,24 @@
   "test": 0.954,
   "accounts": "21/393",
   "reported": "15/15",
+  "change": "Jedes Partizip bekommt sein eigenes Hilfsverb, auch in Nebensätzen; „mich“ und „uns“ als Objekt beim Retten und Helfen"
+ },
+ {
+  "round": 15,
+  "model": "base",
+  "deployed": true,
+  "release": true,
+  "train": 53494,
+  "test": 0.951,
+  "accounts": "15/393",
+  "reported": "14/15",
   "data": {
    "tatoeba": 39679,
    "template": 3301,
-   "agy": 14179,
+   "agy": 15078,
    "narratives": 170
   },
-  "remaining": "fehlende Wörter in langen Aufzählungen (vor allem das zweite Hilfsverb), einzelne Zeitformen in Nebensätzen und gelegentlich „sich“ statt „sie“",
-  "change": "Jedes Partizip bekommt sein eigenes Hilfsverb, auch in Nebensätzen; „mich“ und „uns“ als Objekt beim Retten und Helfen"
+  "remaining": "„habe“ statt „hätten“ bei einem Subjekt im Plural hinter einem vorangestellten Dativ („Ihm habe zwei Personen gegenübergesessen“), „haben“ statt „sein“ bei einzelnen Verben und gelegentlich falsche Zeitformen in Nebensätzen",
+  "change": "Modalverben in beiden Satzteilen, Passiv mit Modalverb, Zustandspassiv neben Plusquamperfekt"
  }
 ]
