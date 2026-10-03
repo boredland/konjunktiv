@@ -63,12 +63,6 @@ round 16: 800 sentences (fronted dative Mir/Uns with plural vs singular subject,
 rollback: round 15 put back live after round 16 (accounts 15 vs 21/393, separable 40 vs 38/40, round 16 also dropped the apposition from a user sentence). out/rounds.json marks the live round with "live": true; scripts/release_round.sh redeploys an existing release without creating a new one.
 judge noise: round 15's predictions graded three times gave 15, 15 and 14 flagged account sentences (14 flagged every time), so a difference of 1–2 between rounds is noise; 6 is not.
 round 17 (no training): uniform weight average of rounds 13–16 (scripts/average_models.py). Averages of 14–16, 13–16 and 12–16 were compared: 16, 14 and 16 flagged account sentences; all three 15/15 on the user sentences and 40/40 separable. 13–16 chosen: test 0.948 (round 15: 0.951), challenge 20/20, regression 15/15, separable 40/40, subclause 23/24 ("klingele"), held-out accounts 14/393 (hearings 5, police 9), Tatoeba audit 4/546. A second training seed was not run: averaging already removed the round-to-round regressions at no training cost.
-web/model size: 650M
-web/model size: 650M
-web/model size: 650M
-web/model size: 650M
-web/model size: 650M
-web/model size: 650M
-web/model size: 650M
-web/model size: 650M
-web/model size: 650M
+round 18: 900 sentences (sich erschrecken vs erschrak, war + state participles, zu-infinitives after versuchen/sich weigern, distant separable particles, two-subject coordination, object lists). Single model: test 0.960 (best so far), regression 15/15, separable 40/40, subclause 23/24, held-out accounts 19/393 (round 17: 14), Tatoeba audit 6/545. Averages with round 18 (14+15+16+18, and 15+16+18+round 17) both: accounts 14/393, Tatoeba 4/546, all probes equal to round 17. Not deployed: no gain beyond the measured judge noise (±1). Released for reference.
+convergence: rounds 15–18 and every average land at 14–16 flagged account sentences; targeted data no longer moves that number. Remaining flags are one-off forms (rare participles, extra/missing "gewesen", single haben/sein slips) rather than a repeated pattern.
+web/model size: 650M (encoder fp32 439 MB, decoder q8 per-channel with fp32 lm_head 239 MB)
