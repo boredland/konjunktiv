@@ -1,9 +1,17 @@
 // Keeps the page itself (HTML, JS, CSS, WASM runtime) available offline. Model files are not handled
 // here: Transformers.js stores them in its own Cache Storage bucket ("transformers-cache").
-const CACHE = 'konjunktiv-shell-v1';
+// scripts/build_site.mjs replaces the version with a hash of the shell files, so every redeploy opens a
+// fresh cache; older ones (with their superseded ?v= module URLs) are deleted on activate.
+const CACHE = 'konjunktiv-shell-{{SHELL_VERSION}}';
 
 self.addEventListener('install', () => self.skipWaiting());
-self.addEventListener('activate', (event) => event.waitUntil(self.clients.claim()));
+self.addEventListener('activate', (event) =>
+  event.waitUntil(
+    caches.keys()
+      .then((keys) => Promise.all(keys.filter((k) => k.startsWith('konjunktiv-shell-') && k !== CACHE).map((k) => caches.delete(k))))
+      .then(() => self.clients.claim()),
+  ),
+);
 
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);

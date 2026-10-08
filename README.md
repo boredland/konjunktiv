@@ -26,7 +26,7 @@ browser keeps the model in Cache Storage and the page works offline.
 | Average | The published model is the uniform weight average of the last four rounds; single rounds swing (each fixes its targets and breaks other cases), the average keeps the gains | `average_models.py` |
 | Evaluate | Exact match on 1,000 held-out pairs, hand-written challenge/probe sets, LLM-judged audit on unseen Tatoeba sentences and on 22 held-out fictional asylum-hearing and police-interview accounts | `eval_model.py`, `probe.py`, `audit_predict.py`, `audit_judge.py` |
 | Export | ONNX export; decoder int8 per-channel with the output projection kept fp32, encoder fp32 | `export_onnx.sh`, `quantize.py` |
-| Web | Static page; runtime vendored, files > 20 MiB split for Cloudflare Workers assets and reassembled by a tiny Worker; training statistics on the page come from `out/rounds.json` | `vendor_runtime.mjs`, `build_site.mjs`, `worker/index.js` |
+| Web | Static page; runtime vendored, files > 20 MiB split for Cloudflare Workers assets and reassembled by a tiny Worker; `_headers` makes the page cross-origin isolated so ONNX Runtime can use WASM threads; training statistics and the model size on the page come from `out/rounds.json` and `web/model/` | `vendor_runtime.mjs`, `build_site.mjs`, `worker/index.js` |
 | Publish | Export, deploy, live byte check, commit and GitHub release per round | `release_round.sh` |
 
 Run log, measured numbers and every deviation from the original plan: [`out/README.md`](out/README.md).

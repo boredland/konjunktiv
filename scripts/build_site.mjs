@@ -46,6 +46,13 @@ for (const dep of ['sentences.js', 'vendor/transformers.min.js']) {
   mainJs = mainJs.replace(`'./${dep}'`, `'./${dep}?v=${fileHash(join(SRC, dep))}'`);
 }
 writeFileSync(join(DIST, 'main.js'), mainJs);
+const shellVersion = hashOf(mainJs + readFileSync(join(SRC, 'style.css'), 'utf8') + readFileSync(join(SRC, 'index.html'), 'utf8') + fileHash(join(SRC, 'vendor/ort-wasm-simd-threaded.asyncify.wasm')));
+writeFileSync(join(DIST, 'sw.js'), readFileSync(join(SRC, 'sw.js'), 'utf8').replace('{{SHELL_VERSION}}', shellVersion));
+
+// Without cross-origin isolation ONNX Runtime refuses SharedArrayBuffer and runs on one WASM thread
+// (measured: ~1.8× slower per sentence, ~2.3× under 4× CPU throttling). Everything the page loads is
+// same-origin (runtime vendored, model reassembled by the Worker), so require-corp blocks nothing.
+writeFileSync(join(DIST, '_headers'), '/*\n  Cross-Origin-Opener-Policy: same-origin\n  Cross-Origin-Embedder-Policy: require-corp\n');
 
 // Training statistics on the page come from out/rounds.json (one entry per round, written after its
 // evaluation), so the copy cannot drift from the published model.
@@ -61,7 +68,9 @@ const row = (r) => `<tr${r === live ? ' class="live"' : ''}>`
   + `<td class="num">${pct(r.test)}</td>`
   + `<td class="num">${r.accounts ? r.accounts.replace('/', '&nbsp;von&nbsp;') : '–'}</td>`
   + `<td>${r === live ? 'live' : r.deployed ? 'war live' : r.release ? 'nur Release' : '–'}</td></tr>`;
+const modelBytes = walk(join(SRC, 'model')).reduce((n, f) => n + statSync(f).size, 0);
 const stats = {
+  MODEL_MB: de(Math.round(modelBytes / 1e6 / 10) * 10),
   ROUND: String(live.round),
   ROUNDS: String(rounds.length),
   TATOEBA: de(Math.round(live.data.tatoeba / 1000) * 1000),
