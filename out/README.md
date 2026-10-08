@@ -70,4 +70,12 @@ web/model size: 650M (encoder fp32 439 MB, decoder q8 per-channel with fp32 lm_h
 ## Site: WASM threads
 
 The live site was not cross-origin isolated, so ONNX Runtime ran on one WASM thread. Measured in headless Chromium against the same web/ files, 5 sentences, outputs identical: 1 thread 244–415 ms per sentence (median ~350), 4 threads (ORT caps at 4) 126–321 ms (median ~200); under 4× CPU throttling 1,033–1,718 ms vs 405–811 ms. scripts/build_site.mjs now writes dist/_headers (COOP same-origin, COEP require-corp); nothing on the page is cross-origin, so no resource is blocked. Verified through wrangler dev with the Worker-reassembled model: crossOriginIsolated true, load, convert and copy work.
-WebGPU (fp16 encoder, would halve the 439 MB download) could not be tested here: neither the bundled Chrome 150 nor the system Chromium exposes navigator.gpu headless without a display server. Needs a desktop browser plus the same test[:300] exact-match check that rejected the q8 encoder.
+
+## Site: WebGPU (tested, not adopted)
+
+Chrome 150 headless with --use-angle=vulkan --enable-unsafe-webgpu exposes WebGPU on the Radeon 890M (RADV, shader-f16 supported). Same 5 sentences, same q8 decoder, cross-origin isolated (4 WASM threads):
+- encoder fp32 on WASM, decoder WASM: 133–240 ms/sentence (baseline).
+- encoder fp32 on WebGPU, decoder WASM: 154–217 ms. No gain: the encoder runs once per sentence and is not the bottleneck.
+- everything on WebGPU (fp32): 2,165–3,737 ms. The merged decoder's per-token If-graph is ~15× slower on WebGPU than on WASM threads.
+- encoder fp16 (onnxruntime.transformers.float16, keep_io_types) on WebGPU: all-zero hidden states, so the decoder emits only padding. On WASM/CPU the same fp16 file is lossless: test[:300] exact 0.933 = fp32 0.933 (Node, onnxruntime-node). A 1-op fp16 MatMul model runs correctly on WebGPU; block.0 layer-norm and softmax taps match WASM, so the collapse is somewhere later in the fp16 graph on the WebGPU EP (ORT 1.31 dev). Not bisected further: even if fixed, the encoder alone gains nothing from WebGPU (see above).
+Conclusion: WebGPU brings no speed on this model; the only possible win is the fp16 encoder's download size (219 vs 439 MB), which works on WASM. Not shipped: WASM fp16 needs the fp16 → fp32 casts per op and ran 222 vs 191 ms/sentence in Node; browser impact and the 1,000-pair test would have to be measured before trading 220 MB of one-time download for a slower per-sentence loop.
