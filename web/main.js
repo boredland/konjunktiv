@@ -14,11 +14,15 @@ env.backends.onnx.wasm.wasmPaths = {
   mjs: new URL('./vendor/ort-wasm-simd-threaded.asyncify.mjs', import.meta.url).href,
   wasm: new URL('./vendor/ort-wasm-simd-threaded.asyncify.wasm', import.meta.url).href,
 };
-// With a progress callback, Transformers.js GETs each model file once just to read Content-Length
-// and never reads that body, then GETs it again for real. Chrome's HTTP cache lets the second request
-// wait on the first for the same URL, which stalled loading of the 100+ MB files. The library keeps
-// its own Cache API copy ("transformers-cache"), so skipping the HTTP cache costs no re-downloads.
-env.fetch = (url, init) => fetch(url, { ...init, cache: 'no-store' });
+// With a progress callback, Transformers.js first GETs each model file with "Range: bytes=0-0" just
+// to read its size. Neither Workers assets nor the chunk Worker honour Range, so that probe streamed
+// ~58 MB of each ONNX file before being cancelled (measured 794 MB received for a 680 MB model).
+// A HEAD returns the same Content-Length with no body. The real download skips the HTTP cache: Chrome
+// otherwise queues it behind the probe for the same URL, and the library keeps its own Cache API copy.
+env.fetch = (url, init = {}) => {
+  const range = new Headers(init.headers).get('range');
+  return fetch(url, { ...init, cache: 'no-store', ...(range === 'bytes=0-0' ? { method: 'HEAD' } : {}) });
+};
 
 const PIPELINE_OPTIONS = {
   // fp32 encoder + q8 decoder: see scripts/quantize.py for the measured tradeoff.

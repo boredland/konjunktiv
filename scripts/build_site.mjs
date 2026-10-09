@@ -52,7 +52,15 @@ writeFileSync(join(DIST, 'sw.js'), readFileSync(join(SRC, 'sw.js'), 'utf8').repl
 // Without cross-origin isolation ONNX Runtime refuses SharedArrayBuffer and runs on one WASM thread
 // (measured: ~1.8× slower per sentence, ~2.3× under 4× CPU throttling). Everything the page loads is
 // same-origin (runtime vendored, model reassembled by the Worker), so require-corp blocks nothing.
-writeFileSync(join(DIST, '_headers'), '/*\n  Cross-Origin-Opener-Policy: same-origin\n  Cross-Origin-Embedder-Policy: require-corp\n');
+// Workers assets default to max-age=0, so every chunk revalidated at the origin on each first load
+// (cf-cache-status MISS/REVALIDATED). The .partN files only change together with the chunk list and
+// the bytes behind them, so they can be cached for a year; the assembled URLs keep revalidating.
+// _headers patterns allow a single splat, so each chunk gets its own exact rule (35 of max 100).
+const chunkRules = Object.values(manifest).flatMap((m) => m.parts).map((p) => `${p}\n  Cache-Control: public, max-age=31536000, immutable\n`);
+writeFileSync(
+  join(DIST, '_headers'),
+  '/*\n  Cross-Origin-Opener-Policy: same-origin\n  Cross-Origin-Embedder-Policy: require-corp\n' + chunkRules.join(''),
+);
 
 // Training statistics on the page come from out/rounds.json (one entry per round, written after its
 // evaluation), so the copy cannot drift from the published model.
