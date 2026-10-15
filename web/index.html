@@ -36,6 +36,10 @@
       <h2 id="h-run"><span class="step">2</span> Text umwandeln</h2>
       <label for="direct">Direkte Rede (Ich-Form)</label>
       <textarea id="direct" rows="5" placeholder="Ich bin 18 Jahre alt und in Nürnberg geboren."></textarea>
+      <div class="row" id="example-row" hidden>
+        <button id="example" type="button" class="secondary"><span class="spinner" aria-hidden="true"></span><span class="label">Beispiel erzeugen</span></button>
+        <span id="example-status" class="status" role="status" aria-live="polite"></span>
+      </div>
 
       <div class="row">
         <label for="speaker" class="inline">Wer spricht?</label>
@@ -84,6 +88,11 @@
         <a href="https://onnxruntime.ai/">ONNX Runtime</a> in WebAssembly.
         Es gibt kein Backend, keine API und keine Datenbank – nur statische Dateien. Einzige Ausnahme ist ein anonymer
         Besucherzähler von Cloudflare, dem Hoster der Seite; er sieht Ihren Text nicht.
+      </p>
+      <p>
+        In Chrome mit eingebautem Sprachmodell (Gemini Nano) erscheint unter dem Eingabefeld zusätzlich „Beispiel erzeugen“.
+        Auch diesen Beispieltext schreibt das Modell auf Ihrem Gerät. Die Schaltfläche erscheint nur, wenn Chrome das Modell
+        bereits heruntergeladen hat.
       </p>
       <p>
         Nach dem ersten Laden speichert der Browser das Modell (Cache Storage). Beim nächsten Besuch lädt es in wenigen Sekunden

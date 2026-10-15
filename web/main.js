@@ -45,8 +45,34 @@ const direct = $('direct');
 const indirect = $('indirect');
 const copyButton = $('copy');
 const copyStatus = $('copy-status');
+const exampleRow = $('example-row');
+const exampleButton = $('example');
+const exampleStatus = $('example-status');
 
 let pipe = null;
+
+// Chrome's built-in Gemini Nano (Prompt API) writes example input on the device, so it keeps the page's
+// promise that no text leaves the browser. Offered only when the model is already downloaded: a click on
+// a demo button should not start a multi-gigabyte download.
+const EXAMPLE_OPTIONS = {
+  expectedInputs: [{ type: 'text', languages: ['de'] }],
+  expectedOutputs: [{ type: 'text', languages: ['de'] }],
+};
+// Mirrors the limits stated on the page: statements only, no questions, commands or du/ihr address.
+const EXAMPLE_SYSTEM_PROMPT = [
+  'Du schreibst Beispieltexte für ein Werkzeug, das direkte Rede in indirekte Rede umwandelt.',
+  'Schreibe zwei bis vier Sätze, die eine Person in der Ich- oder Wir-Form über sich erzählt,',
+  'wie in einer Zeugenaussage, einem Interview oder einem Gespräch. Mische Gegenwart und Vergangenheit.',
+  'Nur Aussagesätze: keine Fragen, keine Befehle, niemand wird mit du oder ihr angesprochen.',
+  'Antworte nur mit dem Text selbst, ohne Anführungszeichen, Überschrift oder Erklärung.',
+].join(' ');
+// The web Prompt API exposes no temperature, so variety comes from a different topic per request.
+const EXAMPLE_TOPICS = [
+  'Arbeit', 'Umzug', 'Familie', 'ein Verkehrsunfall', 'die Flucht aus der Heimat', 'ein Diebstahl',
+  'Schule und Ausbildung', 'ein Arztbesuch', 'Urlaub', 'Streit mit den Nachbarn', 'ein Vorstellungsgespräch',
+  'ein Termin bei einer Behörde', 'ein Sportverein', 'eine Hochzeit',
+];
+let exampleSession = null;
 
 function setStatus(el, message, kind = '') {
   el.textContent = message;
@@ -201,11 +227,53 @@ async function copyOutput() {
   setTimeout(() => setStatus(copyStatus, ''), 2000);
 }
 
+async function offerExamples() {
+  if (!('LanguageModel' in self)) return;
+  try {
+    if ((await LanguageModel.availability(EXAMPLE_OPTIONS)) !== 'available') return;
+  } catch {
+    return;
+  }
+  exampleRow.hidden = false;
+}
+
+async function writeExample() {
+  setBusy(exampleButton, true, 'Wird geschrieben …');
+  setStatus(exampleStatus, '');
+  direct.value = '';
+  try {
+    exampleSession ??= await LanguageModel.create({
+      ...EXAMPLE_OPTIONS,
+      initialPrompts: [{ role: 'system', content: EXAMPLE_SYSTEM_PROMPT }],
+    });
+    // One clone per example: in a single long session the earlier examples steer the next ones.
+    const session = await exampleSession.clone();
+    try {
+      const topic = EXAMPLE_TOPICS[Math.floor(Math.random() * EXAMPLE_TOPICS.length)];
+      for await (const chunk of session.promptStreaming(`Thema: ${topic}`)) {
+        direct.value += chunk;
+        fitToContent(direct);
+      }
+    } finally {
+      session.destroy();
+    }
+    direct.value = stripQuotes(direct.value.trim());
+    fitToContent(direct);
+    setStatus(exampleStatus, 'Geschrieben von Gemini Nano, lokal in Chrome.', 'ok');
+  } catch (error) {
+    setStatus(exampleStatus, `Fehler: ${error.message}`, 'err');
+  } finally {
+    setBusy(exampleButton, false, 'Beispiel erzeugen');
+  }
+}
+
 async function init() {
   loadButton.addEventListener('click', loadModel);
   forgetButton.addEventListener('click', forgetModel);
   runButton.addEventListener('click', convert);
   copyButton.addEventListener('click', copyOutput);
+  exampleButton.addEventListener('click', writeExample);
+  offerExamples();
   // Without it, the page itself (not the model) needs a network connection on the next visit.
   navigator.serviceWorker?.register('./sw.js').catch(() => {});
   // Reopening the page after a download should not ask for another click: load from the local cache.
