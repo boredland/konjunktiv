@@ -48,12 +48,13 @@ const copyStatus = $('copy-status');
 const exampleRow = $('example-row');
 const exampleButton = $('example');
 const exampleStatus = $('example-status');
+const exampleProgress = $('example-progress');
 
 let pipe = null;
 
 // Chrome's built-in Gemini Nano (Prompt API) writes example input on the device, so it keeps the page's
-// promise that no text leaves the browser. Offered only when the model is already downloaded: a click on
-// a demo button should not start a multi-gigabyte download.
+// promise that no text leaves the browser. Chrome downloads the model only after a site asks for it, so
+// the button is also offered while it is still "downloadable"; its label then names the download.
 const EXAMPLE_OPTIONS = {
   expectedInputs: [{ type: 'text', languages: ['de'] }],
   expectedOutputs: [{ type: 'text', languages: ['de'] }],
@@ -72,6 +73,8 @@ const EXAMPLE_TOPICS = [
   'Schule und Ausbildung', 'ein Arztbesuch', 'Urlaub', 'Streit mit den Nachbarn', 'ein Vorstellungsgespräch',
   'ein Termin bei einer Behörde', 'ein Sportverein', 'eine Hochzeit',
 ];
+const EXAMPLE_LABEL = 'Beispiel erzeugen';
+let exampleIdleLabel = EXAMPLE_LABEL;
 let exampleSession = null;
 
 function setStatus(el, message, kind = '') {
@@ -229,23 +232,45 @@ async function copyOutput() {
 
 async function offerExamples() {
   if (!('LanguageModel' in self)) return;
+  let availability;
   try {
-    if ((await LanguageModel.availability(EXAMPLE_OPTIONS)) !== 'available') return;
+    availability = await LanguageModel.availability(EXAMPLE_OPTIONS);
   } catch {
     return;
+  }
+  if (availability === 'unavailable') return;
+  if (availability !== 'available') {
+    exampleIdleLabel = `${EXAMPLE_LABEL} (lädt Gemini Nano)`;
+    exampleButton.querySelector('.label').textContent = exampleIdleLabel;
+    setStatus(exampleStatus, 'Chrome lädt dafür beim ersten Klick einmalig sein Sprachmodell herunter, mehrere GB.');
   }
   exampleRow.hidden = false;
 }
 
 async function writeExample() {
-  setBusy(exampleButton, true, 'Wird geschrieben …');
+  setBusy(exampleButton, true, exampleSession ? 'Wird geschrieben …' : 'Wird vorbereitet …');
   setStatus(exampleStatus, '');
-  direct.value = '';
   try {
+    // create() is the first await: a "downloadable" model only downloads while the click's user activation lasts.
     exampleSession ??= await LanguageModel.create({
       ...EXAMPLE_OPTIONS,
       initialPrompts: [{ role: 'system', content: EXAMPLE_SYSTEM_PROMPT }],
+      monitor(m) {
+        m.addEventListener('downloadprogress', (e) => {
+          exampleProgress.hidden = false;
+          exampleProgress.value = e.loaded;
+          // loaded reaches 1 before the model is unpacked and loaded, which takes a while longer.
+          setStatus(exampleStatus, e.loaded < 1
+            ? `Lade Gemini Nano … ${Math.floor(e.loaded * 100)} %`
+            : 'Gemini Nano ist geladen und wird vorbereitet …');
+        });
+      },
     });
+    exampleIdleLabel = EXAMPLE_LABEL;
+    exampleProgress.hidden = true;
+    setBusy(exampleButton, true, 'Wird geschrieben …');
+    setStatus(exampleStatus, '');
+    direct.value = '';
     // One clone per example: in a single long session the earlier examples steer the next ones.
     const session = await exampleSession.clone();
     try {
@@ -261,9 +286,10 @@ async function writeExample() {
     fitToContent(direct);
     setStatus(exampleStatus, 'Geschrieben von Gemini Nano, lokal in Chrome.', 'ok');
   } catch (error) {
+    exampleProgress.hidden = true;
     setStatus(exampleStatus, `Fehler: ${error.message}`, 'err');
   } finally {
-    setBusy(exampleButton, false, 'Beispiel erzeugen');
+    setBusy(exampleButton, false, exampleIdleLabel);
   }
 }
 

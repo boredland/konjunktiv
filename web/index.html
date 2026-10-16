@@ -40,6 +40,7 @@
         <button id="example" type="button" class="secondary"><span class="spinner" aria-hidden="true"></span><span class="label">Beispiel erzeugen</span></button>
         <span id="example-status" class="status" role="status" aria-live="polite"></span>
       </div>
+      <progress id="example-progress" max="1" value="0" hidden></progress>
 
       <div class="row">
         <label for="speaker" class="inline">Wer spricht?</label>
@@ -91,8 +92,8 @@
       </p>
       <p>
         In Chrome mit eingebautem Sprachmodell (Gemini Nano) erscheint unter dem Eingabefeld zusätzlich „Beispiel erzeugen“.
-        Auch diesen Beispieltext schreibt das Modell auf Ihrem Gerät. Die Schaltfläche erscheint nur, wenn Chrome das Modell
-        bereits heruntergeladen hat.
+        Auch diesen Beispieltext schreibt das Modell auf Ihrem Gerät. Hat Chrome das Modell noch nicht, lädt es beim ersten
+        Klick einmalig mehrere Gigabyte von Google herunter; Ihr Text wird dabei nicht übertragen.
       </p>
       <p>
         Nach dem ersten Laden speichert der Browser das Modell (Cache Storage). Beim nächsten Besuch lädt es in wenigen Sekunden
