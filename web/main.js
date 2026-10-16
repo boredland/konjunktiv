@@ -60,24 +60,58 @@ const EXAMPLE_OPTIONS = {
   expectedOutputs: [{ type: 'text', languages: ['de'] }],
 };
 // Asylum-hearing accounts are the case the model was audited on (see the training section on the page).
-// Short sentences because the converter caps each sentence at 64 tokens; the rest mirrors the limits
-// stated on the page: statements only, no questions, commands or du/ihr address.
+// Left to itself, Nano invented history (a war in Sarajevo in 2015), slipped into reported speech
+// ("Er sagte, die Lage verschlechtert sich"), which is the converter's output rather than its input, and
+// wrote broken sentences. So the page picks country, reason and narrator, and two excerpts from the
+// held-out hearing accounts (data/probe_hearings.json, h01 and h02) show the register to imitate.
+// Short sentences because the converter caps each sentence at 64 tokens.
 const EXAMPLE_SYSTEM_PROMPT = [
-  'Du schreibst Beispieltexte für ein Werkzeug, das direkte Rede in indirekte Rede umwandelt.',
-  'Schreibe einen erfundenen Erfahrungsbericht von etwa 100 Wörtern, wie ihn eine asylsuchende Person',
-  'in ihrer Anhörung beim Bundesamt für Migration und Flüchtlinge in der Ich-Form erzählt:',
-  'was ihr in der Heimat passiert ist, warum sie geflohen ist und wie sie nach Deutschland kam.',
-  'Sachlich und konkret, mit Orten, Zeitangaben und Personen aus ihrem Umfeld. Mische Gegenwart und Vergangenheit.',
-  'Kurze Sätze mit höchstens 20 Wörtern. Nur Aussagesätze: keine Fragen, keine Befehle,',
-  'niemand wird mit du oder ihr angesprochen.',
-  'Antworte nur mit dem Bericht als einem Absatz, ohne Anführungszeichen, Überschrift oder Erklärung.',
+  'Du schreibst erfundene Beispieltexte für ein Werkzeug, das direkte Rede in indirekte Rede umwandelt.',
+  'Jeder Text ist ein Ausschnitt von etwa 100 Wörtern aus der Anhörung einer asylsuchenden Person beim',
+  'Bundesamt für Migration und Flüchtlinge, in der Ich-Form und so sachlich wie ein Protokoll.',
+  'Beginne mit Beruf und Wohnort, dann folgen die Ereignisse in zeitlicher Reihenfolge mit Monat oder Jahr,',
+  'Orten und Personen. Halte dich an Land, Fluchtgrund und Zeitraum aus der Anfrage und erfinde keine Kriege.',
+  'Kurze, vollständige Sätze mit höchstens 20 Wörtern. Gib nie wieder, was andere gesagt haben:',
+  'kein „sagte, dass“, keine Zitate. Keine Fragen, keine Befehle, niemand wird mit du oder ihr angesprochen.',
+  'Keine Einleitung wie „Ich erinnere mich“, keine Gefühle über die Zukunft am Ende.',
+  'Antworte nur mit dem Text als einem Absatz, ohne Anführungszeichen, Überschrift oder Erklärung.',
 ].join(' ');
-// The web Prompt API exposes no temperature, so variety comes from a different flight reason per request.
+const EXAMPLE_SHOTS = [
+  {
+    request: 'Land: Afghanistan. Fluchtgrund: heimlicher Unterricht für Mädchen. Zeitraum: ab 2021. Erzählt von: einem Mann.',
+    text: 'Ich habe viele Jahre lang als Lehrer an einer Grundschule in der Provinz Ghazni gearbeitet. '
+      + 'Ich unterrichtete Mathematik und half den jüngeren Schülern beim Schreiben. '
+      + 'Nachdem die Taliban im August 2021 die Macht übernommen hatten, veränderten sich unsere Lebensbedingungen schlagartig. '
+      + 'Die neuen Machthaber verlangten von uns, dass wir den Unterricht für Mädchen ab der sechsten Klasse sofort einstellen sollten. '
+      + 'Ich konnte mich mit dieser Anordnung nicht abfinden, weil Bildung für jedes Kind unverzichtbar ist. '
+      + 'Gemeinsam mit zwei Kollegen organisierte ich deshalb heimlichen Unterricht in einem Kellerraum, obwohl wir wussten, wie gefährlich das war.',
+  },
+  {
+    request: 'Land: Iran. Fluchtgrund: Übertritt zum Christentum. Zeitraum: die letzten drei Jahre. Erzählt von: einer Frau.',
+    text: 'Ich lebte bis zu meiner Ausreise in Isfahan und habe dort als selbstständige Grafikdesignerin gearbeitet. '
+      + 'Vor etwa drei Jahren schloss ich mich durch eine vertraute Freundin einer christlichen Hauskirche an. '
+      + 'In unserem Herkunftsland betrachtet der Staat den Übertritt vom Islam zum Christentum als schwere Straftat. '
+      + 'Aus diesem Grund mussten wir uns immer heimlich in privaten Wohnungen versammeln. '
+      + 'Wir beteten gemeinsam, sangen leise geistliche Lieder und lasen in der Bibel. '
+      + 'Im April des letzten Jahres drangen Angehörige der Revolutionsgarde plötzlich während eines Gottesdienstes gewaltsam in die Wohnung ein.',
+  },
+];
+// The web Prompt API exposes no temperature, so variety comes from the request. Each pairing of country,
+// reason and period is one that actually happened, so Nano does not have to know the history; a fourth
+// entry fixes the narrator where the reason only applies to men.
 const EXAMPLE_TOPICS = [
-  'politische Verfolgung nach einer Demonstration', 'religiöse Verfolgung', 'drohende Zwangsrekrutierung',
-  'Bedrohung durch eine bewaffnete Gruppe', 'Verfolgung wegen der sexuellen Orientierung',
-  'Verfolgung als Journalistin oder Journalist', 'Blutrache zwischen zwei Familien', 'Bürgerkrieg in der Heimatstadt',
-  'drohende Zwangsheirat', 'Verfolgung wegen der Zugehörigkeit zu einer ethnischen Minderheit',
+  ['Syrien', 'Verhaftung nach Teilnahme an Protesten gegen die Regierung', '2011 bis 2013'],
+  ['Eritrea', 'unbefristeter Nationaldienst beim Militär', 'die letzten fünf Jahre'],
+  ['Türkei', 'Strafverfahren wegen Mitgliedschaft in einer kurdischen Partei', 'ab 2016'],
+  ['Russland', 'drohende Einberufung nach der Teilmobilmachung', 'Herbst 2022', 'Er'],
+  ['Irak', 'Drohungen einer Miliz gegen eine jesidische Familie', '2014 bis 2016'],
+  ['Somalia', 'Zwangsrekrutierung durch al-Shabaab', 'die letzten drei Jahre', 'Er'],
+  ['Nigeria', 'Angriffe von Boko Haram auf das Heimatdorf', '2015 bis 2018'],
+  ['Belarus', 'Verfolgung nach den Protesten gegen die Präsidentschaftswahl', '2020 bis 2021'],
+  ['Georgien', 'Blutrache zwischen zwei Familien', 'ab 2022'],
+  ['Venezuela', 'Drohungen regierungsnaher Gruppen wegen Gewerkschaftsarbeit', '2017 bis 2019'],
+  ['Kolumbien', 'Morddrohungen nach Recherchen über bewaffnete Gruppen', 'ab 2022'],
+  ['Uganda', 'Verfolgung wegen Homosexualität', 'ab 2023'],
 ];
 const EXAMPLE_LABEL = 'Beispiel erzeugen';
 let exampleIdleLabel = EXAMPLE_LABEL;
@@ -260,7 +294,13 @@ async function writeExample() {
     // create() is the first await: a "downloadable" model only downloads while the click's user activation lasts.
     exampleSession ??= await LanguageModel.create({
       ...EXAMPLE_OPTIONS,
-      initialPrompts: [{ role: 'system', content: EXAMPLE_SYSTEM_PROMPT }],
+      initialPrompts: [
+        { role: 'system', content: EXAMPLE_SYSTEM_PROMPT },
+        ...EXAMPLE_SHOTS.flatMap((shot) => [
+          { role: 'user', content: shot.request },
+          { role: 'assistant', content: shot.text },
+        ]),
+      ],
       monitor(m) {
         m.addEventListener('downloadprogress', (e) => {
           exampleProgress.hidden = false;
@@ -280,8 +320,13 @@ async function writeExample() {
     // One clone per example: in a single long session the earlier examples steer the next ones.
     const session = await exampleSession.clone();
     try {
-      const topic = EXAMPLE_TOPICS[Math.floor(Math.random() * EXAMPLE_TOPICS.length)];
-      for await (const chunk of session.promptStreaming(`Thema: ${topic}`)) {
+      const [country, reason, period, fixedSpeaker] = EXAMPLE_TOPICS[Math.floor(Math.random() * EXAMPLE_TOPICS.length)];
+      const speaker = fixedSpeaker ?? (Math.random() < 0.5 ? 'Er' : 'Sie');
+      $('speaker').value = speaker;
+      const narrator = speaker === 'Er' ? 'einem Mann' : 'einer Frau';
+      for await (const chunk of session.promptStreaming(
+        `Land: ${country}. Fluchtgrund: ${reason}. Zeitraum: ${period}. Erzählt von: ${narrator}.`,
+      )) {
         direct.value += chunk;
         fitToContent(direct);
       }
