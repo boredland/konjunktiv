@@ -59,19 +59,25 @@ const EXAMPLE_OPTIONS = {
   expectedInputs: [{ type: 'text', languages: ['de'] }],
   expectedOutputs: [{ type: 'text', languages: ['de'] }],
 };
-// Mirrors the limits stated on the page: statements only, no questions, commands or du/ihr address.
+// Asylum-hearing accounts are the case the model was audited on (see the training section on the page).
+// Short sentences because the converter caps each sentence at 64 tokens; the rest mirrors the limits
+// stated on the page: statements only, no questions, commands or du/ihr address.
 const EXAMPLE_SYSTEM_PROMPT = [
   'Du schreibst Beispieltexte für ein Werkzeug, das direkte Rede in indirekte Rede umwandelt.',
-  'Schreibe zwei bis vier Sätze, die eine Person in der Ich- oder Wir-Form über sich erzählt,',
-  'wie in einer Zeugenaussage, einem Interview oder einem Gespräch. Mische Gegenwart und Vergangenheit.',
-  'Nur Aussagesätze: keine Fragen, keine Befehle, niemand wird mit du oder ihr angesprochen.',
-  'Antworte nur mit dem Text selbst, ohne Anführungszeichen, Überschrift oder Erklärung.',
+  'Schreibe einen erfundenen Erfahrungsbericht von etwa 100 Wörtern, wie ihn eine asylsuchende Person',
+  'in ihrer Anhörung beim Bundesamt für Migration und Flüchtlinge in der Ich-Form erzählt:',
+  'was ihr in der Heimat passiert ist, warum sie geflohen ist und wie sie nach Deutschland kam.',
+  'Sachlich und konkret, mit Orten, Zeitangaben und Personen aus ihrem Umfeld. Mische Gegenwart und Vergangenheit.',
+  'Kurze Sätze mit höchstens 20 Wörtern. Nur Aussagesätze: keine Fragen, keine Befehle,',
+  'niemand wird mit du oder ihr angesprochen.',
+  'Antworte nur mit dem Bericht als einem Absatz, ohne Anführungszeichen, Überschrift oder Erklärung.',
 ].join(' ');
-// The web Prompt API exposes no temperature, so variety comes from a different topic per request.
+// The web Prompt API exposes no temperature, so variety comes from a different flight reason per request.
 const EXAMPLE_TOPICS = [
-  'Arbeit', 'Umzug', 'Familie', 'ein Verkehrsunfall', 'die Flucht aus der Heimat', 'ein Diebstahl',
-  'Schule und Ausbildung', 'ein Arztbesuch', 'Urlaub', 'Streit mit den Nachbarn', 'ein Vorstellungsgespräch',
-  'ein Termin bei einer Behörde', 'ein Sportverein', 'eine Hochzeit',
+  'politische Verfolgung nach einer Demonstration', 'religiöse Verfolgung', 'drohende Zwangsrekrutierung',
+  'Bedrohung durch eine bewaffnete Gruppe', 'Verfolgung wegen der sexuellen Orientierung',
+  'Verfolgung als Journalistin oder Journalist', 'Blutrache zwischen zwei Familien', 'Bürgerkrieg in der Heimatstadt',
+  'drohende Zwangsheirat', 'Verfolgung wegen der Zugehörigkeit zu einer ethnischen Minderheit',
 ];
 const EXAMPLE_LABEL = 'Beispiel erzeugen';
 let exampleIdleLabel = EXAMPLE_LABEL;
