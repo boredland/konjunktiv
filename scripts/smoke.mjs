@@ -1,8 +1,13 @@
+// Parity check: the shipped web model must reproduce the PyTorch predictions on the challenge set.
+//   node scripts/smoke.mjs [model-dir under web/, default "model"] [reference jsonl, default out/pred_challenge.jsonl]
 import { readFileSync } from 'node:fs';
 import { pipeline, env } from '@huggingface/transformers';
 
 env.localModelPath = 'web/';
 env.allowRemoteModels = false;
+
+const model = process.argv[2] ?? 'model';
+const referencePath = process.argv[3] ?? 'out/pred_challenge.jsonl';
 
 const loadJsonl = (path) =>
   readFileSync(path, 'utf8')
@@ -11,11 +16,11 @@ const loadJsonl = (path) =>
     .map((line) => JSON.parse(line));
 
 const challenge = loadJsonl('data/challenge_20.jsonl');
-const reference = loadJsonl('out/pred_challenge.jsonl');
+const reference = loadJsonl(referencePath);
 
 // device:'wasm' is browser-only; Node runs the same ONNX graphs and dtypes on onnxruntime-node (cpu).
 // Same dtype map as web/main.js; progress_callback makes Node take the same size-prefetch path as the browser.
-const pipe = await pipeline('text2text-generation', 'model', {
+const pipe = await pipeline('text2text-generation', model, {
   dtype: { model: 'fp32', encoder_model: 'fp32', decoder_model_merged: 'q8' },
   progress_callback: () => {},
 });
@@ -29,7 +34,7 @@ for (const row of challenge) {
 console.log(preds[0]);
 
 if (reference.length !== challenge.length) {
-  console.error(`out/pred_challenge.jsonl has ${reference.length} lines, expected ${challenge.length}`);
+  console.error(`${referencePath} has ${reference.length} lines, expected ${challenge.length}`);
   process.exit(1);
 }
 

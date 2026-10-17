@@ -1,6 +1,6 @@
 // Builds dist/ for Cloudflare Workers static assets from web/.
-// Workers assets cap each file at 25 MiB, so larger files (the q8 ONNX graphs) are split into
-// .partN chunks; worker/index.js reassembles them under their original URL using worker/chunks.json.
+// Workers assets cap each file at 25 MiB, so larger files (the ONNX graphs) are split into .partN chunks
+// under /chunks/; worker/index.js reassembles them under their original URL using worker/chunks.json.
 import { createHash } from 'node:crypto';
 import { cpSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
@@ -28,10 +28,14 @@ for (const file of walk(SRC)) {
   }
   const data = readFileSync(file);
   const urlPath = '/' + rel.split(sep).join('/');
+  // One /chunks/ prefix lets a single _headers rule cover every part of every model (the file allows
+  // 100 rules, and the base + large models together need ~130 parts).
+  const chunkDir = join(DIST, 'chunks', rel);
+  mkdirSync(join(chunkDir, '..'), { recursive: true });
   const parts = [];
   for (let i = 0, offset = 0; offset < size; i += 1, offset += CHUNK_BYTES) {
-    writeFileSync(`${out}.part${i}`, data.subarray(offset, offset + CHUNK_BYTES));
-    parts.push(`${urlPath}.part${i}`);
+    writeFileSync(`${chunkDir}.part${i}`, data.subarray(offset, offset + CHUNK_BYTES));
+    parts.push(`/chunks${urlPath}.part${i}`);
   }
   manifest[urlPath] = { size, parts };
   console.log(`split ${urlPath} (${size} bytes) into ${parts.length} parts`);
@@ -55,11 +59,10 @@ writeFileSync(join(DIST, 'sw.js'), readFileSync(join(SRC, 'sw.js'), 'utf8').repl
 // Workers assets default to max-age=0, so every chunk revalidated at the origin on each first load
 // (cf-cache-status MISS/REVALIDATED). The .partN files only change together with the chunk list and
 // the bytes behind them, so they can be cached for a year; the assembled URLs keep revalidating.
-// _headers patterns allow a single splat, so each chunk gets its own exact rule (35 of max 100).
-const chunkRules = Object.values(manifest).flatMap((m) => m.parts).map((p) => `${p}\n  Cache-Control: public, max-age=31536000, immutable\n`);
 writeFileSync(
   join(DIST, '_headers'),
-  '/*\n  Cross-Origin-Opener-Policy: same-origin\n  Cross-Origin-Embedder-Policy: require-corp\n' + chunkRules.join(''),
+  '/*\n  Cross-Origin-Opener-Policy: same-origin\n  Cross-Origin-Embedder-Policy: require-corp\n'
+    + '/chunks/*\n  Cache-Control: public, max-age=31536000, immutable\n',
 );
 
 // Training statistics on the page come from out/rounds.json (one entry per round, written after its
@@ -71,14 +74,29 @@ if (!live?.data || !live.remaining) throw new Error('out/rounds.json needs exact
 const de = (n) => n.toLocaleString('de-DE');
 const pct = (x) => `${(x * 100).toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}&nbsp;%`;
 const [accErr, accTotal] = live.accounts.split('/').map(Number);
-const row = (r) => `<tr${r === live ? ' class="live"' : ''}>`
+// Both live models are highlighted: the default (base) and the optional large one.
+const isLive = (r) => r === live || r.variant === 'large';
+const row = (r) => `<tr${isLive(r) ? ' class="live"' : ''}>`
   + `<td>${r.round}</td><td>${r.model}</td><td>${r.change}</td>`
   + `<td class="num">${pct(r.test)}</td>`
   + `<td class="num">${r.accounts ? r.accounts.replace('/', '&nbsp;von&nbsp;') : '–'}</td>`
-  + `<td>${r === live ? 'live' : r.deployed ? 'war live' : r.release ? 'nur Release' : '–'}</td></tr>`;
-const modelBytes = walk(join(SRC, 'model')).reduce((n, f) => n + statSync(f).size, 0);
+  + `<td>${r === live ? 'live (Standard)' : r.variant === 'large' ? 'live (genauer)' : r.deployed ? 'war live' : r.release ? 'nur Release' : '–'}</td></tr>`;
+const dirBytes = (dir) => walk(join(SRC, dir)).reduce((n, f) => n + statSync(f).size, 0);
+// Under 1 GB the page says "rund 680 MB"; above, "rund 1,9 GB" reads better than "1.950 MB".
+const dirSize = (dir) => {
+  const bytes = dirBytes(dir);
+  return bytes < 1e9
+    ? `${de(Math.round(bytes / 1e6 / 10) * 10)}&nbsp;MB`
+    : `${(bytes / 1e9).toLocaleString('de-DE', { maximumFractionDigits: 1 })}&nbsp;GB`;
+};
+// The large model is optional on the page: out/rounds.json marks its round with "variant": "large".
+const large = rounds.find((r) => r.variant === 'large');
+if (!large) throw new Error('out/rounds.json needs one round with "variant": "large" for web/model-large');
 const stats = {
-  MODEL_MB: de(Math.round(modelBytes / 1e6 / 10) * 10),
+  MODEL_SIZE: dirSize('model'),
+  MODEL_LARGE_SIZE: dirSize('model-large'),
+  LARGE_TEST: pct(large.test),
+  LARGE_ACC_ERR: large.accounts.split('/')[0],
   ROUND: String(live.round),
   ROUNDS: String(rounds.length),
   TATOEBA: de(Math.round(live.data.tatoeba / 1000) * 1000),

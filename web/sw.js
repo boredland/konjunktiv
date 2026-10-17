@@ -15,7 +15,7 @@ self.addEventListener('activate', (event) =>
 
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
-  if (event.request.method !== 'GET' || url.origin !== self.location.origin || url.pathname.startsWith('/model/')) {
+  if (event.request.method !== 'GET' || url.origin !== self.location.origin || /^\/(model|model-large|chunks)\//.test(url.pathname)) {
     return;
   }
   // Network first so a redeploy shows up immediately; the cached copy is the offline fallback.

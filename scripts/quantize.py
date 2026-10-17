@@ -1,13 +1,18 @@
-"""Web model layout for Transformers.js: fp32 encoder + int8 (q8) merged decoder."""
+"""Web model layout for Transformers.js: fp32 encoder + int8 (q8) merged decoder.
+
+    uv run python scripts/quantize.py [export_dir] [web_model_dir]
+Defaults: out/onnx-fp32 → web/model (flan-t5-base); the large model goes out/onnx-fp32-large → web/model-large.
+"""
 
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 
 from onnxruntime.quantization import QuantType, quantize_dynamic
 
-EXPORT_DIR = Path("out/onnx-fp32")
-WEB_MODEL_DIR = Path("web/model")
+EXPORT_DIR = Path(sys.argv[1] if len(sys.argv) > 1 else "out/onnx-fp32")
+WEB_MODEL_DIR = Path(sys.argv[2] if len(sys.argv) > 2 else "web/model")
 README_PATH = Path("out/README.md")
 
 # Quantizing the encoder cost ~7 points exact match (0.797 vs 0.863 on test[:300]) and swapped rare
@@ -61,7 +66,7 @@ def main():
         shutil.copy2(EXPORT_DIR / name, WEB_MODEL_DIR / name)
 
     size = subprocess.run(["du", "-sh", str(WEB_MODEL_DIR)], capture_output=True, text=True, check=True).stdout.split()[0]
-    line = f"web/model size: {size}"
+    line = f"{WEB_MODEL_DIR} size: {size}"
     print(line)
     with README_PATH.open("a", encoding="utf-8") as fh:
         fh.write(line + "\n")

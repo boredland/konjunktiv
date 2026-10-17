@@ -167,7 +167,7 @@
   "live": true,
   "train": 54213,
   "test": 0.948,
-  "accounts": "14/393",
+  "accounts": "13/393",
   "reported": "15/15",
   "data": {
    "tatoeba": 39679,
@@ -188,5 +188,17 @@
   "accounts": "19/393",
   "reported": "15/15",
   "change": "„sich erschrecken“, Zustände mit „war“, Infinitive nach „versuchen“; einzeln schlechter, im Mittelwert ohne Gewinn"
+ },
+ {
+  "round": 19,
+  "model": "large",
+  "variant": "large",
+  "deployed": true,
+  "release": true,
+  "train": 55046,
+  "test": 0.966,
+  "accounts": "10/393",
+  "reported": "15/15",
+  "change": "Größeres Grundmodell (Flan-T5 large, 783 Mio. Parameter) auf den Daten von Runde 18, trainiert auf einer Instinct MI50 – als wählbares, genaueres Modell neben dem Standard"
  }
 ]

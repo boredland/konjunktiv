@@ -4,7 +4,35 @@ import { pipeline, env, ModelRegistry } from './vendor/transformers.min.js';
 import { splitParagraphs, splitSentences } from './sentences.js';
 
 const TASK = 'text2text-generation';
-const MODEL = 'model';
+// Two exports of the same task: "model" is flan-t5-base, "model-large" flan-t5-large (~3× the download and
+// ~2× slower per sentence, see out/README.md); pickInitialModel() chooses between them. Both resolve under ./.
+const MODELS = ['model', 'model-large'];
+const CHOICE_KEY = 'konjunktiv-model';
+// A stored explicit choice; otherwise pickInitialModel() decides in init().
+let model = MODELS.includes(localStorage.getItem(CHOICE_KEY)) ? localStorage.getItem(CHOICE_KEY) : 'model';
+
+// The large model loads ~2.1 GB into the JS heap and downloads 1.9 GB, so it is only preselected when every
+// signal the browser exposes says that is fine; anything unknown keeps the default. navigator.deviceMemory
+// (Chromium only) is rounded to a power of two; navigator.connection.downlink is capped and coarse (it read
+// 1.55 Mbps on a 1 Gbit line), so only effectiveType and saveData are used.
+async function recommendModel() {
+  const memory = navigator.deviceMemory;
+  const mobile = navigator.userAgentData?.mobile ?? /Mobi|Android|iPhone|iPad/.test(navigator.userAgent);
+  const connection = navigator.connection;
+  const quota = await navigator.storage?.estimate?.().then((e) => e.quota).catch(() => undefined);
+  if (mobile) return { model: 'model', reason: 'Auf Mobilgeräten ist das Standardmodell vorausgewählt.' };
+  if (connection?.saveData) return { model: 'model', reason: 'Der Datensparmodus ist an, deshalb ist das Standardmodell vorausgewählt.' };
+  if (connection?.effectiveType && connection.effectiveType !== '4g') {
+    return { model: 'model', reason: 'Die Verbindung wirkt langsam, deshalb ist das kleinere Standardmodell vorausgewählt.' };
+  }
+  if (!memory || memory < 8) {
+    return { model: 'model', reason: memory ? `Dieses Gerät meldet etwa ${memory} GB Arbeitsspeicher; das genauere Modell braucht mehr.` : '' };
+  }
+  if (quota !== undefined && quota < 4e9) {
+    return { model: 'model', reason: 'Der Browser stellt nicht genug Speicherplatz für das genauere Modell bereit.' };
+  }
+  return { model: 'model-large', reason: `Vorausgewählt, weil dieses Gerät genug Arbeitsspeicher (${memory} GB oder mehr) meldet und der Datensparmodus aus ist.` };
+}
 
 // The browser build defaults allowLocalModels to false; enable it so 'model' resolves to ./model/
 env.allowLocalModels = true;
@@ -38,6 +66,7 @@ const loadButton = $('load');
 const forgetButton = $('forget');
 const progressBar = $('progress');
 const loadStatus = $('load-status');
+const modelHint = $('model-hint');
 const runButton = $('run');
 const runStatus = $('run-status');
 const runProgress = $('run-progress');
@@ -138,8 +167,12 @@ function setBusy(button, busy, label) {
   if (label) button.querySelector('.label').textContent = label;
 }
 
+const modelRadios = () => document.querySelectorAll('input[name="model"]');
+
 async function loadModel() {
   setBusy(loadButton, true, 'Wird geladen …');
+  // A switch mid-download would let the old pipeline resolve later and replace the new one.
+  for (const radio of modelRadios()) radio.disabled = true;
   runButton.disabled = true;
   forgetButton.hidden = true;
   progressBar.hidden = false;
@@ -148,7 +181,7 @@ async function loadModel() {
   // progress after the catch has written the error and would overwrite it.
   let loading = true;
   try {
-    pipe = await pipeline(TASK, MODEL, {
+    pipe = await pipeline(TASK, model, {
       ...PIPELINE_OPTIONS,
       progress_callback: (p) => {
         if (!loading || p.status !== 'progress_total') return;
@@ -161,7 +194,7 @@ async function loadModel() {
     progressBar.hidden = true;
     // Private windows cap Cache Storage: the 439 MB encoder then fails to store while the model still runs
     // from memory, so only claim "stored" when the files really are in the cache.
-    const stored = await ModelRegistry.is_pipeline_cached(TASK, MODEL, PIPELINE_OPTIONS).catch(() => false);
+    const stored = await ModelRegistry.is_pipeline_cached(TASK, model, PIPELINE_OPTIONS).catch(() => false);
     setStatus(
       loadStatus,
       stored
@@ -178,7 +211,11 @@ async function loadModel() {
     loading = false;
     progressBar.hidden = true;
     setBusy(loadButton, false, 'Modell herunterladen');
-    setStatus(loadStatus, `Fehler beim Laden: ${error.message}`, 'err');
+    // The large model needs ~2 GB of WASM memory; on smaller devices that is where loading fails.
+    const hint = model === 'model-large' ? ' Auf diesem Gerät reicht der Speicher womöglich nicht – wählen Sie das Standardmodell.' : '';
+    setStatus(loadStatus, `Fehler beim Laden: ${error.message.replace(/\.$/, '')}.${hint}`, 'err');
+  } finally {
+    for (const radio of modelRadios()) radio.disabled = false;
   }
 }
 
@@ -187,7 +224,7 @@ async function forgetModel() {
   try {
     await pipe?.dispose();
     pipe = null;
-    const { filesDeleted } = await ModelRegistry.clear_pipeline_cache(TASK, MODEL, PIPELINE_OPTIONS);
+    const { filesDeleted } = await ModelRegistry.clear_pipeline_cache(TASK, model, PIPELINE_OPTIONS);
     runButton.disabled = true;
     setBusy(loadButton, false, 'Modell herunterladen');
     forgetButton.hidden = true;
@@ -217,6 +254,8 @@ async function convert() {
     return;
   }
   setBusy(runButton, true, 'Wird umgewandelt …');
+  // chooseModel() disposes the pipeline this loop is still calling.
+  for (const radio of modelRadios()) radio.disabled = true;
   copyButton.disabled = true;
   setStatus(copyStatus, '');
   indirect.value = '';
@@ -251,6 +290,7 @@ async function convert() {
     setStatus(runStatus, `Fehler: ${error.message}`, 'err');
   } finally {
     setBusy(runButton, false, 'In indirekte Rede umwandeln');
+    for (const radio of modelRadios()) radio.disabled = false;
     runProgress.hidden = true;
     copyButton.disabled = !indirect.value;
   }
@@ -344,7 +384,56 @@ async function writeExample() {
   }
 }
 
+// Switching models drops the loaded one from memory (the large model holds ~2 GB) but keeps both downloads
+// cached; the next load of either comes from disk.
+async function chooseModel(event) {
+  if (event.target.value === model) return;
+  model = event.target.value;
+  localStorage.setItem(CHOICE_KEY, model);
+  modelHint.textContent = '';
+  await pipe?.dispose();
+  pipe = null;
+  runButton.disabled = true;
+  forgetButton.hidden = true;
+  setBusy(loadButton, false, 'Modell herunterladen');
+  setStatus(runStatus, 'Laden Sie zuerst das Modell (Schritt 1).');
+  setStatus(loadStatus, '');
+  await loadIfCached();
+}
+
+// Reopening the page after a download should not ask for another click: load from the local cache.
+async function loadIfCached() {
+  try {
+    if (await ModelRegistry.is_pipeline_cached(TASK, model, PIPELINE_OPTIONS)) {
+      setStatus(loadStatus, 'Modell ist bereits auf diesem Gerät gespeichert – wird aus dem Speicher geladen …');
+      await loadModel();
+    }
+  } catch {
+    // no Cache API (e.g. private mode): fall back to the explicit download button
+  }
+}
+
+// An explicit earlier choice wins; next a model that is already on disk (no second download); only then the
+// device-based recommendation, which is not stored, so it can change with the device or connection.
+async function pickInitialModel() {
+  if (localStorage.getItem(CHOICE_KEY)) return;
+  for (const candidate of ['model-large', 'model']) {
+    if (await ModelRegistry.is_pipeline_cached(TASK, candidate, PIPELINE_OPTIONS).catch(() => false)) {
+      model = candidate;
+      return;
+    }
+  }
+  const recommendation = await recommendModel();
+  model = recommendation.model;
+  modelHint.textContent = recommendation.reason;
+}
+
 async function init() {
+  await pickInitialModel();
+  for (const radio of modelRadios()) {
+    radio.checked = radio.value === model;
+    radio.addEventListener('change', chooseModel);
+  }
   loadButton.addEventListener('click', loadModel);
   forgetButton.addEventListener('click', forgetModel);
   runButton.addEventListener('click', convert);
@@ -353,15 +442,7 @@ async function init() {
   offerExamples();
   // Without it, the page itself (not the model) needs a network connection on the next visit.
   navigator.serviceWorker?.register('./sw.js').catch(() => {});
-  // Reopening the page after a download should not ask for another click: load from the local cache.
-  try {
-    if (await ModelRegistry.is_pipeline_cached(TASK, MODEL, PIPELINE_OPTIONS)) {
-      setStatus(loadStatus, 'Modell ist bereits auf diesem Gerät gespeichert – wird aus dem Speicher geladen …');
-      await loadModel();
-    }
-  } catch {
-    // no Cache API (e.g. private mode): fall back to the explicit download button
-  }
+  await loadIfCached();
 }
 
 init();

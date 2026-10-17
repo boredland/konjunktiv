@@ -21,9 +21,22 @@
     <section class="card" id="step-download" aria-labelledby="h-download">
       <h2 id="h-download"><span class="step">1</span> Modell laden</h2>
       <p>
-        Das Modell wird einmalig heruntergeladen (<span id="model-size">rund {{MODEL_MB}}&nbsp;MB</span>) und im Browser gespeichert.
-        Danach funktioniert die Seite auch ohne Internetverbindung.
+        Das Modell wird einmalig heruntergeladen und im Browser gespeichert. Danach funktioniert die Seite auch ohne Internetverbindung.
       </p>
+      <fieldset class="model-choice">
+        <legend>Welches Modell?</legend>
+        <label class="choice">
+          <input type="radio" name="model" value="model" checked>
+          <span><strong>Standard</strong> – rund {{MODEL_SIZE}}, schnell. Für die meisten Texte richtig.</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="model" value="model-large">
+          <span><strong>Genauer</strong> – rund {{MODEL_LARGE_SIZE}}, etwa doppelt so langsam und braucht gut 2&nbsp;GB Arbeitsspeicher.
+            Etwa ein Drittel weniger Fehler bei den Testsätzen ({{LARGE_TEST}} statt {{TEST}} wortgleich). Für Desktop-Rechner;
+            auf Smartphones nicht erprobt.</span>
+        </label>
+      </fieldset>
+      <p id="model-hint" class="note"></p>
       <div class="row">
         <button id="load" type="button"><span class="spinner" aria-hidden="true"></span><span class="label">Modell herunterladen</span></button>
         <button id="forget" type="button" class="secondary" hidden>Modell vom Gerät löschen</button>
@@ -97,15 +110,18 @@
       </p>
       <p>
         Nach dem ersten Laden speichert der Browser das Modell (Cache Storage). Beim nächsten Besuch lädt es in wenigen Sekunden
-        von der Festplatte, auch im Flugmodus. Mit „Modell vom Gerät löschen“ geben Sie den Speicher wieder frei.
+        von der Festplatte, auch im Flugmodus. Mit „Modell vom Gerät löschen“ geben Sie den Speicher des gewählten Modells wieder frei;
+        das andere bleibt gespeichert, falls Sie beide geladen haben.
       </p>
     </section>
 
     <section aria-labelledby="h-how">
       <h2 id="h-how">Worauf es basiert und wie es trainiert wurde</h2>
       <p>
-        Grundlage ist <a href="https://huggingface.co/google/flan-t5-base">Flan-T5 base</a> von Google
-        (248&nbsp;Millionen Parameter, Apache-2.0-Lizenz). Das Modell wurde für genau diese eine Aufgabe feinjustiert:
+        Grundlage des Standardmodells ist <a href="https://huggingface.co/google/flan-t5-base">Flan-T5 base</a> von Google
+        (248&nbsp;Millionen Parameter), Grundlage des genaueren Modells
+        <a href="https://huggingface.co/google/flan-t5-large">Flan-T5 large</a> (783&nbsp;Millionen Parameter, beide Apache-2.0-Lizenz).
+        Beide wurden auf denselben Daten für genau diese eine Aufgabe feinjustiert:
       </p>
       <ol>
         <li><strong>Sätze sammeln:</strong> rund {{TATOEBA}} deutsche Ich- und Wir-Sätze aus dem freien Satzkorpus
@@ -116,8 +132,9 @@
         <li><strong>Beispiele erzeugen:</strong> Ein großes Sprachmodell hat jeden Satz nach festen Regeln in die indirekte Rede gesetzt.</li>
         <li><strong>Prüfen:</strong> Ein zweiter Durchgang hat jedes Paar gegen dieselben Regeln geprüft und fehlerhafte aussortiert (etwa 4&nbsp;%).
           Am Ende blieben {{TRAIN}} Trainingspaare.</li>
-        <li><strong>Trainieren:</strong> drei Durchläufe auf einer Laptop-Grafikkarte, gut drei Stunden pro Runde.</li>
-        <li><strong>Mitteln:</strong> Das Modell auf dieser Seite ist der Mittelwert mehrerer Trainingsrunden. Einzelne Runden
+        <li><strong>Trainieren:</strong> drei Durchläufe pro Runde. Das Standardmodell lief auf einer Laptop-Grafikkarte, gut drei Stunden
+          pro Runde; das genauere Modell (Runde&nbsp;19) auf einer AMD Instinct MI50, ebenfalls rund drei Stunden.</li>
+        <li><strong>Mitteln:</strong> Das Standardmodell ist der Mittelwert mehrerer Trainingsrunden. Einzelne Runden
           schwanken – jede behebt die Fehler, auf die sie zielt, und macht dafür andere. Der Mittelwert behält die Verbesserungen.</li>
         <li><strong>Verkleinern:</strong> Der Decoder wurde auf 8-Bit-Gewichte komprimiert, damit der Download handlich bleibt.
           Encoder und Ausgabeschicht bleiben in voller Genauigkeit, weil die Kompression dort seltene Wörter verfälschte.</li>
@@ -130,13 +147,16 @@
         Nach jeder Runde wurde das Modell an Sätzen geprüft, die es im Training nie gesehen hatte. Die Fehler, die dabei auffielen,
         bestimmten, welche Beispiele die nächste Runde bekam. Nicht jede Runde wurde besser: War eine schlechter als die vorige,
         lief hier weiter die bessere. Ab Runde&nbsp;15 kam weder eine neue Runde noch ein Mittelwert unter 14&nbsp;fehlerhafte
-        Sätze in den Schilderungen, deshalb endete das Training mit Runde&nbsp;18. Hier läuft Runde&nbsp;{{ROUND}}.
+        Sätze in den Schilderungen, deshalb endete das Training des Standardmodells mit Runde&nbsp;18. Als Standard läuft hier
+        Runde&nbsp;{{ROUND}}; Runde&nbsp;19 ist das größere, wählbare Modell auf denselben Daten.
       </p>
       <ul>
-        <li><strong>Testsätze:</strong> Auf 1.000 zurückgehaltenen Sätzen trifft es die erwartete Umformung in
-          <span id="metric-exact">{{TEST}}</span> der Fälle Wort für Wort.</li>
+        <li><strong>Testsätze:</strong> Auf 1.000 zurückgehaltenen Sätzen trifft das Standardmodell die erwartete Umformung in
+          <span id="metric-exact">{{TEST}}</span> der Fälle Wort für Wort, das genauere in {{LARGE_TEST}}.</li>
         <li><strong>Lange Schilderungen:</strong> In 22 zurückgehaltenen Anhörungen und Vernehmungen ({{ACC_TOTAL}} Sätze)
-          enthalten noch {{ACC_ERR}} Sätze einen Fehler ({{ACC_PCT}}). In Runde&nbsp;7 waren es 101.</li>
+          enthalten beim Standardmodell noch {{ACC_ERR}} Sätze einen Fehler ({{ACC_PCT}}), beim genaueren {{LARGE_ACC_ERR}}.
+          Der Unterschied liegt hier im Bereich der Bewertungsschwankung; das genauere Modell behebt einige Fehler und macht dafür
+          andere. In Runde&nbsp;7 waren es 101.</li>
         <li><strong>Häufigste verbleibende Fehler:</strong> {{REMAINING}}.</li>
       </ul>
       <div class="table-wrap">
@@ -153,7 +173,7 @@
         „Testsätze“ zählt nur wortgleiche Treffer; eine gleichwertige andere Formulierung gilt dort als Fehler.
         Die Fehler in den Schilderungen hat ein zweites Sprachmodell in drei unabhängigen Durchgängen bewertet;
         gezählt ist ein Satz, wenn mindestens zwei Durchgänge denselben Fehler fanden. Wiederholt man diese Bewertung
-        für dasselbe Modell, schwankt das Ergebnis um etwa einen Satz.
+        für dasselbe Modell, schwankt das Ergebnis um ein bis zwei Sätze.
       </p>
       <p>
         Ab Runde&nbsp;6 ist jede Runde als Modelldatei veröffentlicht, unter
@@ -165,7 +185,7 @@
 
   <footer>
     <p>
-      Modell: Flan-T5 base (Apache&nbsp;2.0), feinjustiert · Laufzeit: Transformers.js und ONNX Runtime Web ·
+      Modelle: Flan-T5 base und Flan-T5 large (Apache&nbsp;2.0), feinjustiert · Laufzeit: Transformers.js und ONNX Runtime Web ·
       Satzquelle: Tatoeba (CC&nbsp;BY&nbsp;2.0&nbsp;FR) · Code: MIT
     </p>
   </footer>

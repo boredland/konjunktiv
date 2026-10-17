@@ -17,11 +17,12 @@ from transformers import (
 )
 from transformers.trainer_utils import get_last_checkpoint
 
-# flan-t5-base (248M) instead of -small (77M): the download budget allows ~1 GB, and the small model's
-# remaining errors (invented participles, rare verbs) are capacity errors that more data did not remove.
-# Override with KONJUNKTIV_BASE_MODEL=google/flan-t5-small for a faster run.
+# flan-t5-base (248M) instead of -small (77M): the small model's remaining errors (invented participles,
+# rare verbs) were capacity errors that more data did not remove. Override with KONJUNKTIV_BASE_MODEL to
+# compare other bases; KONJUNKTIV_TOKENIZER points at a tokenizer built for that base (scripts/build_tokenizer.py)
+# and KONJUNKTIV_OUTPUT_DIR keeps candidate runs apart.
 BASE_MODEL = os.environ.get("KONJUNKTIV_BASE_MODEL", "google/flan-t5-base")
-OUTPUT_DIR = Path("out/konjunktiv-t5")
+OUTPUT_DIR = Path(os.environ.get("KONJUNKTIV_OUTPUT_DIR", "out/konjunktiv-t5"))
 README_PATH = Path("out/README.md")
 TRAIN_PATH = Path("data/train.jsonl")
 VAL_PATH = Path("data/val.jsonl")
@@ -130,7 +131,7 @@ def train_round(model, tokenizer, train_rows, val_rows, *, num_train_epochs, lea
         load_best_model_at_end=True,
         metric_for_best_model="eval_loss",
         greater_is_better=False,
-        seed=42,
+        seed=int(os.environ.get("KONJUNKTIV_SEED", "42")),
         bf16=False,
         fp16=False,
         report_to="none",
@@ -157,7 +158,7 @@ def train_round(model, tokenizer, train_rows, val_rows, *, num_train_epochs, lea
 
 
 # Built by scripts/build_tokenizer.py: base vocab + SentencePiece pieces for Ä/Ö/ẞ.
-TOKENIZER_DIR = Path("out/tokenizer")
+TOKENIZER_DIR = Path(os.environ.get("KONJUNKTIV_TOKENIZER", "out/tokenizer"))
 BASE_SP_PIECES = 32000
 # Each new piece starts from the mean of existing pieces it resembles. A shared init (e.g. the vocab
 # mean) left ▁Ä and ▁Ö at cosine 0.99997 after training, and the model wrote "Äkologie" for "Ökologie".
